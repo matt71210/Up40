@@ -411,3 +411,41 @@ a { text-decoration: none; color: inherit; }
   .cal-cell { font-size: 0.8rem; border-radius: 8px; }
   .acc-card { flex-direction: column; gap: 1rem; }
 }
+
+/* Premium Page Styles */
+.premium-bg { position: absolute; top: 0; left: 0; width: 100%; height: 60vh; background: radial-gradient(ellipse at 50% 0%, rgba(15,111,103,0.06) 0%, rgba(255,255,255,0) 70%); z-index: 0; pointer-events: none; }
+.premium-container { max-width: 1000px; margin: 0 auto; padding: 4rem 1.5rem 6rem; position: relative; z-index: 1; }
+.premium-hero { margin-bottom: 5rem; }
+
+.pricing-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 2rem; margin-bottom: 6rem; align-items: center; }
+.pricing-card { background: white; border-radius: 24px; padding: 2.5rem; position: relative; }
+.trial-card { border: 1px solid var(--border); box-shadow: 0 10px 30px rgba(0,0,0,0.02); }
+.premium-card { border: 2px solid var(--brand); box-shadow: 0 20px 40px rgba(15,111,103,0.12); padding: 3.5rem 2.5rem; }
+
+.popular-badge { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: var(--brand); color: white; padding: 4px 16px; border-radius: 999px; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+
+.pricing-header { margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
+.pricing-header h3 { margin: 0 0 1rem 0; font-size: 1.4rem; color: var(--text-gray); font-weight: 600; }
+.premium-card .pricing-header h3 { color: var(--brand); font-weight: 800; }
+.price-block { display: flex; align-items: baseline; gap: 0.5rem; margin-bottom: 0.5rem; }
+.price { font-size: 3.5rem; font-weight: 800; line-height: 1; letter-spacing: -0.04em; }
+.duration { color: var(--text-gray); font-weight: 500; font-size: 1rem; }
+.pricing-desc { margin: 0; color: var(--text-gray); font-size: 0.95rem; line-height: 1.5; }
+
+.feature-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 1rem; }
+.feature-list li { display: flex; align-items: flex-start; gap: 0.8rem; font-size: 0.95rem; font-weight: 500; }
+.feature-list li.faded { opacity: 0.5; }
+.check { color: var(--text-main); font-weight: bold; }
+.brand-check { color: var(--brand); }
+.cross { color: #a3a3a3; font-weight: bold; }
+
+.faq-section { max-width: 800px; margin: 0 auto; }
+.faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem 3rem; }
+.faq-item h4 { margin: 0 0 0.8rem 0; font-size: 1.05rem; font-weight: 700; line-height: 1.4; }
+.faq-item p { margin: 0; color: var(--text-gray); font-size: 0.95rem; line-height: 1.6; }
+
+@media (max-width: 900px) {
+  .pricing-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .premium-card { padding: 2.5rem; }
+  .faq-grid { grid-template-columns: 1fr; gap: 2rem; }
+}

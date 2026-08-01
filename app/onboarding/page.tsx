@@ -1,15 +1,39 @@
 "use client"
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
 
 export default function Onboarding() {
   const [step, setStep] = useState(1)
-  const [answers, setAnswers] = useState({ goal: '', pain: '', level: '' })
+  const [answers, setAnswers] = useState<{ goal: string, pains: string[], level: string }>({ 
+    goal: '', 
+    pains: [], 
+    level: '' 
+  })
   const [isCalculating, setIsCalculating] = useState(false)
 
   const handleSelect = (key: string, value: string) => {
     setAnswers(prev => ({ ...prev, [key]: value }))
+  }
+
+  const togglePain = (painId: string) => {
+    setAnswers(prev => {
+      // Si on clique sur "aucune", on efface le reste
+      if (painId === 'aucune') {
+        return { ...prev, pains: ['aucune'] }
+      }
+
+      // Sinon, on enlève "aucune" et on toggle la douleur sélectionnée
+      let newPains = prev.pains.filter(p => p !== 'aucune')
+
+      if (newPains.includes(painId)) {
+        newPains = newPains.filter(p => p !== painId)
+      } else {
+        newPains = [...newPains, painId]
+      }
+
+      return { ...prev, pains: newPains }
+    })
   }
 
   const nextStep = () => {
@@ -28,21 +52,39 @@ export default function Onboarding() {
     setStep(s => s - 1)
   }
 
-  // Calcul du résultat simulé
+  // Calcul du résultat
   let recommendedLevel = "Incliné 1"
   let recommendedDesc = "Départ stable avec travail d'appuis et contrôle."
+
+  const hasPains = answers.pains.length > 0 && !answers.pains.includes('aucune')
+
   if (answers.level === '0') {
     recommendedLevel = "Appui Mur"
     recommendedDesc = "L'étape parfaite pour reconnecter le cerveau et les pecs sans aucun stress articulaire."
   } else if (answers.level === '1-5') {
-    recommendedLevel = "Incliné 1 (Genoux/Banc)"
-    recommendedDesc = "Idéal pour construire du volume propre sans dégrader la posture."
-  } else if (answers.level === '5-15' && answers.pain !== 'aucune') {
-    recommendedLevel = "Excentrique Lente"
-    recommendedDesc = "Vous avez la force, on va maintenant réparer le mouvement pour effacer les douleurs."
+    if (hasPains) {
+      recommendedLevel = "Incliné 1 (Contrôle Articulaire)"
+      recommendedDesc = "On adapte la charge en incliné pour effacer les douleurs tout en construisant une base solide."
+    } else {
+      recommendedLevel = "Incliné 1 (Banc/Chaise)"
+      recommendedDesc = "Idéal pour construire du volume propre sans dégrader la posture."
+    }
+  } else if (answers.level === '5-15') {
+    if (hasPains) {
+      recommendedLevel = "Excentrique Lente"
+      recommendedDesc = "Vous avez la force. On va utiliser le travail excentrique pour soulager vos articulations et réparer le mouvement."
+    } else {
+      recommendedLevel = "Pompe Stricte (Séries courtes)"
+      recommendedDesc = "On consolide votre niveau avec un focus sur la qualité d'exécution plutôt que sur la fatigue."
+    }
   } else if (answers.level === '15+') {
-    recommendedLevel = "Pompe Stricte Tempo"
-    recommendedDesc = "Optimisation de la biomécanique pour préserver vos acquis après 40 ans."
+    if (hasPains) {
+      recommendedLevel = "Décharge partielle & Iso"
+      recommendedDesc = "Niveau avancé, mais le corps envoie des signaux. On va renforcer vos tendons sans surcharger vos muscles."
+    } else {
+      recommendedLevel = "Pompe Stricte Tempo"
+      recommendedDesc = "Optimisation de la biomécanique pour préserver vos acquis après 40 ans."
+    }
   }
 
   return (
@@ -86,7 +128,7 @@ export default function Onboarding() {
                 <div className="option-icon">🛡️</div>
                 <div className="option-text">
                   <h4>Santé articulaire</h4>
-                  <p>Pratiquer sans me faire mal aux épaules.</p>
+                  <p>Pratiquer sans me faire mal aux articulations.</p>
                 </div>
               </div>
               <div 
@@ -106,35 +148,57 @@ export default function Onboarding() {
         {step === 2 && (
           <div className="step-content">
             <h1 className="step-title">Avez-vous des douleurs régulières ?</h1>
-            <p className="step-subtitle">Soyez honnête, le programme contournera ces zones de stress.</p>
+            <p className="step-subtitle">Sélectionnez toutes les zones concernées. Le programme s'adaptera.</p>
 
             <div className="options-grid">
-              <div className={`option-card ${answers.pain === 'epaules' ? 'selected' : ''}`} onClick={() => handleSelect('pain', 'epaules')}>
+              <div 
+                className={`option-card ${answers.pains.includes('epaules') ? 'selected' : ''}`} 
+                onClick={() => togglePain('epaules')}
+              >
                 <div className="option-icon">⚠️</div>
                 <div className="option-text">
                   <h4>Oui, aux épaules</h4>
                   <p>Tensions à l'avant de l'épaule ou coiffe des rotateurs.</p>
                 </div>
               </div>
-              <div className={`option-card ${answers.pain === 'poignets' ? 'selected' : ''}`} onClick={() => handleSelect('pain', 'poignets')}>
+              <div 
+                className={`option-card ${answers.pains.includes('poignets') ? 'selected' : ''}`} 
+                onClick={() => togglePain('poignets')}
+              >
                 <div className="option-icon">✋</div>
                 <div className="option-text">
                   <h4>Oui, aux poignets</h4>
-                  <p>Sensibilité en appui plat sur le sol.</p>
+                  <p>Sensibilité en appui plat ou sous charge.</p>
                 </div>
               </div>
-              <div className={`option-card ${answers.pain === 'dos' ? 'selected' : ''}`} onClick={() => handleSelect('pain', 'dos')}>
+              <div 
+                className={`option-card ${answers.pains.includes('coudes') ? 'selected' : ''}`} 
+                onClick={() => togglePain('coudes')}
+              >
+                <div className="option-icon">🦾</div>
+                <div className="option-text">
+                  <h4>Oui, aux coudes</h4>
+                  <p>Inconfort pendant la flexion ou la poussée.</p>
+                </div>
+              </div>
+              <div 
+                className={`option-card ${answers.pains.includes('dos') ? 'selected' : ''}`} 
+                onClick={() => togglePain('dos')}
+              >
                 <div className="option-icon">⚡</div>
                 <div className="option-text">
                   <h4>Oui, au bas du dos</h4>
                   <p>Tensions lombaires pendant le gainage.</p>
                 </div>
               </div>
-              <div className={`option-card ${answers.pain === 'aucune' ? 'selected' : ''}`} onClick={() => handleSelect('pain', 'aucune')}>
+              <div 
+                className={`option-card ${answers.pains.includes('aucune') ? 'selected' : ''}`} 
+                onClick={() => togglePain('aucune')}
+              >
                 <div className="option-icon">✅</div>
                 <div className="option-text">
                   <h4>Aucune douleur</h4>
-                  <p>Tout va bien de ce côté là.</p>
+                  <p>Tout va bien de ce côté-là.</p>
                 </div>
               </div>
             </div>
@@ -179,7 +243,11 @@ export default function Onboarding() {
           <div className="result-container loading-state">
             <div className="spinner"></div>
             <h2 className="step-title mt-4">Analyse en cours...</h2>
-            <p className="step-subtitle">Création de votre plan de progression</p>
+            <p className="step-subtitle">
+              {hasPains 
+                ? "Adaptation du protocole à vos contraintes articulaires" 
+                : "Création de votre plan de progression"}
+            </p>
           </div>
         )}
 
@@ -202,8 +270,18 @@ export default function Onboarding() {
               </div>
               <div className="result-row">
                 <span className="text-gray">Focus :</span>
-                <strong>{answers.goal === 'force' ? 'Volume propre' : 'Santé & Posture'}</strong>
+                <strong>
+                  {hasPains ? 'Réhabilitation & Force' : (answers.goal === 'force' ? 'Volume propre' : 'Santé & Posture')}
+                </strong>
               </div>
+              {hasPains && (
+                <div className="result-row" style={{ borderTop: '1px dashed var(--border)', marginTop: '0.5rem', paddingTop: '1rem' }}>
+                  <span className="text-gray" style={{ color: '#0f6f67' }}>✓ Adapté pour :</span>
+                  <strong style={{ color: '#0f6f67', textAlign: 'right' }}>
+                    {answers.pains.map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(', ')}
+                  </strong>
+                </div>
+              )}
             </div>
             <Link href="/program" className="btn-dark block text-center w-full">Générer mon programme gratuit</Link>
           </div>
@@ -220,7 +298,7 @@ export default function Onboarding() {
               onClick={nextStep}
               disabled={
                 (step === 1 && !answers.goal) || 
-                (step === 2 && !answers.pain) || 
+                (step === 2 && answers.pains.length === 0) || 
                 (step === 3 && !answers.level)
               }
             >

@@ -263,3 +263,70 @@ a { text-decoration: none; color: inherit; }
 .spinner { width: 40px; height: 40px; border: 4px solid var(--border); border-top-color: var(--brand); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto; }
 @keyframes spin { to { transform: rotate(360deg); } }
 .loading-state { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 50vh; }
+
+/* Program Styles */
+.program-container { max-width: 800px; margin: 0 auto; padding: 4rem 1.5rem 6rem; }
+.program-header { margin-bottom: 4rem; }
+
+.timeline { position: relative; margin-bottom: 5rem; }
+.timeline::before {
+  content: ''; position: absolute; left: 24px; top: 0; bottom: 0; width: 2px;
+  background: var(--border); border-radius: 2px;
+}
+
+.timeline-item { position: relative; padding-left: 70px; margin-bottom: 3rem; }
+.timeline-item:last-child { margin-bottom: 0; }
+
+.timeline-marker {
+  position: absolute; left: 0; top: 0;
+  width: 50px; height: 50px; border-radius: 50%;
+  background: white; border: 2px solid var(--border);
+  display: grid; place-items: center;
+  font-size: 1.2rem; font-weight: 800; color: var(--text-gray);
+  z-index: 2;
+}
+
+.timeline-content {
+  background: white; border: 1px solid var(--border);
+  border-radius: 20px; padding: 1.8rem;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+}
+
+.level-badge {
+  display: inline-block; padding: 4px 10px; border-radius: 8px;
+  background: #f5f5f5; color: var(--text-gray);
+  font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.05em; margin-bottom: 0.8rem;
+}
+
+.timeline-content h3 { margin: 0 0 0.8rem 0; font-size: 1.4rem; font-weight: 800; }
+.timeline-content p { margin: 0 0 1.5rem 0; color: var(--text-gray); line-height: 1.6; font-size: 0.95rem; }
+
+.level-details { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+.detail-tag {
+  font-size: 0.8rem; font-weight: 600; color: var(--text-main);
+  background: #fafafa; border: 1px solid var(--border);
+  padding: 6px 12px; border-radius: 10px;
+}
+
+/* Highlight for level 5 */
+.highlight-marker { border-color: var(--brand); background: var(--brand); color: white; box-shadow: 0 0 0 4px var(--brand-soft); }
+.border-highlight { border: 2px solid var(--brand); box-shadow: 0 10px 30px rgba(15,111,103,0.08); }
+.highlight-badge { background: var(--brand-soft); color: var(--brand); }
+.highlight-tag { background: var(--brand-soft); color: var(--brand); border-color: rgba(15,111,103,0.2); }
+
+/* Weekly Routine */
+.weekly-routine { margin-bottom: 4rem; }
+.routine-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.routine-card { background: #fafafa; border: 1px solid var(--border); border-radius: 20px; padding: 1.5rem; text-align: center; }
+.routine-icon { width: 40px; height: 40px; border-radius: 50%; background: white; border: 1px solid var(--border); display: grid; place-items: center; font-weight: 700; margin: 0 auto 1rem; color: var(--text-gray); }
+.routine-card h4 { margin: 0 0 0.5rem 0; font-size: 1.05rem; }
+.routine-card p { margin: 0; font-size: 0.85rem; color: var(--text-gray); line-height: 1.5; }
+
+@media (max-width: 768px) {
+  .program-container { padding: 2rem 1.2rem 6rem; }
+  .timeline::before { left: 20px; }
+  .timeline-marker { width: 42px; height: 42px; font-size: 1rem; }
+  .timeline-item { padding-left: 58px; }
+  .routine-grid { grid-template-columns: 1fr; gap: 1rem; }
+}

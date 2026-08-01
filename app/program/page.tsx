@@ -22,7 +22,7 @@ export default function Program() {
             Biomécanique & Progression.
           </h1>
           <p className="hero-description mx-auto">
-            Le but n'est pas d'enchaîner 100 répétitions cassées, mais de reconstruire une force solide et saine. Voici le chemin exact, palier par palier, pour y arriver.
+            Le but n'est pas d'enchaîner 100 répétitions cassées, mais de reconstruire une force solide et saine. Voici le chemin exact, l'inclinaison requise, et les accessoires idéaux.
           </p>
         </section>
 
@@ -36,7 +36,10 @@ export default function Program() {
                 <div className="level-badge">Semaines 1-2</div>
                 <h3>Fondations : Appui Mur</h3>
                 <p>Réveil du système nerveux. On réapprend à gainer la sangle abdominale et à placer les omoplates sans aucune charge sur les poignets.</p>
-                <div className="level-details">
+                <div className="accessory-box">
+                  <strong>Installation :</strong> Face à un mur, pieds à 1 mètre du mur. 
+                </div>
+                <div className="level-details mt-4">
                   <span className="detail-tag">Focus: Alignement</span>
                   <span className="detail-tag">Charge: ~20% pdc</span>
                 </div>
@@ -48,9 +51,12 @@ export default function Program() {
               <div className="timeline-marker">2</div>
               <div className="timeline-content">
                 <div className="level-badge">Semaines 3-4</div>
-                <h3>Incliné Haut (Banc/Table)</h3>
-                <p>Introduction de la charge. Le buste descend vers les mains. C'est ici que l'on construit le volume propre et l'endurance des triceps.</p>
-                <div className="level-details">
+                <h3>Incliné Haut (~80cm)</h3>
+                <p>Introduction de la charge. Le buste descend vers les mains. C'est ici que l'on construit le volume propre et l'endurance des triceps sans écraser la coiffe des rotateurs.</p>
+                <div className="accessory-box">
+                  <strong>Installation :</strong> Un plan de travail de cuisine, une table de salle à manger solide, ou des <em>sangles de suspension (TRX)</em> fixées en haut d'une porte.
+                </div>
+                <div className="level-details mt-4">
                   <span className="detail-tag">Focus: Volume</span>
                   <span className="detail-tag">Charge: ~40% pdc</span>
                 </div>
@@ -62,9 +68,12 @@ export default function Program() {
               <div className="timeline-marker">3</div>
               <div className="timeline-content">
                 <div className="level-badge">Semaines 5-6</div>
-                <h3>Incliné Bas (Marche/Chaise)</h3>
-                <p>La charge devient sérieuse. On réduit l'inclinaison. Le gainage doit être parfait pour ne pas creuser le dos. Les pectoraux prennent le relais.</p>
-                <div className="level-details">
+                <h3>Incliné Bas (~40cm)</h3>
+                <p>La charge devient sérieuse. On réduit l'inclinaison de moitié. Le gainage doit être parfait pour ne pas creuser le dos. Les pectoraux prennent le relais.</p>
+                <div className="accessory-box">
+                  <strong>Installation :</strong> Un banc de musculation, un canapé ferme, la 2ème/3ème marche d'un escalier, ou une <em>box de plyométrie</em>.
+                </div>
+                <div className="level-details mt-4">
                   <span className="detail-tag">Focus: Force de poussée</span>
                   <span className="detail-tag">Charge: ~55% pdc</span>
                 </div>
@@ -76,9 +85,12 @@ export default function Program() {
               <div className="timeline-marker">4</div>
               <div className="timeline-content">
                 <div className="level-badge">Semaines 7-8</div>
-                <h3>L'Excentrique (Sol)</h3>
-                <p>On passe au sol, mais uniquement sur la descente (très lente, 4 secondes). La remontée se fait sur les genoux. Idéal pour renforcer les tendons.</p>
-                <div className="level-details">
+                <h3>L'Excentrique Lente (Sol)</h3>
+                <p>On passe au sol, mais uniquement sur la descente (très lente, 4 secondes). La remontée se fait sur les genoux. Idéal pour renforcer les tendons et effacer les douleurs.</p>
+                <div className="accessory-box">
+                  <strong>Installation :</strong> Au sol. Utilisation de <em>poignées de pompes (parallettes)</em> fortement recommandée si vous avez les poignets sensibles.
+                </div>
+                <div className="level-details mt-4">
                   <span className="detail-tag">Focus: Tissus conjonctifs</span>
                   <span className="detail-tag">Charge: 100% pdc (descente)</span>
                 </div>
@@ -90,9 +102,12 @@ export default function Program() {
               <div className="timeline-marker highlight-marker">5</div>
               <div className="timeline-content border-highlight">
                 <div className="level-badge highlight-badge">Semaines 9+</div>
-                <h3>La Pompe Parfaite</h3>
+                <h3>La Pompe Parfaite (Sol)</h3>
                 <p>Corps gainé, descente contrôlée, buste frôlant le sol, poussée explosive. Vous avez reconstruit votre force, sans douleur.</p>
-                <div className="level-details">
+                <div className="accessory-box highlight-acc">
+                  <strong>Installation :</strong> Sol. Avec ou sans poignées selon votre confort articulaire.
+                </div>
+                <div className="level-details mt-4">
                   <span className="detail-tag highlight-tag">Focus: Maîtrise totale</span>
                   <span className="detail-tag highlight-tag">Charge: ~70% pdc</span>
                 </div>
@@ -102,29 +117,31 @@ export default function Program() {
           </div>
         </section>
 
-        <section className="weekly-routine">
-          <h2 className="text-center mb-8" style={{ fontSize: '1.8rem', fontWeight: 800 }}>Votre routine type (12 min)</h2>
-          <div className="routine-grid">
-            <div className="routine-card">
-              <div className="routine-icon">1</div>
-              <h4>Mobilité (3 min)</h4>
-              <p>Rotations des poignets, cercles d'épaules, ouverture thoracique.</p>
+        <section className="accessories-section">
+          <h2 className="mb-8" style={{ fontSize: '1.6rem', fontWeight: 800 }}>Le matériel recommandé</h2>
+          <p className="hero-description" style={{ fontSize: '1rem' }}>
+            Bien que le programme soit réalisable à 100% avec le mobilier de la maison (table, canapé, sol), deux accessoires abordables peuvent transformer votre progression et protéger vos articulations.
+          </p>
+
+          <div className="acc-card">
+            <div className="acc-icon">⭕</div>
+            <div className="acc-details">
+              <h4>Sangles de suspension (Type TRX ou Anneaux)</h4>
+              <p>Idéal pour régler l'inclinaison au millimètre près. Les poignées rotatives soulagent totalement les poignets et forcent le gainage profond.</p>
             </div>
-            <div className="routine-card">
-              <div className="routine-icon">2</div>
-              <h4>Travail ciblé (6 min)</h4>
-              <p>4 séries de votre palier actuel. Récupération active entre les séries.</p>
-            </div>
-            <div className="routine-card">
-              <div className="routine-icon">3</div>
-              <h4>Gainage (3 min)</h4>
-              <p>Planche stricte ou hollow body pour solidifier le transfert de force.</p>
+          </div>
+
+          <div className="acc-card">
+            <div className="acc-icon">🏗️</div>
+            <div className="acc-details">
+              <h4>Poignées de pompes (Parallettes)</h4>
+              <p>Indispensable à partir du niveau 4 (sol) si vous ressentez des pincements aux poignets. Elles permettent de garder le poignet dans un axe neutre et droit.</p>
             </div>
           </div>
         </section>
 
         <div className="text-center mt-4">
-          <Link href="/onboarding" className="btn-dark">Commencer mon programme</Link>
+          <Link href="/onboarding" className="btn-dark">Commencer mon diagnostic</Link>
         </div>
       </div>
 

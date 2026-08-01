@@ -46,64 +46,74 @@ export default function Progress() {
 
         <section className="milestone-section">
           <div className="milestone-header">
-            <h3>Prochain palier : Incliné Bas</h3>
+            <h3>Prochain palier : Incliné Bas (~40cm)</h3>
             <span className="text-brand font-semibold">65%</span>
           </div>
           <div className="milestone-bar-bg">
             <div className="milestone-bar-fill" style={{ width: '65%' }}></div>
           </div>
           <p className="milestone-desc">
-            Encore 4 séances maîtrisées à ce niveau avant que l'algorithme ne vous propose de descendre l'inclinaison.
+            Encore 4 séances maîtrisées à ce niveau avant que l'algorithme ne vous propose de descendre l'inclinaison vers un banc ou une marche.
           </p>
         </section>
 
         <section className="consistency-section">
-          <h3>Activité (30 derniers jours)</h3>
-          <div className="heatmap-container">
-            <div className="heatmap-grid">
-              {/* Semaine 1 */}
-              <div className="heat-cell heat-0"></div>
-              <div className="heat-cell heat-0"></div>
-              <div className="heat-cell heat-1"></div>
-              <div className="heat-cell heat-0"></div>
-              <div className="heat-cell heat-1"></div>
-              <div className="heat-cell heat-0"></div>
-              <div className="heat-cell heat-0"></div>
+          <div className="flex-between">
+            <h3>Activité (Août)</h3>
+            <span className="text-brand font-semibold text-sm">8 séances</span>
+          </div>
+          <div className="calendar-container">
+            <div className="calendar-grid">
+              <div className="day-name">L</div>
+              <div className="day-name">M</div>
+              <div className="day-name">M</div>
+              <div className="day-name">J</div>
+              <div className="day-name">V</div>
+              <div className="day-name">S</div>
+              <div className="day-name">D</div>
 
-              {/* Semaine 2 */}
-              <div className="heat-cell heat-1"></div>
-              <div className="heat-cell heat-0"></div>
-              <div className="heat-cell heat-2"></div>
-              <div className="heat-cell heat-0"></div>
-              <div className="heat-cell heat-2"></div>
-              <div className="heat-cell heat-0"></div>
-              <div className="heat-cell heat-0"></div>
+              {/* Jours vides du mois (offset) */}
+              <div className="cal-cell empty"></div>
+              <div className="cal-cell empty"></div>
+              <div className="cal-cell empty"></div>
+              <div className="cal-cell empty"></div>
 
-              {/* Semaine 3 */}
-              <div className="heat-cell heat-2"></div>
-              <div className="heat-cell heat-0"></div>
-              <div className="heat-cell heat-2"></div>
-              <div className="heat-cell heat-0"></div>
-              <div className="heat-cell heat-3"></div>
-              <div className="heat-cell heat-0"></div>
-              <div className="heat-cell heat-0"></div>
+              {/* Jours du mois */}
+              <div className="cal-cell heat-3">1</div>
+              <div className="cal-cell heat-0">2</div>
+              <div className="cal-cell heat-0">3</div>
 
-              {/* Semaine 4 (Current) */}
-              <div className="heat-cell heat-3"></div>
-              <div className="heat-cell heat-0"></div>
-              <div className="heat-cell heat-3"></div>
-              <div className="heat-cell heat-0"></div>
-              <div className="heat-cell heat-0 current-day"></div>
-              <div className="heat-cell heat-0"></div>
-              <div className="heat-cell heat-0"></div>
+              <div className="cal-cell heat-3">4</div>
+              <div className="cal-cell heat-0">5</div>
+              <div className="cal-cell heat-2">6</div>
+              <div className="cal-cell heat-0">7</div>
+              <div className="cal-cell heat-2">8</div>
+              <div className="cal-cell heat-0">9</div>
+              <div className="cal-cell heat-0">10</div>
+
+              <div className="cal-cell heat-3">11</div>
+              <div className="cal-cell heat-0">12</div>
+              <div className="cal-cell heat-3">13</div>
+              <div className="cal-cell heat-0">14</div>
+              <div className="cal-cell heat-3 current-day">15</div>
+              <div className="cal-cell heat-0">16</div>
+              <div className="cal-cell heat-0">17</div>
+
+              {/* Future days */}
+              <div className="cal-cell heat-0 text-faint">18</div>
+              <div className="cal-cell heat-0 text-faint">19</div>
+              <div className="cal-cell heat-0 text-faint">20</div>
+              <div className="cal-cell heat-0 text-faint">21</div>
+              <div className="cal-cell heat-0 text-faint">22</div>
+              <div className="cal-cell heat-0 text-faint">23</div>
+              <div className="cal-cell heat-0 text-faint">24</div>
             </div>
-            <div className="heatmap-legend">
-              <span className="text-gray text-sm">Moins</span>
-              <div className="heat-cell heat-0"></div>
-              <div className="heat-cell heat-1"></div>
-              <div className="heat-cell heat-2"></div>
-              <div className="heat-cell heat-3"></div>
-              <span className="text-gray text-sm">Plus</span>
+            <div className="heatmap-legend mt-4">
+              <span className="text-gray text-sm">Repos</span>
+              <div className="cal-cell heat-0" style={{width: 16, height: 16, borderRadius: 4}}></div>
+              <div className="cal-cell heat-2" style={{width: 16, height: 16, borderRadius: 4}}></div>
+              <div className="cal-cell heat-3" style={{width: 16, height: 16, borderRadius: 4}}></div>
+              <span className="text-gray text-sm">Séance</span>
             </div>
           </div>
         </section>
@@ -116,7 +126,7 @@ export default function Progress() {
               <div className="history-icon done">✓</div>
               <div className="history-details">
                 <h4>Séance 8 : Volume Incliné</h4>
-                <span className="text-gray text-sm">Aujourd'hui • 12 min • Facile</span>
+                <span className="text-gray text-sm">Aujourd'hui • 12 min • Plan de travail</span>
               </div>
               <div className="history-action">
                 <Link href="#" className="text-brand font-semibold text-sm">Détails</Link>
@@ -127,7 +137,7 @@ export default function Progress() {
               <div className="history-icon done">✓</div>
               <div className="history-details">
                 <h4>Séance 7 : Force Inclinée</h4>
-                <span className="text-gray text-sm">Il y a 2 jours • 14 min • Modéré</span>
+                <span className="text-gray text-sm">13 Août • 14 min • Plan de travail</span>
               </div>
               <div className="history-action">
                 <Link href="#" className="text-brand font-semibold text-sm">Détails</Link>
@@ -138,7 +148,7 @@ export default function Progress() {
               <div className="history-icon done">✓</div>
               <div className="history-details">
                 <h4>Séance 6 : Contrôle</h4>
-                <span className="text-gray text-sm">Il y a 4 jours • 11 min • Facile</span>
+                <span className="text-gray text-sm">11 Août • 11 min • Plan de travail</span>
               </div>
               <div className="history-action">
                 <Link href="#" className="text-brand font-semibold text-sm">Détails</Link>

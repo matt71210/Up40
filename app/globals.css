@@ -382,3 +382,32 @@ a { text-decoration: none; color: inherit; }
   .user-greeting { flex-direction: column; align-items: flex-start; gap: 1rem; }
   .avatar-large { width: 56px; height: 56px; font-size: 1.5rem; }
 }
+
+/* Calendar & Flex additions */
+.flex-between { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 1.5rem; }
+.calendar-container { background: #fafafa; border: 1px solid var(--border); border-radius: 24px; padding: 1.5rem; }
+.calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; text-align: center; }
+.day-name { font-size: 0.8rem; font-weight: 600; color: var(--text-gray); margin-bottom: 0.5rem; }
+.cal-cell { aspect-ratio: 1; border-radius: 10px; display: grid; place-items: center; font-size: 0.9rem; font-weight: 600; color: var(--text-main); border: 1px solid transparent; }
+.cal-cell.empty { background: transparent; }
+.cal-cell.heat-0 { background: white; border-color: var(--border); color: var(--text-gray); }
+.cal-cell.heat-1 { background: var(--brand-soft); color: var(--brand-dark); }
+.cal-cell.heat-2 { background: rgba(15,111,103,0.25); color: var(--brand-dark); }
+.cal-cell.heat-3 { background: var(--brand); color: white; border-color: var(--brand-dark); }
+.cal-cell.current-day { border: 2px solid var(--text-main); box-shadow: inset 0 0 0 2px white; }
+.text-faint { opacity: 0.4; }
+
+/* Accessory section in Program */
+.accessory-box { margin-top: 1.2rem; padding: 1rem; background: #fafafa; border-radius: 12px; border-left: 3px solid var(--brand); font-size: 0.9rem; color: var(--text-gray); }
+.accessory-box strong { color: var(--text-main); }
+.highlight-acc { background: var(--brand-soft); border-left-color: var(--brand); }
+.accessories-section { margin-bottom: 4rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+.acc-card { display: flex; gap: 1.5rem; background: white; border-radius: 16px; padding: 1.5rem; border: 1px solid var(--border); margin-bottom: 1rem; align-items: flex-start; box-shadow: 0 4px 15px rgba(0,0,0,0.02); }
+.acc-icon { font-size: 2rem; flex-shrink: 0; background: #fafafa; width: 60px; height: 60px; border-radius: 12px; display: grid; place-items: center; }
+.acc-details h4 { margin: 0 0 0.4rem 0; font-size: 1.1rem; }
+.acc-details p { margin: 0; color: var(--text-gray); font-size: 0.95rem; line-height: 1.5; }
+
+@media (max-width: 768px) {
+  .cal-cell { font-size: 0.8rem; border-radius: 8px; }
+  .acc-card { flex-direction: column; gap: 1rem; }
+}

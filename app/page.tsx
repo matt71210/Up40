@@ -1,65 +1,78 @@
 import Link from 'next/link'
 
-function PushIcon() {
+function PushSketch() {
   return (
-    <div className="glow-icon" aria-hidden="true">
-      <div className="glow-ring" />
-      <div className="push-figure">
-        <div className="push-head" />
-        <div className="push-body" />
-        <div className="push-arm" />
-        <div className="push-core" />
-        <div className="push-leg" />
-        <div className="push-shin" />
-        <div className="push-hand" />
-        <div className="push-foot" />
-      </div>
-    </div>
+    <svg viewBox="0 0 420 420" className="pushSvg" aria-hidden="true">
+      <defs>
+        <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="8" result="blur" />
+          <feMerge>
+            <feMergeNode in="blur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
+      <rect x="26" y="26" width="368" height="368" rx="54" fill="#141b24" />
+      <circle cx="210" cy="210" r="132" fill="none" stroke="#f6fbff" strokeWidth="5" filter="url(#softGlow)" />
+      <circle cx="136" cy="176" r="14" fill="#f6fbff" />
+      <path d="M156 190 L188 190 L205 208 L252 214 L291 236 L324 236" fill="none" stroke="#f6fbff" strokeWidth="16" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M177 202 L177 270" fill="none" stroke="#f6fbff" strokeWidth="16" strokeLinecap="round" />
+      <path d="M164 270 L196 270" fill="none" stroke="#f6fbff" strokeWidth="16" strokeLinecap="round" />
+      <path d="M324 236 L340 266" fill="none" stroke="#f6fbff" strokeWidth="16" strokeLinecap="round" />
+      <path d="M328 266 L355 266" fill="none" stroke="#f6fbff" strokeWidth="16" strokeLinecap="round" />
+    </svg>
   )
 }
 
 export default function Page() {
   return (
-    <main>
-      <section className="hero-grid">
-        <div className="hero-copy">
-          <div className="kicker"><span className="kicker-dot" /> Longévité musculaire, sans ego</div>
-          <h1 className="hero-title">Retrouve des pompes propres après 40 ans.</h1>
-          <p className="hero-sub">
-            Une app santé-performance pensée pour les adultes actifs qui veulent reprendre de la force sans s’abîmer les poignets,
-            les épaules ou la motivation. Progression simple, séances courtes, langage clair, sensation premium.
+    <main className="landingPage">
+      <section className="landingHero">
+        <div className="heroText cardGlass">
+          <div className="eyebrow">Up40 · Force, mobilité, reprise intelligente</div>
+          <h1 className="landingTitle">Retrouve des pompes propres sans reprendre comme à 20 ans.</h1>
+          <p className="landingSub">
+            Up40 aide les adultes actifs à reconstruire une vraie force du haut du corps avec un parcours plus calme,
+            plus crédible et plus respectueux des poignets, des épaules et de la récupération.
           </p>
-          <div className="row">
-            <Link className="btn btn-primary" href="/onboarding">Faire mon diagnostic</Link>
-            <Link className="btn btn-secondary" href="/program">Voir un aperçu du programme</Link>
+          <div className="ctaRow">
+            <Link href="/onboarding" className="btn btn-primary">Faire mon diagnostic</Link>
+            <Link href="/program" className="btn btn-secondary">Voir le programme</Link>
           </div>
-          <div className="hero-proof">
-            <div className="proof-card"><span className="proof-label">Fréquence</span><span className="proof-value">3 séances</span></div>
-            <div className="proof-card"><span className="proof-label">Durée</span><span className="proof-value">8–15 min</span></div>
-            <div className="proof-card"><span className="proof-label">Focus</span><span className="proof-value">Force saine</span></div>
+          <div className="trustRow">
+            <div className="trustItem"><strong>3x / semaine</strong><span>routine simple</span></div>
+            <div className="trustItem"><strong>8–15 min</strong><span>séances courtes</span></div>
+            <div className="trustItem"><strong>40+</strong><span>pensé pour la reprise</span></div>
           </div>
         </div>
 
-        <div className="panel">
-          <div className="panel-inner">
-            <div className="panel-top">
-              <span>Up40 preview</span>
-              <span>Move better • Push stronger</span>
+        <div className="heroShot cardDark">
+          <div className="productWindow">
+            <div className="windowBar">
+              <span className="dot" />
+              <span className="dot" />
+              <span className="dot" />
+              <span className="windowLabel">today / readiness / push strength</span>
             </div>
-            <div className="glow-app">
-              <PushIcon />
-              <div className="panel-stats">
-                <div className="metric-card">
-                  <div className="metric-value">Niv. 1</div>
-                  <div className="metric-label">Incliné assisté</div>
+            <div className="previewGrid">
+              <div className="haloTile">
+                <PushSketch />
+              </div>
+              <div className="statRail">
+                <div className="statMini">
+                  <span className="miniLabel">Niveau conseillé</span>
+                  <strong>Incliné 1</strong>
+                  <p>Départ stable avec travail d'appuis et contrôle.</p>
                 </div>
-                <div className="metric-card">
-                  <div className="metric-value">+18%</div>
-                  <div className="metric-label">Contrôle semaine 2</div>
+                <div className="statMini">
+                  <span className="miniLabel">Séance du jour</span>
+                  <strong>12 minutes</strong>
+                  <p>Activation épaules, séries inclinées, gainage.</p>
                 </div>
-                <div className="metric-card">
-                  <div className="metric-value">J+21</div>
-                  <div className="metric-label">Avant 1re vraie pompe</div>
+                <div className="statMini highlight">
+                  <span className="miniLabel">Objectif</span>
+                  <strong>1 vraie pompe propre</strong>
+                  <p>Sans douleur inutile ni surcharge absurde.</p>
                 </div>
               </div>
             </div>
@@ -67,31 +80,32 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="section-shell">
-        <h2 className="section-title">Une reprise plus élégante que le fitness brutal</h2>
-        <div className="feature-grid">
-          <article className="feature-card">
-            <div className="feature-icon">01</div>
-            <h3 className="feature-title">Départ réaliste</h3>
-            <p className="feature-copy">Tu commences au bon palier, pas sur un challenge absurde. L’app s’adresse à la reprise, pas à l’ego.</p>
-          </article>
-          <article className="feature-card">
-            <div className="feature-icon">02</div>
-            <h3 className="feature-title">Appuis respectés</h3>
-            <p className="feature-copy">Poignets, épaules et sensation articulaire sont intégrés dans le parcours, avec une logique plus santé que bootcamp.</p>
-          </article>
-          <article className="feature-card">
-            <div className="feature-icon">03</div>
-            <h3 className="feature-title">Progression visible</h3>
-            <p className="feature-copy">Tu vois rapidement des jalons concrets : mur, incliné, excentrique, amplitude partielle, puis pompe propre complète.</p>
-          </article>
+      <section className="highlightBar">
+        <div>
+          <span className="barLabel">Pourquoi Up40 paraît plus crédible</span>
+          <h2>Moins fitness générique, plus produit santé-performance.</h2>
         </div>
-        <div className="mini-banner">
-          <div>
-            <strong>Positionnement voulu :</strong> une startup santé-performance plus premium, plus calme et plus crédible qu’une app fitness générique.
-          </div>
-          <Link href="/premium" className="btn btn-primary">Voir la version premium</Link>
-        </div>
+        <p>
+          Le message, la hiérarchie et le visuel montrent un produit de progression, pas juste un challenge de pompes.
+        </p>
+      </section>
+
+      <section className="featureDeck">
+        <article className="featurePanel">
+          <div className="featureIndex">01</div>
+          <h3>Départ réaliste</h3>
+          <p>Tu commences au bon palier selon ton niveau, pas sur une promesse héroïque impossible à tenir.</p>
+        </article>
+        <article className="featurePanel">
+          <div className="featureIndex">02</div>
+          <h3>Appuis respectés</h3>
+          <p>Poignets, épaules et récupération font partie de l'expérience, avec une tonalité plus calme et plus adulte.</p>
+        </article>
+        <article className="featurePanel">
+          <div className="featureIndex">03</div>
+          <h3>Progression visible</h3>
+          <p>Chaque palier montre une amélioration concrète, du mur jusqu'à la première vraie pompe complète.</p>
+        </article>
       </section>
     </main>
   )

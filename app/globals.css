@@ -198,23 +198,7 @@ a { text-decoration: none; color: inherit; }
 
 /* Bottom Nav */
 .footer-spacing { height: 100px; }
-.bottom-nav {
-  position: fixed;
-  bottom: 1rem;
-  left: 50%;
-  transform: translateX(-50%);
-  width: calc(100% - 2rem);
-  max-width: 500px;
-  background: color-mix(in srgb, var(--surface) 90%, transparent);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--border);
-  border-radius: 24px;
-  display: flex;
-  justify-content: space-around;
-  padding: 0.5rem;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-  z-index: 1000;
-}
+.bottom-nav { position: fixed; bottom: 1rem; left: 50%; transform: translateX(-50%); width: calc(100% - 2rem); max-width: 500px; background: color-mix(in srgb, var(--surface) 90%, transparent); backdrop-filter: blur(12px); border: 1px solid var(--border); border-radius: 24px; display: flex; justify-content: space-around; padding: 0.5rem; box-shadow: 0 10px 25px rgba(0,0,0,0.08); z-index: 1000; }
 .nav-item {
   display: flex;
   flex-direction: column;
@@ -250,11 +234,11 @@ a { text-decoration: none; color: inherit; }
 .step-title { font-size: 1.8rem; font-weight: 800; margin-bottom: 0.5rem; letter-spacing: -0.03em; }
 .step-subtitle { color: var(--text-gray); margin-bottom: 2.5rem; font-size: 1.1rem; }
 .options-grid { display: grid; gap: 1rem; }
-.option-card { padding: 1.2rem 1.5rem; border: 2px solid var(--border); border-radius: 16px; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 1.2rem; background: #fff; }
+.option-card { padding: 1.2rem 1.5rem; border: 2px solid var(--border); border-radius: 16px; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 1.2rem; background: var(--surface); color: var(--text-main); }
 .option-card:hover { border-color: rgba(15,111,103,0.3); }
 .option-card.selected { border-color: var(--brand); background: var(--brand-soft); }
 .option-icon { font-size: 1.8rem; }
-.option-text h4 { margin: 0 0 0.2rem 0; font-size: 1.1rem; font-weight: 600; }
+.option-text h4 { margin: 0 0 0.2rem 0; font-size: 1.1rem; font-weight: 600; color: var(--text-main); }
 .option-text p { margin: 0; font-size: 0.9rem; color: var(--text-gray); line-height: 1.4; }
 .action-bar { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
 .btn-prev { background: transparent; border: none; color: var(--text-gray); font-weight: 600; cursor: pointer; padding: 0.8rem 0; font-size: 1rem; }

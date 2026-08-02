@@ -51,7 +51,7 @@ export default function Program() {
 
   return (
     <main className="min-h-screen bg-white">
-      <header className="top-header">
+      <header className="top-header transparent">
         <div className="nav-container">
           <nav className="nav-bar">
             <Link href="/" className="logo-minimal">Up40.</Link>
@@ -67,7 +67,7 @@ export default function Program() {
       </header>
 
       <div className="program-container">
-        <section className="program-header text-center">
+        <section className="program-header text-center program-photo-hero">
           <div className="badge-new mx-auto">
             {userLevel ? "Votre programme personnalisé" : "La Méthode Up40"}
           </div>

@@ -4,7 +4,7 @@ import ThemeToggle from '../ThemeToggle'
 export default function Progress() {
   return (
     <main className="min-h-screen bg-white">
-      <header className="top-header">
+      <header className="top-header transparent">
         <div className="nav-container">
           <nav className="nav-bar">
             <Link href="/" className="logo-minimal">Up40.</Link>
@@ -19,7 +19,12 @@ export default function Progress() {
         </div>
       </header>
 
-      <div className="progress-container">
+      <section className="progress-photo-hero text-center">
+        <h1 className="display-title" style={{ fontSize: '2.5rem' }}>Vos Progrès</h1>
+        <p className="hero-description mx-auto">Consistance avant intensité. La clé est de ne jamais briser la chaîne.</p>
+      </section>
+
+      <div className="progress-container" style={{ paddingTop: 0 }}>
         <div className="progress-header">
           <div className="user-greeting">
             <div className="avatar-large">M</div>

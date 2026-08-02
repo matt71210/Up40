@@ -496,3 +496,50 @@ a { text-decoration: none; color: inherit; }
 .top-header.transparent .logo-minimal { color: white; }
 .top-header.transparent .nav-link { color: rgba(255,255,255,0.8); }
 .top-header.transparent .nav-link:hover { color: white; }
+
+/* Additional Photo Heroes for other pages */
+.program-photo-hero {
+  position: relative;
+  background: linear-gradient(to bottom, rgba(15,111,103,0.85), rgba(0,0,0,0.85)), url('https://picsum.photos/seed/pushup/1200/800');
+  background-size: cover;
+  background-position: center;
+  color: white;
+  padding: 7rem 1.5rem 5rem;
+  margin-top: -70px;
+  border-radius: 0 0 32px 32px;
+  margin-bottom: 3rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+.program-photo-hero .display-title { color: white; }
+.program-photo-hero p { color: rgba(255,255,255,0.9); }
+.program-photo-hero .badge-new { background: rgba(255,255,255,0.15); color: white; border-color: rgba(255,255,255,0.3); }
+
+.progress-photo-hero {
+  position: relative;
+  background: linear-gradient(to bottom, rgba(15,111,103,0.85), rgba(0,0,0,0.85)), url('https://picsum.photos/seed/workout/1200/800');
+  background-size: cover;
+  background-position: center;
+  color: white;
+  padding: 6rem 1.5rem 4rem;
+  margin-top: -70px;
+  border-radius: 0 0 32px 32px;
+  margin-bottom: 2rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+.progress-photo-hero .display-title { color: white; }
+.progress-photo-hero p { color: rgba(255,255,255,0.9); }
+
+.onboarding-photo-hero {
+  position: relative;
+  background: linear-gradient(to bottom, rgba(15,111,103,0.9), rgba(0,0,0,0.8)), url('https://picsum.photos/seed/anatomy/1200/600');
+  background-size: cover;
+  background-position: center;
+  color: white;
+  padding: 6rem 1.5rem 3rem;
+  margin-top: -70px;
+  border-radius: 0 0 32px 32px;
+  margin-bottom: 2rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+.onboarding-photo-hero .display-title { color: white; }
+.onboarding-photo-hero .badge-new { background: rgba(255,255,255,0.15); color: white; border-color: rgba(255,255,255,0.3); }

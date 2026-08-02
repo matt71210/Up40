@@ -96,7 +96,7 @@ export default function Onboarding() {
 
   return (
     <main className="min-h-screen bg-white">
-      <header className="top-header">
+      <header className="top-header transparent">
         <div className="nav-container">
           <nav className="nav-bar">
             <Link href="/" className="logo-minimal">Up40.</Link>
@@ -108,7 +108,12 @@ export default function Onboarding() {
         </div>
       </header>
 
-      <div className="onboarding-container">
+      <section className="onboarding-photo-hero text-center">
+        <div className="badge-new mx-auto">Bilan Personnalisé</div>
+        <h1 className="display-title mt-2" style={{ fontSize: '2rem' }}>Votre Profil</h1>
+      </section>
+
+      <div className="onboarding-container" style={{ paddingTop: 0 }}>
         {step < 4 && (
           <div className="progress-bar">
             <div className="progress-fill" style={{ width: `${(step / 3) * 100}%` }}></div>

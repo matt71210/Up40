@@ -6,7 +6,7 @@ export default function Page() {
       <header className="top-header">
         <div className="nav-container">
           <nav className="nav-bar">
-            <div className="logo-minimal">Up40.</div>
+            <Link href="/" className="logo-minimal">Up40.</Link>
             <div className="nav-links">
               <Link href="/program" className="nav-link">La méthode</Link>
               <Link href="/premium" className="nav-btn">Premium</Link>
@@ -23,10 +23,10 @@ export default function Page() {
             <span className="text-gray">Préservez votre corps.</span>
           </h1>
           <p className="hero-description">
-            Up40 est le programme d'entraînement conçu pour la biomécanique de l'adulte actif. Fini le fitness brutal et les douleurs inutiles : retrouvez de vraies pompes complètes avec 12 minutes de pratique intelligente par jour.
+            Up40 est le programme d'entraînement conçu pour la biomécanique de l'adulte actif. Fini le fitness brutal et l'usure prématurée : retrouvez de vraies pompes complètes avec 12 minutes de pratique intelligente par jour.
           </p>
           <div className="cta-group">
-            <Link href="/onboarding" className="btn-dark">Démarrer le diagnostic</Link>
+            <Link href="/onboarding" className="btn-dark">Démarrer mon bilan</Link>
             <Link href="/program" className="btn-outline">Découvrir la méthode</Link>
           </div>
           <div className="trust-metrics">
@@ -104,8 +104,8 @@ export default function Page() {
       <section className="value-section">
         <div className="value-grid">
           <div className="value-box">
-            <h3>Fini les douleurs d'épaules</h3>
-            <p>Une progression axée sur le placement et la santé articulaire, pas sur le volume pur.</p>
+            <h3>Confort des épaules</h3>
+            <p>Une progression axée sur le placement et le respect articulaire, pas sur le volume pur.</p>
           </div>
           <div className="value-box">
             <h3>Des paliers réalistes</h3>
@@ -122,7 +122,7 @@ export default function Page() {
 
       <nav className="bottom-nav">
         <Link href="/" className="nav-item active">Accueil</Link>
-        <Link href="/onboarding" className="nav-item">Diagnostic</Link>
+        <Link href="/onboarding" className="nav-item">Bilan</Link>
         <Link href="/program" className="nav-item">Méthode</Link>
         <Link href="/progress" className="nav-item">Progrès</Link>
         <Link href="/premium" className="nav-item">Premium</Link>

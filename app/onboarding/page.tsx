@@ -18,12 +18,10 @@ export default function Onboarding() {
 
   const togglePain = (painId: string) => {
     setAnswers(prev => {
-      // Si on clique sur "aucune", on efface le reste
       if (painId === 'aucune') {
         return { ...prev, pains: ['aucune'] }
       }
 
-      // Sinon, on enlève "aucune" et on toggle la douleur sélectionnée
       let newPains = prev.pains.filter(p => p !== 'aucune')
 
       if (newPains.includes(painId)) {
@@ -64,7 +62,7 @@ export default function Onboarding() {
   } else if (answers.level === '1-5') {
     if (hasPains) {
       recommendedLevel = "Incliné 1 (Contrôle Articulaire)"
-      recommendedDesc = "On adapte la charge en incliné pour effacer les douleurs tout en construisant une base solide."
+      recommendedDesc = "On adapte la charge en incliné pour effacer les inconforts tout en construisant une base solide."
     } else {
       recommendedLevel = "Incliné 1 (Banc/Chaise)"
       recommendedDesc = "Idéal pour construire du volume propre sans dégrader la posture."
@@ -72,7 +70,7 @@ export default function Onboarding() {
   } else if (answers.level === '5-15') {
     if (hasPains) {
       recommendedLevel = "Excentrique Lente"
-      recommendedDesc = "Vous avez la force. On va utiliser le travail excentrique pour soulager vos articulations et réparer le mouvement."
+      recommendedDesc = "Vous avez la force. On va utiliser le travail excentrique pour ménager vos articulations et consolider le mouvement."
     } else {
       recommendedLevel = "Pompe Stricte (Séries courtes)"
       recommendedDesc = "On consolide votre niveau avec un focus sur la qualité d'exécution plutôt que sur la fatigue."
@@ -80,7 +78,7 @@ export default function Onboarding() {
   } else if (answers.level === '15+') {
     if (hasPains) {
       recommendedLevel = "Décharge partielle & Iso"
-      recommendedDesc = "Niveau avancé, mais le corps envoie des signaux. On va renforcer vos tendons sans surcharger vos muscles."
+      recommendedDesc = "Niveau avancé, mais le corps envoie des signaux. On va renforcer vos tendons sans surcharger les articulations."
     } else {
       recommendedLevel = "Pompe Stricte Tempo"
       recommendedDesc = "Optimisation de la biomécanique pour préserver vos acquis après 40 ans."
@@ -127,8 +125,8 @@ export default function Onboarding() {
               >
                 <div className="option-icon">🛡️</div>
                 <div className="option-text">
-                  <h4>Santé articulaire</h4>
-                  <p>Pratiquer sans me faire mal aux articulations.</p>
+                  <h4>Confort articulaire</h4>
+                  <p>Pratiquer sans subir de gênes aux articulations.</p>
                 </div>
               </div>
               <div 
@@ -147,8 +145,8 @@ export default function Onboarding() {
 
         {step === 2 && (
           <div className="step-content">
-            <h1 className="step-title">Avez-vous des douleurs régulières ?</h1>
-            <p className="step-subtitle">Sélectionnez toutes les zones concernées. Le programme s'adaptera.</p>
+            <h1 className="step-title">Ressentez-vous des gênes fréquentes ?</h1>
+            <p className="step-subtitle">Sélectionnez toutes les zones sensibles. Le programme s'adaptera.</p>
 
             <div className="options-grid">
               <div 
@@ -158,7 +156,7 @@ export default function Onboarding() {
                 <div className="option-icon">⚠️</div>
                 <div className="option-text">
                   <h4>Oui, aux épaules</h4>
-                  <p>Tensions à l'avant de l'épaule ou coiffe des rotateurs.</p>
+                  <p>Inconforts à l'avant de l'épaule ou coiffe des rotateurs.</p>
                 </div>
               </div>
               <div 
@@ -197,7 +195,7 @@ export default function Onboarding() {
               >
                 <div className="option-icon">✅</div>
                 <div className="option-text">
-                  <h4>Aucune douleur</h4>
+                  <h4>Aucune gêne</h4>
                   <p>Tout va bien de ce côté-là.</p>
                 </div>
               </div>
@@ -242,10 +240,10 @@ export default function Onboarding() {
         {isCalculating && (
           <div className="result-container loading-state">
             <div className="spinner"></div>
-            <h2 className="step-title mt-4">Analyse en cours...</h2>
+            <h2 className="step-title mt-4">Évaluation en cours...</h2>
             <p className="step-subtitle">
               {hasPains 
-                ? "Adaptation du protocole à vos contraintes articulaires" 
+                ? "Adaptation du protocole à vos sensibilités" 
                 : "Création de votre plan de progression"}
             </p>
           </div>
@@ -253,7 +251,7 @@ export default function Onboarding() {
 
         {step === 4 && !isCalculating && (
           <div className="result-container">
-            <div className="badge-new">Diagnostic terminé</div>
+            <div className="badge-new">Bilan terminé</div>
             <h2 className="result-title">Votre point de départ idéal :</h2>
             <div className="result-level">{recommendedLevel}</div>
             <p className="hero-description mx-auto mb-8">
@@ -271,12 +269,12 @@ export default function Onboarding() {
               <div className="result-row">
                 <span className="text-gray">Focus :</span>
                 <strong>
-                  {hasPains ? 'Réhabilitation & Force' : (answers.goal === 'force' ? 'Volume propre' : 'Santé & Posture')}
+                  {hasPains ? 'Préservation & Force' : (answers.goal === 'force' ? 'Volume propre' : 'Confort & Posture')}
                 </strong>
               </div>
               {hasPains && (
                 <div className="result-row" style={{ borderTop: '1px dashed var(--border)', marginTop: '0.5rem', paddingTop: '1rem' }}>
-                  <span className="text-gray" style={{ color: '#0f6f67' }}>✓ Adapté pour :</span>
+                  <span className="text-gray" style={{ color: '#0f6f67' }}>✓ Adapté pour préserver :</span>
                   <strong style={{ color: '#0f6f67', textAlign: 'right' }}>
                     {answers.pains.map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(', ')}
                   </strong>

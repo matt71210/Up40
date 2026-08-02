@@ -28,7 +28,7 @@ export default function Premium() {
             <span style={{ color: 'var(--text-gray)' }}>seul vrai capital.</span>
           </h1>
           <p className="hero-description mx-auto mt-4">
-            Testez l'algorithme, constatez l'absence de douleurs et mettez en place la routine. 
+            Testez l'algorithme, découvrez un confort articulaire retrouvé et mettez en place la routine. 
             Aucune carte bancaire requise pour démarrer vos 14 premiers jours.
           </p>
         </section>
@@ -71,7 +71,7 @@ export default function Premium() {
                 <span className="price">79€</span>
                 <span className="duration">/ an</span>
               </div>
-              <p className="pricing-desc">Un an pour reconstruire entièrement la biomécanique de votre haut du corps.</p>
+              <p className="pricing-desc">Un an pour reconstruire entièrement et durablement le haut de votre corps.</p>
             </div>
 
             <ul className="feature-list">
@@ -121,7 +121,7 @@ export default function Premium() {
 
       <nav className="bottom-nav">
         <Link href="/" className="nav-item">Accueil</Link>
-        <Link href="/onboarding" className="nav-item">Diagnostic</Link>
+        <Link href="/onboarding" className="nav-item">Bilan</Link>
         <Link href="/program" className="nav-item">Méthode</Link>
         <Link href="/progress" className="nav-item">Progrès</Link>
         <Link href="/premium" className="nav-item active">Premium</Link>

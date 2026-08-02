@@ -52,7 +52,7 @@ export default function Program() {
               <div className="timeline-content">
                 <div className="level-badge">Semaines 3-4</div>
                 <h3>Incliné Haut (~80cm)</h3>
-                <p>Introduction de la charge. Le buste descend vers les mains. C'est ici que l'on construit le volume propre et l'endurance des triceps sans écraser la coiffe des rotateurs.</p>
+                <p>Introduction de la charge. Le buste descend vers les mains. C'est ici que l'on construit le volume propre et l'endurance des triceps sans imposer un stress inutile à la coiffe des rotateurs.</p>
                 <div className="accessory-box">
                   <strong>Installation :</strong> Un plan de travail de cuisine, une table de salle à manger solide, ou des <em>sangles de suspension (TRX)</em> fixées en haut d'une porte.
                 </div>
@@ -86,7 +86,7 @@ export default function Program() {
               <div className="timeline-content">
                 <div className="level-badge">Semaines 7-8</div>
                 <h3>L'Excentrique Lente (Sol)</h3>
-                <p>On passe au sol, mais uniquement sur la descente (très lente, 4 secondes). La remontée se fait sur les genoux. Idéal pour renforcer les tendons et effacer les douleurs.</p>
+                <p>On passe au sol, mais uniquement sur la descente (très lente, 4 secondes). La remontée se fait sur les genoux. Idéal pour renforcer les tendons et effacer les inconforts.</p>
                 <div className="accessory-box">
                   <strong>Installation :</strong> Au sol. Utilisation de <em>poignées de pompes (parallettes)</em> fortement recommandée si vous avez les poignets sensibles.
                 </div>
@@ -103,7 +103,7 @@ export default function Program() {
               <div className="timeline-content border-highlight">
                 <div className="level-badge highlight-badge">Semaines 9+</div>
                 <h3>La Pompe Parfaite (Sol)</h3>
-                <p>Corps gainé, descente contrôlée, buste frôlant le sol, poussée explosive. Vous avez reconstruit votre force, sans douleur.</p>
+                <p>Corps gainé, descente contrôlée, buste frôlant le sol, poussée explosive. Vous avez reconstruit votre force de manière pérenne.</p>
                 <div className="accessory-box highlight-acc">
                   <strong>Installation :</strong> Sol. Avec ou sans poignées selon votre confort articulaire.
                 </div>
@@ -120,14 +120,14 @@ export default function Program() {
         <section className="accessories-section">
           <h2 className="mb-8" style={{ fontSize: '1.6rem', fontWeight: 800 }}>Le matériel recommandé</h2>
           <p className="hero-description" style={{ fontSize: '1rem' }}>
-            Bien que le programme soit réalisable à 100% avec le mobilier de la maison (table, canapé, sol), deux accessoires abordables peuvent transformer votre progression et protéger vos articulations.
+            Bien que le programme soit réalisable à 100% avec le mobilier de la maison (table, canapé, sol), deux accessoires abordables peuvent transformer votre progression et préserver vos articulations.
           </p>
 
           <div className="acc-card">
             <div className="acc-icon">⭕</div>
             <div className="acc-details">
               <h4>Sangles de suspension (Type TRX ou Anneaux)</h4>
-              <p>Idéal pour régler l'inclinaison au millimètre près. Les poignées rotatives soulagent totalement les poignets et forcent le gainage profond.</p>
+              <p>Idéal pour régler l'inclinaison au millimètre près. Les poignées rotatives apportent du confort aux poignets et forcent le gainage profond.</p>
             </div>
           </div>
 
@@ -141,7 +141,7 @@ export default function Program() {
         </section>
 
         <div className="text-center mt-4">
-          <Link href="/onboarding" className="btn-dark">Commencer mon diagnostic</Link>
+          <Link href="/onboarding" className="btn-dark">Commencer mon bilan</Link>
         </div>
       </div>
 
@@ -149,7 +149,7 @@ export default function Program() {
 
       <nav className="bottom-nav">
         <Link href="/" className="nav-item">Accueil</Link>
-        <Link href="/onboarding" className="nav-item">Diagnostic</Link>
+        <Link href="/onboarding" className="nav-item">Bilan</Link>
         <Link href="/program" className="nav-item active">Méthode</Link>
         <Link href="/progress" className="nav-item">Progrès</Link>
         <Link href="/premium" className="nav-item">Premium</Link>

@@ -33,6 +33,19 @@ export default function Program() {
     return level === userLevel;
   }
 
+  const getWeekLabel = (level: number) => {
+    if (!userLevel) {
+      const start = (level - 1) * 2 + 1;
+      return level === 5 ? `Semaines ${start}+` : `Semaines ${start}-${start+1}`;
+    }
+    if (level < userLevel) return "✓ Acquis";
+
+    const offset = level - userLevel;
+    const startWeek = offset * 2 + 1;
+    return level === 5 ? `Semaines ${startWeek}+` : `Semaines ${startWeek}-${startWeek+1}`;
+  }
+
+
   return (
     <main className="min-h-screen bg-white">
       <header className="top-header">
@@ -77,7 +90,7 @@ export default function Program() {
               <div className={`timeline-marker ${isHighlight(1) ? 'highlight-marker' : ''}`}>1</div>
               <div className={`timeline-content ${isHighlight(1) ? 'border-highlight' : ''}`}>
                 <div className="flex" style={{display:'flex', alignItems:'center', gap:'10px'}}>
-                  <div className={`level-badge ${isHighlight(1) ? 'highlight-badge' : ''}`}>Semaines 1-2</div>
+                  <div className={`level-badge ${isHighlight(1) ? 'highlight-badge' : ''}`}>{getWeekLabel(1)}</div>
                   {isHighlight(1) && <span style={{fontSize:'0.75rem', fontWeight:800, color:'var(--brand)', textTransform:'uppercase'}}>Votre point de départ</span>}
                 </div>
                 <h3>Fondations : Appui Mur</h3>
@@ -97,7 +110,7 @@ export default function Program() {
               <div className={`timeline-marker ${isHighlight(2) ? 'highlight-marker' : ''}`}>2</div>
               <div className={`timeline-content ${isHighlight(2) ? 'border-highlight' : ''}`}>
                 <div className="flex" style={{display:'flex', alignItems:'center', gap:'10px'}}>
-                  <div className={`level-badge ${isHighlight(2) ? 'highlight-badge' : ''}`}>Semaines 3-4</div>
+                  <div className={`level-badge ${isHighlight(2) ? 'highlight-badge' : ''}`}>{getWeekLabel(2)}</div>
                   {isHighlight(2) && <span style={{fontSize:'0.75rem', fontWeight:800, color:'var(--brand)', textTransform:'uppercase'}}>Votre point de départ</span>}
                 </div>
                 <h3>Incliné Haut (~80cm)</h3>
@@ -117,7 +130,7 @@ export default function Program() {
               <div className={`timeline-marker ${isHighlight(3) ? 'highlight-marker' : ''}`}>3</div>
               <div className={`timeline-content ${isHighlight(3) ? 'border-highlight' : ''}`}>
                 <div className="flex" style={{display:'flex', alignItems:'center', gap:'10px'}}>
-                  <div className={`level-badge ${isHighlight(3) ? 'highlight-badge' : ''}`}>Semaines 5-6</div>
+                  <div className={`level-badge ${isHighlight(3) ? 'highlight-badge' : ''}`}>{getWeekLabel(3)}</div>
                   {isHighlight(3) && <span style={{fontSize:'0.75rem', fontWeight:800, color:'var(--brand)', textTransform:'uppercase'}}>Votre point de départ</span>}
                 </div>
                 <h3>Incliné Bas (~40cm)</h3>
@@ -137,7 +150,7 @@ export default function Program() {
               <div className={`timeline-marker ${isHighlight(4) ? 'highlight-marker' : ''}`}>4</div>
               <div className={`timeline-content ${isHighlight(4) ? 'border-highlight' : ''}`}>
                 <div className="flex" style={{display:'flex', alignItems:'center', gap:'10px'}}>
-                  <div className={`level-badge ${isHighlight(4) ? 'highlight-badge' : ''}`}>Semaines 7-8</div>
+                  <div className={`level-badge ${isHighlight(4) ? 'highlight-badge' : ''}`}>{getWeekLabel(4)}</div>
                   {isHighlight(4) && <span style={{fontSize:'0.75rem', fontWeight:800, color:'var(--brand)', textTransform:'uppercase'}}>Votre point de départ</span>}
                 </div>
                 <h3>L'Excentrique Lente (Sol)</h3>
@@ -157,7 +170,7 @@ export default function Program() {
               <div className={`timeline-marker ${isHighlight(5) ? 'highlight-marker' : ''}`}>5</div>
               <div className={`timeline-content ${isHighlight(5) ? 'border-highlight' : ''}`}>
                 <div className="flex" style={{display:'flex', alignItems:'center', gap:'10px'}}>
-                  <div className={`level-badge ${isHighlight(5) ? 'highlight-badge' : ''}`}>Semaines 9+</div>
+                  <div className={`level-badge ${isHighlight(5) ? 'highlight-badge' : ''}`}>{getWeekLabel(5)}</div>
                   {isHighlight(5) && <span style={{fontSize:'0.75rem', fontWeight:800, color:'var(--brand)', textTransform:'uppercase'}}>Votre point de départ</span>}
                 </div>
                 <h3>La Pompe Parfaite (Sol)</h3>

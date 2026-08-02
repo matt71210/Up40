@@ -100,7 +100,10 @@ export default function Onboarding() {
         <div className="nav-container">
           <nav className="nav-bar">
             <Link href="/" className="logo-minimal">Up40.</Link>
-            <div className="nav-actions"><Link href="/" className="nav-link" style={{fontWeight: "bold"}}>✕ FERMER</Link><ThemeToggle /></div>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <Link href="/" className="nav-link">Annuler</Link>
+              <ThemeToggle />
+            </div>
           </nav>
         </div>
       </header>
@@ -117,28 +120,37 @@ export default function Onboarding() {
             <h1 className="step-title">Quel est votre objectif principal ?</h1>
             <p className="step-subtitle">Up40 s'adapte à votre priorité du moment.</p>
 
-            <div className="editorial-list">
-              <div className={`editorial-item ${answers.goal === 'force' ? 'selected' : ''}`} onClick={() => handleSelect('goal', 'force')}>
-  <div className="ed-item-content">
-    <span className="ed-item-title">Gagner en force</span>
-    <span className="ed-item-desc">Retrouver de vraies pompes complètes.</span>
-  </div>
-  <div className="ed-item-radio"></div>
-</div>
-              <div className={`editorial-item ${answers.goal === 'sante' ? 'selected' : ''}`} onClick={() => handleSelect('goal', 'sante')}>
-  <div className="ed-item-content">
-    <span className="ed-item-title">Confort articulaire</span>
-    <span className="ed-item-desc">Pratiquer sans subir de gênes aux articulations.</span>
-  </div>
-  <div className="ed-item-radio"></div>
-</div>
-              <div className={`editorial-item ${answers.goal === 'posture' ? 'selected' : ''}`} onClick={() => handleSelect('goal', 'posture')}>
-  <div className="ed-item-content">
-    <span className="ed-item-title">Améliorer ma posture</span>
-    <span className="ed-item-desc">Ouvrir le torse et renforcer le haut du corps.</span>
-  </div>
-  <div className="ed-item-radio"></div>
-</div>
+            <div className="options-grid">
+              <div 
+                className={`option-card ${answers.goal === 'force' ? 'selected' : ''}`}
+                onClick={() => handleSelect('goal', 'force')}
+              >
+                <div className="option-icon">💪</div>
+                <div className="option-text">
+                  <h4>Gagner en force</h4>
+                  <p>Retrouver de vraies pompes complètes.</p>
+                </div>
+              </div>
+              <div 
+                className={`option-card ${answers.goal === 'sante' ? 'selected' : ''}`}
+                onClick={() => handleSelect('goal', 'sante')}
+              >
+                <div className="option-icon">🛡️</div>
+                <div className="option-text">
+                  <h4>Confort articulaire</h4>
+                  <p>Pratiquer sans subir de gênes aux articulations.</p>
+                </div>
+              </div>
+              <div 
+                className={`option-card ${answers.goal === 'posture' ? 'selected' : ''}`}
+                onClick={() => handleSelect('goal', 'posture')}
+              >
+                <div className="option-icon">🧍</div>
+                <div className="option-text">
+                  <h4>Améliorer ma posture</h4>
+                  <p>Ouvrir le torse et renforcer le haut du corps.</p>
+                </div>
+              </div>
             </div>
           </div>
         )}
@@ -148,42 +160,57 @@ export default function Onboarding() {
             <h1 className="step-title">Ressentez-vous des gênes fréquentes ?</h1>
             <p className="step-subtitle">Sélectionnez toutes les zones sensibles. Le programme s'adaptera.</p>
 
-            <div className="editorial-list">
-              <div className={`editorial-item ${answers.pains.includes('epaules') ? 'selected' : ''}`} onClick={() => togglePain('epaules')}>
-  <div className="ed-item-content">
-    <span className="ed-item-title">Gênes aux épaules</span>
-    <span className="ed-item-desc">Inconforts à l'avant de l'épaule ou coiffe des rotateurs.</span>
-  </div>
-  <div className="ed-item-radio"></div>
-</div>
-              <div className={`editorial-item ${answers.pains.includes('poignets') ? 'selected' : ''}`} onClick={() => togglePain('poignets')}>
-  <div className="ed-item-content">
-    <span className="ed-item-title">Gênes aux poignets</span>
-    <span className="ed-item-desc">Sensibilité en appui plat ou sous charge.</span>
-  </div>
-  <div className="ed-item-radio"></div>
-</div>
-              <div className={`editorial-item ${answers.pains.includes('coudes') ? 'selected' : ''}`} onClick={() => togglePain('coudes')}>
-  <div className="ed-item-content">
-    <span className="ed-item-title">Gênes aux coudes</span>
-    <span className="ed-item-desc">Inconfort pendant la flexion ou la poussée.</span>
-  </div>
-  <div className="ed-item-radio"></div>
-</div>
-              <div className={`editorial-item ${answers.pains.includes('dos') ? 'selected' : ''}`} onClick={() => togglePain('dos')}>
-  <div className="ed-item-content">
-    <span className="ed-item-title">Gênes au dos</span>
-    <span className="ed-item-desc">Tensions lombaires pendant le gainage.</span>
-  </div>
-  <div className="ed-item-radio"></div>
-</div>
-              <div className={`editorial-item ${answers.pains.includes('aucune') ? 'selected' : ''}`} onClick={() => togglePain('aucune')}>
-  <div className="ed-item-content">
-    <span className="ed-item-title">Aucune gêne</span>
-    <span className="ed-item-desc">Tout va bien de ce côté-là.</span>
-  </div>
-  <div className="ed-item-radio"></div>
-</div>
+            <div className="options-grid">
+              <div 
+                className={`option-card ${answers.pains.includes('epaules') ? 'selected' : ''}`} 
+                onClick={() => togglePain('epaules')}
+              >
+                <div className="option-icon">⚠️</div>
+                <div className="option-text">
+                  <h4>Oui, aux épaules</h4>
+                  <p>Inconforts à l'avant de l'épaule ou coiffe des rotateurs.</p>
+                </div>
+              </div>
+              <div 
+                className={`option-card ${answers.pains.includes('poignets') ? 'selected' : ''}`} 
+                onClick={() => togglePain('poignets')}
+              >
+                <div className="option-icon">✋</div>
+                <div className="option-text">
+                  <h4>Oui, aux poignets</h4>
+                  <p>Sensibilité en appui plat ou sous charge.</p>
+                </div>
+              </div>
+              <div 
+                className={`option-card ${answers.pains.includes('coudes') ? 'selected' : ''}`} 
+                onClick={() => togglePain('coudes')}
+              >
+                <div className="option-icon">🦾</div>
+                <div className="option-text">
+                  <h4>Oui, aux coudes</h4>
+                  <p>Inconfort pendant la flexion ou la poussée.</p>
+                </div>
+              </div>
+              <div 
+                className={`option-card ${answers.pains.includes('dos') ? 'selected' : ''}`} 
+                onClick={() => togglePain('dos')}
+              >
+                <div className="option-icon">⚡</div>
+                <div className="option-text">
+                  <h4>Oui, au bas du dos</h4>
+                  <p>Tensions lombaires pendant le gainage.</p>
+                </div>
+              </div>
+              <div 
+                className={`option-card ${answers.pains.includes('aucune') ? 'selected' : ''}`} 
+                onClick={() => togglePain('aucune')}
+              >
+                <div className="option-icon">✅</div>
+                <div className="option-text">
+                  <h4>Aucune gêne</h4>
+                  <p>Tout va bien de ce côté-là.</p>
+                </div>
+              </div>
             </div>
           </div>
         )}
@@ -193,35 +220,31 @@ export default function Onboarding() {
             <h1 className="step-title">Combien de pompes propres faites-vous aujourd'hui ?</h1>
             <p className="step-subtitle">Buste qui touche presque le sol, corps bien droit.</p>
 
-            <div className="editorial-list">
-              <div className={`editorial-item ${answers.level === '0' ? 'selected' : ''}`} onClick={() => handleSelect('level', '0')}>
-  <div className="ed-item-content">
-    <span className="ed-item-title">0 vraie pompe</span>
-    <span className="ed-item-desc">C'est exactement pour ça qu'on est là.</span>
-  </div>
-  <div className="ed-item-radio"></div>
-</div>
-              <div className={`editorial-item ${answers.level === '1-5' ? 'selected' : ''}`} onClick={() => handleSelect('level', '1-5')}>
-  <div className="ed-item-content">
-    <span className="ed-item-title">Entre 1 et 5 pompes</span>
-    <span className="ed-item-desc">Le mouvement est là, manque de fondations.</span>
-  </div>
-  <div className="ed-item-radio"></div>
-</div>
-              <div className={`editorial-item ${answers.level === '5-15' ? 'selected' : ''}`} onClick={() => handleSelect('level', '5-15')}>
-  <div className="ed-item-content">
-    <span className="ed-item-title">Entre 5 et 15 pompes</span>
-    <span className="ed-item-desc">Bon niveau, on va peaufiner la biomécanique.</span>
-  </div>
-  <div className="ed-item-radio"></div>
-</div>
-              <div className={`editorial-item ${answers.level === '15+' ? 'selected' : ''}`} onClick={() => handleSelect('level', '15+')}>
-  <div className="ed-item-content">
-    <span className="ed-item-title">Plus de 15 pompes</span>
-    <span className="ed-item-desc">Niveau avancé. Focus sur le maintien articulaire.</span>
-  </div>
-  <div className="ed-item-radio"></div>
-</div>
+            <div className="options-grid">
+              <div className={`option-card ${answers.level === '0' ? 'selected' : ''}`} onClick={() => handleSelect('level', '0')}>
+                <div className="option-text">
+                  <h4>0 vraie pompe</h4>
+                  <p>C'est exactement pour ça qu'on est là.</p>
+                </div>
+              </div>
+              <div className={`option-card ${answers.level === '1-5' ? 'selected' : ''}`} onClick={() => handleSelect('level', '1-5')}>
+                <div className="option-text">
+                  <h4>Entre 1 et 5 pompes</h4>
+                  <p>Le mouvement est là, manque de fondations.</p>
+                </div>
+              </div>
+              <div className={`option-card ${answers.level === '5-15' ? 'selected' : ''}`} onClick={() => handleSelect('level', '5-15')}>
+                <div className="option-text">
+                  <h4>Entre 5 et 15 pompes</h4>
+                  <p>Bon niveau, on va peaufiner la biomécanique.</p>
+                </div>
+              </div>
+              <div className={`option-card ${answers.level === '15+' ? 'selected' : ''}`} onClick={() => handleSelect('level', '15+')}>
+                <div className="option-text">
+                  <h4>Plus de 15 pompes</h4>
+                  <p>Niveau avancé. Focus sur le maintien articulaire.</p>
+                </div>
+              </div>
             </div>
           </div>
         )}

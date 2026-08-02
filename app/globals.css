@@ -1,37 +1,41 @@
 
 :root {
-  --bg: #F5F4F0;
-  --surface: #FCFBF8;
-  --surface-2: #EBEAE5;
-  --surface-3: #E1E0DA;
-  --text-main: #242321;
-  --text-gray: #7A7873;
-  --border: #DCDBCF;
-  --brand: #1E4D48;
-  --brand-dark: #12332F;
-  --brand-soft: #E4ECEB;
-  --font-display: 'Instrument Serif', Georgia, serif;
-  --font-body: 'Inter', system-ui, sans-serif;
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --surface-2: #fafafa;
+  --surface-3: #f5f5f5;
+  --text-main: #0a0a0a;
+  --text-gray: #737373;
+  --border: #e5e5e5;
+  --brand: #0f6f67;
+  --brand-dark: #0b4e49;
+  --brand-soft: #eaf5f4;
+  --font-body: "Satoshi", system-ui, sans-serif;
+  --font-display: "Satoshi", system-ui, sans-serif;
+  --accent: #0f6f67;
 }
 
 [data-theme="dark"] {
-  --bg: #121211;
-  --surface: #1A1A19;
-  --surface-2: #242422;
-  --surface-3: #2E2D2A;
-  --text-main: #E8E7E3;
-  --text-gray: #8A8883;
-  --border: #33322E;
-  --brand: #4FA8A0;
-  --brand-dark: #37827B;
-  --brand-soft: #152422;
+  --bg: #0d1110;
+  --surface: #141917;
+  --surface-2: #1a211f;
+  --surface-3: #212a28;
+  --text-main: #f0f4f3;
+  --text-gray: #94a39e;
+  --border: #2c3532;
+  --brand: #35c4b7;
+  --brand-dark: #1ca196;
+  --brand-soft: #112a27;
+  --font-body: "Satoshi", system-ui, sans-serif;
+  --font-display: "Satoshi", system-ui, sans-serif;
+  --accent: #35c4b7;
 }
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
   margin: 0;
-  font-family: var(--font-body);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   background-color: var(--bg);
   color: var(--text-main);
   -webkit-font-smoothing: antialiased;
@@ -80,7 +84,7 @@ a { text-decoration: none; color: inherit; }
   color: var(--brand);
   margin-bottom: 2rem;
 }
-.display-title {
+.display-title { font-family: var(--font-display); font-weight: 900; letter-spacing: -0.03em;
   font-size: clamp(3rem, 5vw, 4.5rem);
   font-weight: 800;
   line-height: 1.05;
@@ -217,7 +221,7 @@ a { text-decoration: none; color: inherit; }
 @media (max-width: 900px) {
   .nav-container { padding: 1rem 1.5rem; }
   .hero-section { flex-direction: column; text-align: center; padding: 2rem 1.5rem; gap: 3rem; }
-  .display-title { font-size: 2.5rem; }
+  .display-title { font-family: var(--font-display); font-weight: 900; letter-spacing: -0.03em; font-size: 2.5rem; }
   .hero-description { margin: 0 auto 2rem; }
   .cta-group { justify-content: center; }
   .trust-metrics { justify-content: center; }
@@ -451,34 +455,44 @@ a { text-decoration: none; color: inherit; }
   .faq-grid { grid-template-columns: 1fr; gap: 2rem; }
 }
 
-/* Editorial Typography Overrides */
-.display-title, h1, h2, h3, h4 { font-family: var(--font-display); font-weight: normal; }
-.logo-minimal { font-family: var(--font-display); font-size: 2rem; font-style: italic; font-weight: normal; letter-spacing: 0; }
+/* --- PHOTO BANNERS --- */
+.photo-hero {
+  position: relative;
+  background: linear-gradient(to bottom, rgba(15,111,103,0.85), rgba(0,0,0,0.8)), url('https://picsum.photos/seed/training/1200/800');
+  background-size: cover;
+  background-position: center;
+  color: white;
+  padding: 6rem 1.5rem 4rem;
+  margin-top: -70px; /* pull under header */
+  border-radius: 0 0 32px 32px;
+  margin-bottom: 3rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+.photo-hero .display-title { color: white; }
+.photo-hero .text-gray { color: rgba(255,255,255,0.8); }
+.photo-hero .hero-description { color: rgba(255,255,255,0.9); }
+.photo-hero .badge-new { background: rgba(255,255,255,0.15); color: white; border-color: rgba(255,255,255,0.3); }
 
-/* Editorial List (Replaces Options Grid) */
-.editorial-list { display: flex; flex-direction: column; border-top: 1px solid var(--border); margin-top: 2rem; }
-.editorial-item { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 0; border-bottom: 1px solid var(--border); cursor: pointer; transition: all 0.3s ease; }
-.editorial-item:hover { padding-left: 1rem; padding-right: 1rem; background: var(--surface-2); }
-.editorial-item.selected { padding-left: 1rem; padding-right: 1rem; background: var(--brand-soft); border-color: var(--brand); }
-.ed-item-content { display: flex; flex-direction: column; gap: 0.3rem; }
-.ed-item-title { font-family: var(--font-display); font-size: 1.8rem; color: var(--text-main); line-height: 1.1; }
-.ed-item-desc { font-size: 0.95rem; color: var(--text-gray); font-family: var(--font-body); }
-.ed-item-radio { width: 18px; height: 18px; border: 1px solid var(--border); border-radius: 50%; display: grid; place-items: center; }
-.editorial-item.selected .ed-item-radio { border-color: var(--brand); }
-.editorial-item.selected .ed-item-radio::after { content: ""; width: 8px; height: 8px; background: var(--brand); border-radius: 50%; }
+.premium-photo-hero {
+  position: relative;
+  background: linear-gradient(to bottom, rgba(11,78,73,0.8), rgba(0,0,0,0.85)), url('https://picsum.photos/seed/gym/1200/800');
+  background-size: cover;
+  background-position: center;
+  color: white;
+  padding: 7rem 1.5rem 5rem;
+  margin-top: -70px;
+  border-radius: 0 0 32px 32px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+.premium-photo-hero .display-title { color: white; }
+.premium-photo-hero .text-gray { color: rgba(255,255,255,0.7); }
+.premium-photo-hero .hero-description { color: rgba(255,255,255,0.9); }
 
-/* Layout adjustments */
-.top-header { border-bottom: 1px solid var(--border); background: var(--bg); position: sticky; top: 0; z-index: 50; }
-.nav-bar { justify-content: space-between; }
-.nav-actions { display: flex; gap: 1rem; align-items: center; overflow-x: auto; padding-bottom: 2px; }
-.nav-actions::-webkit-scrollbar { display: none; }
-.nav-link { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 500; white-space: nowrap; }
-
-/* Brutalist details */
-.task-card, .pricing-card, .result-card { box-shadow: none !important; border: 1px solid var(--border); border-radius: 0; background: var(--surface); }
-.pricing-card { border-radius: 4px; }
-.btn-dark { border-radius: 0; text-transform: uppercase; letter-spacing: 1px; font-size: 0.85rem; font-weight: 600; }
-.btn-outline { border-radius: 0; text-transform: uppercase; letter-spacing: 1px; font-size: 0.85rem; font-weight: 600; border: 1px solid var(--border); }
-.timeline-marker { border-radius: 0; }
-.badge-new { border-radius: 0; font-family: var(--font-body); text-transform: uppercase; letter-spacing: 1px; font-size: 0.75rem; }
-.iphone-mockup { border-radius: 0; border: 1px solid var(--border); }
+/* Make top header transparent when over photo */
+.top-header.transparent {
+  background: transparent !important;
+  border-bottom: none !important;
+}
+.top-header.transparent .logo-minimal { color: white; }
+.top-header.transparent .nav-link { color: rgba(255,255,255,0.8); }
+.top-header.transparent .nav-link:hover { color: white; }

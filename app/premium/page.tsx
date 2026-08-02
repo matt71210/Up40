@@ -4,26 +4,26 @@ import ThemeToggle from '../ThemeToggle'
 export default function Premium() {
   return (
     <main className="min-h-screen bg-white" style={{ position: 'relative' }}>
-      <div className="premium-bg"></div>
+      
 
-      <header className="top-header" style={{ background: 'transparent', borderBottom: 'none' }}>
+      <header className="top-header transparent">
         <div className="nav-container">
           <nav className="nav-bar">
             <Link href="/" className="logo-minimal">Up40.</Link>
-            <div className="nav-actions">
-              <Link href="/onboarding" className="nav-link">Bilan</Link>
-              <Link href="/program" className="nav-link">Méthode</Link>
-              <Link href="/progress" className="nav-link">Progrès</Link>
-              <Link href="/premium" className="nav-link" style={{ color: 'var(--brand)', fontWeight: 600 }}>Premium</Link>
-              <ThemeToggle />
+            <div className="nav-actions" style={{ display: "flex", alignItems: "center" }}>
+            <div className="nav-links">
+              <Link href="/program" className="nav-link">La méthode</Link>
+              <Link href="/premium" className="nav-btn" style={{ background: 'var(--brand)', color: 'white' }}>Premium</Link>
             </div>
+            <ThemeToggle />
+          </div>
           </nav>
         </div>
       </header>
 
       <div className="premium-container">
 
-        <section className="premium-hero text-center">
+        <section className="premium-hero text-center premium-photo-hero">
           <div className="badge-new mx-auto" style={{ background: 'rgba(15,111,103,0.08)', color: 'var(--brand)', borderColor: 'rgba(15,111,103,0.2)' }}>
             14 jours offerts • Sans engagement
           </div>
@@ -121,9 +121,15 @@ export default function Premium() {
 
       </div>
 
-      
+      <div className="footer-spacing"></div>
 
-      
+      <nav className="bottom-nav">
+        <Link href="/" className="nav-item">Accueil</Link>
+        <Link href="/onboarding" className="nav-item">Bilan</Link>
+        <Link href="/program" className="nav-item">Méthode</Link>
+        <Link href="/progress" className="nav-item">Progrès</Link>
+        <Link href="/premium" className="nav-item active">Premium</Link>
+      </nav>
     </main>
   )
 }

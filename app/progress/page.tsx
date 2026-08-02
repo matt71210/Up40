@@ -8,13 +8,13 @@ export default function Progress() {
         <div className="nav-container">
           <nav className="nav-bar">
             <Link href="/" className="logo-minimal">Up40.</Link>
-            <div className="nav-actions" style={{ display: "flex", alignItems: "center" }}>
-            <div className="nav-links">
-              <Link href="/program" className="nav-link">La méthode</Link>
-              <Link href="/premium" className="nav-btn">Premium</Link>
+            <div className="nav-actions">
+              <Link href="/onboarding" className="nav-link">Bilan</Link>
+              <Link href="/program" className="nav-link">Méthode</Link>
+              <Link href="/progress" className="nav-link">Progrès</Link>
+              <Link href="/premium" className="nav-link" style={{ color: 'var(--brand)', fontWeight: 600 }}>Premium</Link>
+              <ThemeToggle />
             </div>
-            <ThemeToggle />
-          </div>
           </nav>
         </div>
       </header>
@@ -163,15 +163,9 @@ export default function Progress() {
         </section>
       </div>
 
-      <div className="footer-spacing"></div>
+      
 
-      <nav className="bottom-nav">
-        <Link href="/" className="nav-item">Accueil</Link>
-        <Link href="/onboarding" className="nav-item">Diagnostic</Link>
-        <Link href="/program" className="nav-item">Méthode</Link>
-        <Link href="/progress" className="nav-item active">Progrès</Link>
-        <Link href="/premium" className="nav-item">Premium</Link>
-      </nav>
+      
     </main>
   )
 }

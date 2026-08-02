@@ -567,3 +567,19 @@ a { text-decoration: none; color: inherit; }
   height: 100%;
   object-fit: cover;
 }
+
+/* Ensure photo heroes always have white text even in light mode */
+.photo-hero, .premium-photo-hero, .program-photo-hero, .progress-photo-hero, .onboarding-photo-hero {
+  color: #ffffff !important;
+}
+.photo-hero .display-title, .premium-photo-hero .display-title, .program-photo-hero .display-title, .progress-photo-hero .display-title, .onboarding-photo-hero .display-title {
+  color: #ffffff !important;
+}
+.photo-hero p, .premium-photo-hero p, .program-photo-hero p, .progress-photo-hero p, .onboarding-photo-hero p {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+.photo-hero .badge-new, .premium-photo-hero .badge-new, .program-photo-hero .badge-new, .progress-photo-hero .badge-new, .onboarding-photo-hero .badge-new {
+  background: rgba(255, 255, 255, 0.15) !important;
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}

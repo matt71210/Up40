@@ -197,8 +197,12 @@ a { text-decoration: none; color: inherit; }
 /* Value Section */
 .value-section { max-width: 1200px; margin: 0 auto; padding: 2rem 2rem 4rem; border-top: 1px solid var(--border); }
 .value-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem; margin-top: 4rem; }
-.value-box h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.8rem; }
-.value-box p { color: var(--text-gray); line-height: 1.6; font-size: 0.95rem; margin: 0; }
+.value-box h3 {
+  color: var(--text);
+}
+.value-box p {
+  color: var(--text-muted);
+}
 
 /* Bottom Nav */
 .footer-spacing { height: 100px; }

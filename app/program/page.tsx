@@ -218,7 +218,7 @@ export default function Program() {
           </p>
 
           <div className="acc-card">
-            <div className="acc-icon">⭕</div>
+            <div className="acc-icon"><img src="https://picsum.photos/seed/up40trx/150/150" alt="Sangles TRX" /></div>
             <div className="acc-details">
               <h4>Sangles de suspension (Type TRX ou Anneaux)</h4>
               <p>Idéal pour régler l'inclinaison au millimètre près. Les poignées rotatives apportent du confort aux poignets et forcent le gainage profond.</p>
@@ -226,7 +226,7 @@ export default function Program() {
           </div>
 
           <div className="acc-card">
-            <div className="acc-icon">🏗️</div>
+            <div className="acc-icon"><img src="https://picsum.photos/seed/up40bars/150/150" alt="Parallettes" /></div>
             <div className="acc-details">
               <h4>Poignées de pompes (Parallettes)</h4>
               <p>Indispensable à partir du niveau 4 (sol) si vous ressentez des pincements aux poignets. Elles permettent de garder le poignet dans un axe neutre et droit.</p>

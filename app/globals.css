@@ -543,3 +543,27 @@ a { text-decoration: none; color: inherit; }
 }
 .onboarding-photo-hero .display-title { color: white; }
 .onboarding-photo-hero .badge-new { background: rgba(255,255,255,0.15); color: white; border-color: rgba(255,255,255,0.3); }
+
+/* Override nav-item for larger text */
+.bottom-nav .nav-item {
+  font-size: 0.95rem !important;
+  font-weight: 700 !important;
+  padding: 0.5rem 0.2rem !important;
+}
+
+/* Style for new image icons */
+.option-icon, .acc-icon {
+  width: 64px !important;
+  height: 64px !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
+  display: block !important;
+  background: var(--surface-2) !important;
+  flex-shrink: 0 !important;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+.option-icon img, .acc-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

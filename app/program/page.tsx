@@ -218,7 +218,7 @@ export default function Program() {
           </p>
 
           <div className="acc-card">
-            <div className="acc-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/TRX_training.jpg/640px-TRX_training.jpg" alt="Sangles TRX" /></div>
+            <div className="acc-icon"><img src="https://pplx-res.cloudinary.com/image/upload/t_thumbnail_512/pplx_search_images/21991f5f738f0df17085144c9b9953f91cfc8279.jpg" alt="Sangles TRX" /></div>
             <div className="acc-details">
               <h4>Sangles de suspension (Type TRX ou Anneaux)</h4>
               <p>Idéal pour régler l'inclinaison au millimètre près. Les poignées rotatives apportent du confort aux poignets et forcent le gainage profond.</p>
@@ -226,7 +226,7 @@ export default function Program() {
           </div>
 
           <div className="acc-card">
-            <div className="acc-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Parallettes.jpg/640px-Parallettes.jpg" alt="Parallettes" /></div>
+            <div className="acc-icon"><img src="https://pplx-res.cloudinary.com/image/upload/t_thumbnail_512/pplx_search_images/044b4054e826122b0a6d2f7f8649120435469607.jpg" alt="Parallettes" /></div>
             <div className="acc-details">
               <h4>Poignées de pompes (Parallettes)</h4>
               <p>Indispensable à partir du niveau 4 (sol) si vous ressentez des pincements aux poignets. Elles permettent de garder le poignet dans un axe neutre et droit.</p>

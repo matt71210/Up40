@@ -153,13 +153,13 @@ export default function Program() {
                   <div className={`level-badge ${isHighlight(4) ? 'highlight-badge' : ''}`}>{getWeekLabel(4)}</div>
                   {isHighlight(4) && <span style={{fontSize:'0.75rem', fontWeight:800, color:'var(--brand)', textTransform:'uppercase'}}>Votre point de départ</span>}
                 </div>
-                <h3>L'Excentrique Lente (Sol)</h3>
-                <p>On passe au sol, mais uniquement sur la descente (très lente, 4 secondes). La remontée se fait sur les genoux. Idéal pour renforcer les tendons et effacer les inconforts.</p>
+                <h3>Force Excentrique & Transfert au Sol</h3>
+                <p>Le programme se densifie. On passe au sol sur la phase de descente (hyper-lente de 5 secondes) pour blinder les tendons. Le protocole intègre désormais des routines avancées de mobilité scapulaire et de gainage dynamique pour préparer le corps à la charge totale.</p>
                 <div className="accessory-box">
                   <strong>Installation :</strong> Au sol. Utilisation de <em>poignées de pompes (parallettes)</em> fortement recommandée si vous avez les poignets sensibles.
                 </div>
                 <div className="level-details mt-4">
-                  <span className={`detail-tag ${isHighlight(4) ? 'highlight-tag' : ''}`}>Focus: Tissus conjonctifs</span>
+                  <span className={`detail-tag ${isHighlight(4) ? 'highlight-tag' : ''}`}>Focus: Densité tendineuse & Core</span>
                   <span className={`detail-tag ${isHighlight(4) ? 'highlight-tag' : ''}`}>Charge: 100% pdc (descente)</span>
                 </div>
               </div>
@@ -173,14 +173,14 @@ export default function Program() {
                   <div className={`level-badge ${isHighlight(5) ? 'highlight-badge' : ''}`}>{getWeekLabel(5)}</div>
                   {isHighlight(5) && <span style={{fontSize:'0.75rem', fontWeight:800, color:'var(--brand)', textTransform:'uppercase'}}>Votre point de départ</span>}
                 </div>
-                <h3>La Pompe Parfaite (Sol)</h3>
-                <p>Corps gainé, descente contrôlée, buste frôlant le sol, poussée explosive. Vous avez reconstruit votre force de manière pérenne.</p>
+                <h3>Maîtrise Totale & Surcharge</h3>
+                <p>La pompe stricte est acquise avec une biomécanique parfaite. L'entraînement évolue vers des cycles d'hypertrophie et de puissance : séries en tempo, instabilité sur anneaux, ou utilisation d'un gilet lesté. On ajoute un travail antagoniste (deltoïdes postérieurs) pour équilibrer la posture.</p>
                 <div className="accessory-box">
                   <strong>Installation :</strong> Sol. Avec ou sans poignées selon votre confort articulaire.
                 </div>
                 <div className="level-details mt-4">
-                  <span className={`detail-tag ${isHighlight(5) ? 'highlight-tag' : ''}`}>Focus: Maîtrise totale</span>
-                  <span className={`detail-tag ${isHighlight(5) ? 'highlight-tag' : ''}`}>Charge: ~70% pdc</span>
+                  <span className={`detail-tag ${isHighlight(5) ? 'highlight-tag' : ''}`}>Focus: Force, Hypertrophie & Puissance</span>
+                  <span className={`detail-tag ${isHighlight(5) ? 'highlight-tag' : ''}`}>Charge: 100% pdc + Lest / Instabilité</span>
                 </div>
               </div>
             </div>

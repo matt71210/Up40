@@ -130,7 +130,7 @@ export default function Onboarding() {
                 className={`option-card ${answers.goal === 'force' ? 'selected' : ''}`}
                 onClick={() => handleSelect('goal', 'force')}
               >
-                <div className="option-icon"><img src="https://pplx-res.cloudinary.com/image/upload/t_thumbnail_512/pplx_search_images/3ccd3ceca212fb1ae74fca0fdd6f41ce0e01545c.jpg" alt="Force" /></div>
+                <div className="option-icon"><img src="/images/force.jpg" alt="Force" /></div>
                 <div className="option-text">
                   <h4>Gagner en force</h4>
                   <p>Retrouver de vraies pompes complètes.</p>
@@ -140,7 +140,7 @@ export default function Onboarding() {
                 className={`option-card ${answers.goal === 'sante' ? 'selected' : ''}`}
                 onClick={() => handleSelect('goal', 'sante')}
               >
-                <div className="option-icon"><img src="https://pplx-res.cloudinary.com/image/upload/t_thumbnail_512/pplx_search_images/bbdf46e4ce56586df98e60568aa7ad000689b494.jpg" alt="Confort" /></div>
+                <div className="option-icon"><img src="/images/health.jpg" alt="Confort" /></div>
                 <div className="option-text">
                   <h4>Confort articulaire</h4>
                   <p>Pratiquer sans subir de gênes aux articulations.</p>
@@ -150,7 +150,7 @@ export default function Onboarding() {
                 className={`option-card ${answers.goal === 'posture' ? 'selected' : ''}`}
                 onClick={() => handleSelect('goal', 'posture')}
               >
-                <div className="option-icon"><img src="https://pplx-res.cloudinary.com/image/upload/t_thumbnail_512/pplx_search_images/044b4054e826122b0a6d2f7f8649120435469607.jpg" alt="Posture" /></div>
+                <div className="option-icon"><img src="/images/posture.jpg" alt="Posture" /></div>
                 <div className="option-text">
                   <h4>Améliorer ma posture</h4>
                   <p>Ouvrir le torse et renforcer le haut du corps.</p>
@@ -170,7 +170,7 @@ export default function Onboarding() {
                 className={`option-card ${answers.pains.includes('epaules') ? 'selected' : ''}`} 
                 onClick={() => togglePain('epaules')}
               >
-                <div className="option-icon"><img src="https://pplx-res.cloudinary.com/image/upload/t_thumbnail_512/pplx_search_images/8cce092b8c8277abce3956790b17949fb5af4d8e.jpg" alt="Epaules" /></div>
+                <div className="option-icon"><img src="/images/shoulder_pain.jpg" alt="Epaules" /></div>
                 <div className="option-text">
                   <h4>Oui, aux épaules</h4>
                   <p>Inconforts à l'avant de l'épaule ou coiffe des rotateurs.</p>
@@ -180,7 +180,7 @@ export default function Onboarding() {
                 className={`option-card ${answers.pains.includes('poignets') ? 'selected' : ''}`} 
                 onClick={() => togglePain('poignets')}
               >
-                <div className="option-icon"><img src="https://pplx-res.cloudinary.com/image/upload/t_thumbnail_512/pplx_search_images/d2383b003807a11d16a56c7b81427e8f6c374a84.jpg" alt="Poignets" /></div>
+                <div className="option-icon"><img src="/images/wrist_pain.jpg" alt="Poignets" /></div>
                 <div className="option-text">
                   <h4>Oui, aux poignets</h4>
                   <p>Sensibilité en appui plat ou sous charge.</p>
@@ -190,7 +190,7 @@ export default function Onboarding() {
                 className={`option-card ${answers.pains.includes('coudes') ? 'selected' : ''}`} 
                 onClick={() => togglePain('coudes')}
               >
-                <div className="option-icon"><img src="https://pplx-res.cloudinary.com/image/upload/t_thumbnail_512/pplx_search_images/c30456ad5c7df56dc8dba0f740dd491406925d06.jpg" alt="Coudes" /></div>
+                <div className="option-icon"><img src="/images/elbow_pain.jpg" alt="Coudes" /></div>
                 <div className="option-text">
                   <h4>Oui, aux coudes</h4>
                   <p>Inconfort pendant la flexion ou la poussée.</p>
@@ -200,7 +200,7 @@ export default function Onboarding() {
                 className={`option-card ${answers.pains.includes('dos') ? 'selected' : ''}`} 
                 onClick={() => togglePain('dos')}
               >
-                <div className="option-icon"><img src="https://pplx-res.cloudinary.com/image/upload/t_thumbnail_512/pplx_search_images/d74756c733033dfc82ad99dcf3dd91ff79733afc.jpg" alt="Dos" /></div>
+                <div className="option-icon"><img src="/images/back_pain.jpg" alt="Dos" /></div>
                 <div className="option-text">
                   <h4>Oui, au bas du dos</h4>
                   <p>Tensions lombaires pendant le gainage.</p>
@@ -210,7 +210,7 @@ export default function Onboarding() {
                 className={`option-card ${answers.pains.includes('aucune') ? 'selected' : ''}`} 
                 onClick={() => togglePain('aucune')}
               >
-                <div className="option-icon"><img src="https://pplx-res.cloudinary.com/image/upload/t_thumbnail_512/pplx_search_images/21991f5f738f0df17085144c9b9953f91cfc8279.jpg" alt="Aucune gêne" /></div>
+                <div className="option-icon"><img src="/images/no_pain.jpg" alt="Aucune gêne" /></div>
                 <div className="option-text">
                   <h4>Aucune gêne</h4>
                   <p>Tout va bien de ce côté-là.</p>

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import ThemeToggle from '../ThemeToggle'
 
@@ -85,6 +85,14 @@ export default function Onboarding() {
       recommendedDesc = "Optimisation de la biomécanique pour préserver vos acquis après 40 ans."
     }
   }
+
+  
+  useEffect(() => {
+    if (step === 4 && !isCalculating) {
+      localStorage.setItem('up40_user_level', recommendedLevel);
+      localStorage.setItem('up40_user_pains', JSON.stringify(answers.pains));
+    }
+  }, [step, isCalculating, recommendedLevel, answers.pains]);
 
   return (
     <main className="min-h-screen bg-white">

@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import ThemeToggle from '../ThemeToggle'
 
 export default function Program() {
   return (
@@ -7,10 +8,13 @@ export default function Program() {
         <div className="nav-container">
           <nav className="nav-bar">
             <Link href="/" className="logo-minimal">Up40.</Link>
+            <div className="nav-actions" style={{ display: "flex", alignItems: "center" }}>
             <div className="nav-links">
               <Link href="/program" className="nav-link" style={{ color: 'var(--brand)' }}>La méthode</Link>
               <Link href="/premium" className="nav-btn">Premium</Link>
             </div>
+            <ThemeToggle />
+          </div>
           </nav>
         </div>
       </header>

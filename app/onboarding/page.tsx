@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import ThemeToggle from '../ThemeToggle'
 
 export default function Onboarding() {
   const [step, setStep] = useState(1)
@@ -91,7 +92,10 @@ export default function Onboarding() {
         <div className="nav-container">
           <nav className="nav-bar">
             <Link href="/" className="logo-minimal">Up40.</Link>
-            <Link href="/" className="nav-link">Annuler</Link>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <Link href="/" className="nav-link">Annuler</Link>
+              <ThemeToggle />
+            </div>
           </nav>
         </div>
       </header>

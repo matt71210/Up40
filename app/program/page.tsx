@@ -208,9 +208,6 @@ export default function Program() {
               </div>
             </div>
 
-          </div>
-        
-
             {/* Niveau 6 */}
             <div className="timeline-item">
               <div className={`timeline-marker ${isHighlight(6) ? 'highlight-marker' : ''}`}>6</div>
@@ -219,14 +216,14 @@ export default function Program() {
                   <div className={`level-badge ${isHighlight(6) ? 'highlight-badge' : ''}`}>{getWeekLabel(6)}</div>
                   {isHighlight(6) && <span style={{fontSize:'0.75rem', fontWeight:800, color:'var(--brand)', textTransform:'uppercase'}}>Votre point de départ</span>}
                 </div>
-                <h3>L'Athlète 40+ (Surcharge & Anneaux)</h3>
+                <h3>L'Athlète 40+</h3>
                 <p>La base est incassable, on passe au niveau supérieur. L'entraînement évolue vers des cycles d'hypertrophie et de puissance : pompes en déficit profond, instabilité totale sur anneaux de gymnastique, ou utilisation d'un gilet lesté. On ajoute un travail spécifique des deltoïdes postérieurs pour un équilibre parfait.</p>
                 <div className="accessory-box" style={{ borderColor: 'var(--brand)', backgroundColor: 'var(--brand-soft)' }}>
                   <strong>Installation :</strong> Sangles de suspension (anneaux) ou Gilet Lesté de 10 à 20kg.
                 </div>
                 <div className="level-details mt-4">
-                  <span className={`detail-tag ${isHighlight(6) ? 'highlight-tag' : ''}`}>Focus: Hypertrophie, Puissance & Longévité</span>
-                  <span className={`detail-tag ${isHighlight(6) ? 'highlight-tag' : ''}`}>Charge: 100% pdc + Lest / Instabilité</span>
+                  <span className={`detail-tag ${isHighlight(6) ? 'highlight-tag' : ''}`}>Focus: Hypertrophie & Puissance</span>
+                  <span className={`detail-tag ${isHighlight(6) ? 'highlight-tag' : ''}`}>Charge: 100% pdc + Lest</span>
                 </div>
               </div>
             </div>

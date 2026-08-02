@@ -34,15 +34,19 @@ export default function Program() {
   }
 
   const getWeekLabel = (level: number) => {
+    const WEEKS_PER_LEVEL = 4; // 4 semaines (1 mois) par palier pour l'adaptation des tendons
+
     if (!userLevel) {
-      const start = (level - 1) * 2 + 1;
-      return level === 6 ? `Semaines ${start}+` : `Semaines ${start}-${start+1}`;
+      const start = (level - 1) * WEEKS_PER_LEVEL + 1;
+      const end = start + WEEKS_PER_LEVEL - 1;
+      return level === 6 ? `Semaines ${start}+` : `Semaines ${start}-${end}`;
     }
     if (level < userLevel) return "✓ Acquis";
 
     const offset = level - userLevel;
-    const startWeek = offset * 2 + 1;
-    return level === 6 ? `Semaines ${startWeek}+` : `Semaines ${startWeek}-${startWeek+1}`;
+    const startWeek = offset * WEEKS_PER_LEVEL + 1;
+    const endWeek = startWeek + WEEKS_PER_LEVEL - 1;
+    return level === 6 ? `Semaines ${startWeek}+` : `Semaines ${startWeek}-${endWeek}`;
   }
 
   return (

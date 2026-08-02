@@ -567,6 +567,7 @@ a { text-decoration: none; color: inherit; }
   box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 .option-icon img, .acc-icon img {
+  background: #ffffff;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -586,4 +587,41 @@ a { text-decoration: none; color: inherit; }
   background: rgba(255, 255, 255, 0.15) !important;
   color: #ffffff !important;
   border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Fix mockup text colors to always be visible (mockup is light theme) */
+.app-ui {
+  background: #ffffff !important;
+  color: #111827 !important;
+}
+.app-date, .app-greeting, .app-section-title {
+  color: #111827 !important;
+}
+.app-greeting {
+  font-weight: 700;
+  font-size: 1.4rem;
+}
+.app-date {
+  color: #6b7280 !important;
+  font-weight: 600;
+}
+.task-card {
+  background: #f9fafb !important;
+  border: 1px solid #e5e7eb !important;
+  color: #111827 !important;
+}
+.task-card h4 {
+  color: #111827 !important;
+}
+.task-card p {
+  color: #6b7280 !important;
+}
+.task-card.active {
+  background: #eaf5f4 !important;
+  border-color: #0f6f67 !important;
+}
+
+.option-icon img {
+  padding: 10px;
+  background: white;
 }

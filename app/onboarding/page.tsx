@@ -130,7 +130,7 @@ export default function Onboarding() {
                 className={`option-card ${answers.goal === 'force' ? 'selected' : ''}`}
                 onClick={() => handleSelect('goal', 'force')}
               >
-                <div className="option-icon"><img src="https://picsum.photos/seed/muscle/150/150" alt="Force" /></div>
+                <div className="option-icon"><img src="https://api.iconify.design/mdi:arm-flex.svg?color=%23e53e3e" alt="Force" /></div>
                 <div className="option-text">
                   <h4>Gagner en force</h4>
                   <p>Retrouver de vraies pompes complètes.</p>
@@ -140,7 +140,7 @@ export default function Onboarding() {
                 className={`option-card ${answers.goal === 'sante' ? 'selected' : ''}`}
                 onClick={() => handleSelect('goal', 'sante')}
               >
-                <div className="option-icon"><img src="https://picsum.photos/seed/health/150/150" alt="Confort" /></div>
+                <div className="option-icon"><img src="https://api.iconify.design/healthicons:joints.svg?color=%230f6f67" alt="Confort" /></div>
                 <div className="option-text">
                   <h4>Confort articulaire</h4>
                   <p>Pratiquer sans subir de gênes aux articulations.</p>
@@ -150,7 +150,7 @@ export default function Onboarding() {
                 className={`option-card ${answers.goal === 'posture' ? 'selected' : ''}`}
                 onClick={() => handleSelect('goal', 'posture')}
               >
-                <div className="option-icon"><img src="https://picsum.photos/seed/spine/150/150" alt="Posture" /></div>
+                <div className="option-icon"><img src="https://api.iconify.design/healthicons:spine.svg?color=%230f6f67" alt="Posture" /></div>
                 <div className="option-text">
                   <h4>Améliorer ma posture</h4>
                   <p>Ouvrir le torse et renforcer le haut du corps.</p>
@@ -170,7 +170,7 @@ export default function Onboarding() {
                 className={`option-card ${answers.pains.includes('epaules') ? 'selected' : ''}`} 
                 onClick={() => togglePain('epaules')}
               >
-                <div className="option-icon"><img src="https://picsum.photos/seed/shoulder/150/150" alt="Epaules" /></div>
+                <div className="option-icon"><img src="https://api.iconify.design/game-icons:deltoids.svg?color=%23e53e3e" alt="Epaules" /></div>
                 <div className="option-text">
                   <h4>Oui, aux épaules</h4>
                   <p>Inconforts à l'avant de l'épaule ou coiffe des rotateurs.</p>
@@ -180,7 +180,7 @@ export default function Onboarding() {
                 className={`option-card ${answers.pains.includes('poignets') ? 'selected' : ''}`} 
                 onClick={() => togglePain('poignets')}
               >
-                <div className="option-icon"><img src="https://picsum.photos/seed/wrist/150/150" alt="Poignets" /></div>
+                <div className="option-icon"><img src="https://api.iconify.design/mdi:hand-back-right.svg?color=%23e53e3e" alt="Poignets" /></div>
                 <div className="option-text">
                   <h4>Oui, aux poignets</h4>
                   <p>Sensibilité en appui plat ou sous charge.</p>
@@ -190,7 +190,7 @@ export default function Onboarding() {
                 className={`option-card ${answers.pains.includes('coudes') ? 'selected' : ''}`} 
                 onClick={() => togglePain('coudes')}
               >
-                <div className="option-icon"><img src="https://picsum.photos/seed/elbow/150/150" alt="Coudes" /></div>
+                <div className="option-icon"><img src="https://api.iconify.design/game-icons:elbow-pad.svg?color=%23e53e3e" alt="Coudes" /></div>
                 <div className="option-text">
                   <h4>Oui, aux coudes</h4>
                   <p>Inconfort pendant la flexion ou la poussée.</p>
@@ -200,7 +200,7 @@ export default function Onboarding() {
                 className={`option-card ${answers.pains.includes('dos') ? 'selected' : ''}`} 
                 onClick={() => togglePain('dos')}
               >
-                <div className="option-icon"><img src="https://picsum.photos/seed/back/150/150" alt="Dos" /></div>
+                <div className="option-icon"><img src="https://api.iconify.design/healthicons:spine-outline.svg?color=%23e53e3e" alt="Dos" /></div>
                 <div className="option-text">
                   <h4>Oui, au bas du dos</h4>
                   <p>Tensions lombaires pendant le gainage.</p>
@@ -210,7 +210,7 @@ export default function Onboarding() {
                 className={`option-card ${answers.pains.includes('aucune') ? 'selected' : ''}`} 
                 onClick={() => togglePain('aucune')}
               >
-                <div className="option-icon"><img src="https://picsum.photos/seed/perfect/150/150" alt="Aucune gêne" /></div>
+                <div className="option-icon"><img src="https://api.iconify.design/mdi:check-circle.svg?color=%230f6f67" alt="Aucune gêne" /></div>
                 <div className="option-text">
                   <h4>Aucune gêne</h4>
                   <p>Tout va bien de ce côté-là.</p>

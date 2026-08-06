@@ -1,8 +1,9 @@
-import { updateSession } from './lib/supabase/middleware'
 import type { NextRequest } from 'next/server'
+import { NextResponse } from 'next/server'
 
+// Pour le MVP local, on passe le middleware en "transparent"
 export async function middleware(request: NextRequest) {
-  return await updateSession(request)
+  return NextResponse.next()
 }
 
 export const config = {

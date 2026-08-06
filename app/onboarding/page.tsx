@@ -1,17 +1,36 @@
 "use client"
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
 import ThemeToggle from '../ThemeToggle'
+import { createClient } from '@supabase/supabase-js'
+
+// Initialisation de Supabase côté client
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || ''
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
+const supabase = createClient(supabaseUrl, supabaseAnonKey)
 
 export default function Onboarding() {
   const [step, setStep] = useState(1)
-  const [answers, setAnswers] = useState<{ goal: string, pains: string[], level: string }>({ 
+  const [answers, setAnswers] = useState<{ 
+    goal: string, 
+    pains: string[], 
+    level: string,
+    email: string,
+    age: string,
+    weight: string
+  }>({ 
     goal: '', 
     pains: [], 
-    level: '' 
+    level: '',
+    email: '',
+    age: '',
+    weight: ''
   })
-  const [isCalculating, setIsCalculating] = useState(false)
+  
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const [isSuccess, setIsSuccess] = useState(false)
 
   const handleSelect = (key: string, value: string) => {
     setAnswers(prev => ({ ...prev, [key]: value }))
@@ -36,22 +55,46 @@ export default function Onboarding() {
   }
 
   const nextStep = () => {
-    if (step === 3) {
-      setIsCalculating(true)
-      setTimeout(() => {
-        setIsCalculating(false)
-        setStep(4)
-      }, 1500)
-    } else {
-      setStep(s => s + 1)
+    setStep(s => s + 1)
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    setError(null)
+
+    try {
+      // 1. Inscription (Auth) en passant les infos du profil dans raw_user_meta_data
+      const { data, error: authError } = await supabase.auth.signUp({
+        email: answers.email,
+        password: 'User_Temp_Password_123!', // Mot de passe temporaire pour le MVP
+        options: {
+          data: {
+            age: parseInt(answers.age),
+            weight_kg: parseFloat(answers.weight),
+            fitness_goal: answers.goal,
+            has_pain: answers.pains.length > 0 && !answers.pains.includes('aucune'),
+            pain_areas: answers.pains,
+            // Mapping du niveau : "0"->0, "1-5"->1, "5-15"->2, "15+"->3 (Exemple basique)
+            current_push_level: answers.level === '0' ? 0 : answers.level === '1-5' ? 1 : answers.level === '5-15' ? 2 : 3
+          }
+        }
+      })
+
+      if (authError) throw authError
+
+      // Succès
+      setIsSuccess(true)
+      
+    } catch (err: any) {
+      console.error(err)
+      setError(err.message || "Une erreur est survenue lors de l'enregistrement.")
+    } finally {
+      setIsSubmitting(false)
     }
   }
 
-  const prevStep = () => {
-    setStep(s => s - 1)
-  }
-
-  // Calcul du résultat
+  // Calcul du résultat local pour l'affichage
   let recommendedLevel = "Incliné 1"
   let recommendedDesc = "Départ stable avec travail d'appuis et contrôle."
 
@@ -86,13 +129,17 @@ export default function Onboarding() {
     }
   }
 
-  
-  useEffect(() => {
-    if (step === 4 && !isCalculating) {
-      localStorage.setItem('up40_user_level', recommendedLevel);
-      localStorage.setItem('up40_user_pains', JSON.stringify(answers.pains));
-    }
-  }, [step, isCalculating, recommendedLevel, answers.pains]);
+  if (isSuccess) {
+    return (
+      <main className="min-h-screen bg-white flex flex-col items-center justify-center p-6 text-center">
+        <div className="badge-new mb-4">Bilan Terminé</div>
+        <h1 className="display-title mb-4">Votre niveau recommandé :<br/><span className="text-blue-600">{recommendedLevel}</span></h1>
+        <p className="hero-description max-w-md mx-auto mb-8">{recommendedDesc}</p>
+        <p className="text-gray-600 mb-8">Votre profil a bien été sauvegardé !</p>
+        <Link href="/" className="btn-dark">Retour à l'accueil</Link>
+      </main>
+    )
+  }
 
   return (
     <main className="min-h-screen bg-white">
@@ -114,11 +161,9 @@ export default function Onboarding() {
       </section>
 
       <div className="onboarding-container" style={{ paddingTop: 0 }}>
-        {step < 4 && (
-          <div className="progress-bar">
-            <div className="progress-fill" style={{ width: `${(step / 3) * 100}%` }}></div>
-          </div>
-        )}
+        <div className="progress-bar">
+          <div className="progress-fill" style={{ width: `${(step / 4) * 100}%` }}></div>
+        </div>
 
         {step === 1 && (
           <div className="step-content">
@@ -128,9 +173,9 @@ export default function Onboarding() {
             <div className="options-grid">
               <div 
                 className={`option-card ${answers.goal === 'force' ? 'selected' : ''}`}
-                onClick={() => handleSelect('goal', 'force')}
+                onClick={() => { handleSelect('goal', 'force'); setTimeout(nextStep, 300) }}
               >
-                <div className="option-icon"><img src="/images/force.jpg" alt="Force" /></div>
+                <div className="option-icon">💪</div>
                 <div className="option-text">
                   <h4>Gagner en force</h4>
                   <p>Retrouver de vraies pompes complètes.</p>
@@ -138,9 +183,9 @@ export default function Onboarding() {
               </div>
               <div 
                 className={`option-card ${answers.goal === 'sante' ? 'selected' : ''}`}
-                onClick={() => handleSelect('goal', 'sante')}
+                onClick={() => { handleSelect('goal', 'sante'); setTimeout(nextStep, 300) }}
               >
-                <div className="option-icon"><img src="/images/health.jpg" alt="Confort" /></div>
+                <div className="option-icon">🛡️</div>
                 <div className="option-text">
                   <h4>Confort articulaire</h4>
                   <p>Pratiquer sans subir de gênes aux articulations.</p>
@@ -148,9 +193,9 @@ export default function Onboarding() {
               </div>
               <div 
                 className={`option-card ${answers.goal === 'posture' ? 'selected' : ''}`}
-                onClick={() => handleSelect('goal', 'posture')}
+                onClick={() => { handleSelect('goal', 'posture'); setTimeout(nextStep, 300) }}
               >
-                <div className="option-icon"><img src="/images/posture.jpg" alt="Posture" /></div>
+                <div className="option-icon">🧍</div>
                 <div className="option-text">
                   <h4>Améliorer ma posture</h4>
                   <p>Ouvrir le torse et renforcer le haut du corps.</p>
@@ -165,58 +210,31 @@ export default function Onboarding() {
             <h1 className="step-title">Ressentez-vous des gênes fréquentes ?</h1>
             <p className="step-subtitle">Sélectionnez toutes les zones sensibles. Le programme s'adaptera.</p>
 
-            <div className="options-grid">
-              <div 
-                className={`option-card ${answers.pains.includes('epaules') ? 'selected' : ''}`} 
-                onClick={() => togglePain('epaules')}
-              >
-                <div className="option-icon"><img src="/images/shoulder_pain.jpg" alt="Epaules" /></div>
-                <div className="option-text">
-                  <h4>Oui, aux épaules</h4>
-                  <p>Inconforts à l'avant de l'épaule ou coiffe des rotateurs.</p>
-                </div>
+            <div className="options-grid mb-6">
+              <div className={`option-card ${answers.pains.includes('epaules') ? 'selected' : ''}`} onClick={() => togglePain('epaules')}>
+                <div className="option-text"><h4>Oui, aux épaules</h4></div>
               </div>
-              <div 
-                className={`option-card ${answers.pains.includes('poignets') ? 'selected' : ''}`} 
-                onClick={() => togglePain('poignets')}
-              >
-                <div className="option-icon"><img src="/images/wrist_pain.jpg" alt="Poignets" /></div>
-                <div className="option-text">
-                  <h4>Oui, aux poignets</h4>
-                  <p>Sensibilité en appui plat ou sous charge.</p>
-                </div>
+              <div className={`option-card ${answers.pains.includes('poignets') ? 'selected' : ''}`} onClick={() => togglePain('poignets')}>
+                <div className="option-text"><h4>Oui, aux poignets</h4></div>
               </div>
-              <div 
-                className={`option-card ${answers.pains.includes('coudes') ? 'selected' : ''}`} 
-                onClick={() => togglePain('coudes')}
-              >
-                <div className="option-icon"><img src="/images/elbow_pain.jpg" alt="Coudes" /></div>
-                <div className="option-text">
-                  <h4>Oui, aux coudes</h4>
-                  <p>Inconfort pendant la flexion ou la poussée.</p>
-                </div>
+              <div className={`option-card ${answers.pains.includes('coudes') ? 'selected' : ''}`} onClick={() => togglePain('coudes')}>
+                <div className="option-text"><h4>Oui, aux coudes</h4></div>
               </div>
-              <div 
-                className={`option-card ${answers.pains.includes('dos') ? 'selected' : ''}`} 
-                onClick={() => togglePain('dos')}
-              >
-                <div className="option-icon"><img src="/images/back_pain.jpg" alt="Dos" /></div>
-                <div className="option-text">
-                  <h4>Oui, au bas du dos</h4>
-                  <p>Tensions lombaires pendant le gainage.</p>
-                </div>
+              <div className={`option-card ${answers.pains.includes('dos') ? 'selected' : ''}`} onClick={() => togglePain('dos')}>
+                <div className="option-text"><h4>Oui, au bas du dos</h4></div>
               </div>
-              <div 
-                className={`option-card ${answers.pains.includes('aucune') ? 'selected' : ''}`} 
-                onClick={() => togglePain('aucune')}
-              >
-                <div className="option-icon"><img src="/images/no_pain.jpg" alt="Aucune gêne" /></div>
-                <div className="option-text">
-                  <h4>Aucune gêne</h4>
-                  <p>Tout va bien de ce côté-là.</p>
-                </div>
+              <div className={`option-card ${answers.pains.includes('aucune') ? 'selected' : ''}`} onClick={() => togglePain('aucune')}>
+                <div className="option-text"><h4>Aucune gêne</h4></div>
               </div>
             </div>
+            
+            <button 
+              className="btn-dark w-full" 
+              onClick={nextStep}
+              disabled={answers.pains.length === 0}
+            >
+              Continuer
+            </button>
           </div>
         )}
 
@@ -226,99 +244,76 @@ export default function Onboarding() {
             <p className="step-subtitle">Buste qui touche presque le sol, corps bien droit.</p>
 
             <div className="options-grid">
-              <div className={`option-card ${answers.level === '0' ? 'selected' : ''}`} onClick={() => handleSelect('level', '0')}>
-                <div className="option-text">
-                  <h4>0 vraie pompe</h4>
-                  <p>C'est exactement pour ça qu'on est là.</p>
-                </div>
+              <div className={`option-card ${answers.level === '0' ? 'selected' : ''}`} onClick={() => { handleSelect('level', '0'); setTimeout(nextStep, 300) }}>
+                <div className="option-text"><h4>0 vraie pompe</h4></div>
               </div>
-              <div className={`option-card ${answers.level === '1-5' ? 'selected' : ''}`} onClick={() => handleSelect('level', '1-5')}>
-                <div className="option-text">
-                  <h4>Entre 1 et 5 pompes</h4>
-                  <p>Le mouvement est là, manque de fondations.</p>
-                </div>
+              <div className={`option-card ${answers.level === '1-5' ? 'selected' : ''}`} onClick={() => { handleSelect('level', '1-5'); setTimeout(nextStep, 300) }}>
+                <div className="option-text"><h4>Entre 1 et 5 pompes</h4></div>
               </div>
-              <div className={`option-card ${answers.level === '5-15' ? 'selected' : ''}`} onClick={() => handleSelect('level', '5-15')}>
-                <div className="option-text">
-                  <h4>Entre 5 et 15 pompes</h4>
-                  <p>Bon niveau, on va peaufiner la biomécanique.</p>
-                </div>
+              <div className={`option-card ${answers.level === '5-15' ? 'selected' : ''}`} onClick={() => { handleSelect('level', '5-15'); setTimeout(nextStep, 300) }}>
+                <div className="option-text"><h4>Entre 5 et 15 pompes</h4></div>
               </div>
-              <div className={`option-card ${answers.level === '15+' ? 'selected' : ''}`} onClick={() => handleSelect('level', '15+')}>
-                <div className="option-text">
-                  <h4>Plus de 15 pompes</h4>
-                  <p>Niveau avancé. Focus sur le maintien articulaire.</p>
-                </div>
+              <div className={`option-card ${answers.level === '15+' ? 'selected' : ''}`} onClick={() => { handleSelect('level', '15+'); setTimeout(nextStep, 300) }}>
+                <div className="option-text"><h4>Plus de 15 pompes</h4></div>
               </div>
             </div>
           </div>
         )}
 
-        {isCalculating && (
-          <div className="result-container loading-state">
-            <div className="spinner"></div>
-            <h2 className="step-title mt-4">Évaluation en cours...</h2>
-            <p className="step-subtitle">
-              {hasPains 
-                ? "Adaptation du protocole à vos sensibilités" 
-                : "Création de votre plan de progression"}
-            </p>
-          </div>
-        )}
+        {step === 4 && (
+          <div className="step-content">
+            <h1 className="step-title">Dernière étape pour voir votre résultat</h1>
+            <p className="step-subtitle">Nous créons votre profil personnalisé.</p>
 
-        {step === 4 && !isCalculating && (
-          <div className="result-container">
-            <div className="badge-new">Bilan terminé</div>
-            <h2 className="result-title">Votre point de départ idéal :</h2>
-            <div className="result-level">{recommendedLevel}</div>
-            <p className="hero-description mx-auto mb-8">
-              {recommendedDesc}
-            </p>
-            <div className="result-card mb-8">
-              <div className="result-row">
-                <span className="text-gray">Fréquence :</span>
-                <strong>3x / semaine</strong>
+            <form onSubmit={handleSubmit} className="flex flex-col gap-4 mt-6 text-left">
+              <div>
+                <label className="block text-sm font-medium mb-1">Votre E-mail</label>
+                <input 
+                  type="email" 
+                  required 
+                  className="w-full p-3 border rounded-md"
+                  placeholder="email@exemple.com"
+                  value={answers.email}
+                  onChange={e => handleSelect('email', e.target.value)}
+                />
               </div>
-              <div className="result-row">
-                <span className="text-gray">Durée :</span>
-                <strong>12 minutes</strong>
-              </div>
-              <div className="result-row">
-                <span className="text-gray">Focus :</span>
-                <strong>
-                  {hasPains ? 'Préservation & Force' : (answers.goal === 'force' ? 'Volume propre' : 'Confort & Posture')}
-                </strong>
-              </div>
-              {hasPains && (
-                <div className="result-row" style={{ borderTop: '1px dashed var(--border)', marginTop: '0.5rem', paddingTop: '1rem' }}>
-                  <span className="text-gray" style={{ color: '#0f6f67' }}>✓ Adapté pour préserver :</span>
-                  <strong style={{ color: '#0f6f67', textAlign: 'right' }}>
-                    {answers.pains.map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(', ')}
-                  </strong>
+              <div className="flex gap-4">
+                <div className="flex-1">
+                  <label className="block text-sm font-medium mb-1">Âge</label>
+                  <input 
+                    type="number" 
+                    required 
+                    min="18" max="100"
+                    className="w-full p-3 border rounded-md"
+                    placeholder="Ex: 42"
+                    value={answers.age}
+                    onChange={e => handleSelect('age', e.target.value)}
+                  />
                 </div>
-              )}
-            </div>
-            <Link href="/program" className="btn-dark block text-center w-full">Générer mon programme gratuit</Link>
-          </div>
-        )}
+                <div className="flex-1">
+                  <label className="block text-sm font-medium mb-1">Poids (kg)</label>
+                  <input 
+                    type="number" 
+                    required 
+                    step="0.1" min="40" max="200"
+                    className="w-full p-3 border rounded-md"
+                    placeholder="Ex: 75.5"
+                    value={answers.weight}
+                    onChange={e => handleSelect('weight', e.target.value)}
+                  />
+                </div>
+              </div>
 
-        {step < 4 && (
-          <div className="action-bar">
-            {step > 1 ? (
-              <button className="btn-prev" onClick={prevStep}>← Précédent</button>
-            ) : <div></div>}
+              {error && <div className="p-3 bg-red-50 text-red-600 rounded-md text-sm">{error}</div>}
 
-            <button 
-              className="btn-next" 
-              onClick={nextStep}
-              disabled={
-                (step === 1 && !answers.goal) || 
-                (step === 2 && answers.pains.length === 0) || 
-                (step === 3 && !answers.level)
-              }
-            >
-              Continuer →
-            </button>
+              <button 
+                type="submit" 
+                className="btn-dark w-full mt-4 flex justify-center items-center h-12"
+                disabled={isSubmitting || !answers.email || !answers.age || !answers.weight}
+              >
+                {isSubmitting ? 'Création en cours...' : 'Voir mon programme'}
+              </button>
+            </form>
           </div>
         )}
       </div>

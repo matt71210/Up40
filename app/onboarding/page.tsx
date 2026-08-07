@@ -26,6 +26,15 @@ const labelStyle: React.CSSProperties = {
 
 const initialAnswers: Answers = { goal: '', pains: [], level: '', email: '', age: '', height: '', weight: '' }
 
+function getErrorMessage(error: unknown) {
+  if (error instanceof Error && error.message) return error.message
+  if (typeof error === 'object' && error !== null) {
+    const value = error as { message?: string; error_description?: string; error?: string }
+    return value.message || value.error_description || value.error || 'Une erreur est survenue lors de l’envoi du lien.'
+  }
+  return 'Une erreur est survenue lors de l’envoi du lien.'
+}
+
 export default function Onboarding() {
   const [step, setStep] = useState(1)
   const [answers, setAnswers] = useState<Answers>(initialAnswers)
@@ -68,12 +77,16 @@ export default function Onboarding() {
       setCooldownRemaining(60)
       setIsMagicLinkSent(true)
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : ''
-      if (message.toLowerCase().includes('rate limit') || message.toLowerCase().includes('email rate')) {
+      console.error('Magic link error:', err)
+      const message = getErrorMessage(err)
+      const normalized = message.toLowerCase()
+      if (normalized.includes('rate limit') || normalized.includes('email rate')) {
         setCooldownRemaining(60)
         setError('Trop de demandes en peu de temps. Attendez 60 secondes avant de réessayer.')
+      } else if (normalized.includes('smtp') || normalized.includes('email provider') || normalized.includes('sender')) {
+        setError('L’envoi de l’email a échoué. Vérifiez la configuration SMTP et l’adresse expéditeur dans Supabase.')
       } else {
-        setError(message || 'Une erreur est survenue lors de l’envoi du lien.')
+        setError(message)
       }
     } finally {
       setIsSubmitting(false)

@@ -3,8 +3,8 @@
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { createClient } from '@/lib/supabase/client'
-import { getProgramAdjustment, type ProfileInput } from '@/lib/program'
+import { createClient } from '../../lib/supabase/client'
+import { getProgramAdjustment, type ProfileInput } from '../../lib/program'
 
 type Profile = ProfileInput & {
   id?: string

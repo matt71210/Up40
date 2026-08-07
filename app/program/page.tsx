@@ -1,32 +1,54 @@
 "use client"
-import Link from 'next/link'
-import { useEffect, useState } from 'react'
-import ThemeToggle from '../ThemeToggle'
+import Link from "next/link"
+import { useEffect, useState, type ReactNode } from "react"
+import ThemeToggle from "../ThemeToggle"
+import { createClient } from "../../lib/supabase/client"
+import { getProgramAdjustment, type ProfileInput } from "../../lib/program"
 
 export default function Program() {
-  const [userLevel, setUserLevel] = useState<number | null>(null)
+  const [adjustment, setAdjustment] = useState<
+    ReturnType<typeof getProgramAdjustment> | null
+  >(null)
   const [userPains, setUserPains] = useState<string[]>([])
 
-  useEffect(() => {
-    const savedLevel = localStorage.getItem('up40_user_level')
-    const savedPains = localStorage.getItem('up40_user_pains')
 
-    if (savedPains) {
-      try { 
-        const parsed = JSON.parse(savedPains).filter((p: string) => p !== 'aucune');
-        setUserPains(parsed) 
-      } catch (e) {}
-    }
+useEffect(() => {
+  let active = true
 
-    if (savedLevel) {
-      if (savedLevel.includes("Mur")) setUserLevel(1);
-      else if (savedLevel.includes("Incliné 1")) setUserLevel(2);
-      else if (savedLevel.includes("Incliné Bas")) setUserLevel(3);
-      else if (savedLevel.includes("Excentrique")) setUserLevel(4);
-      else if (savedLevel.includes("Stricte") || savedLevel.includes("Décharge")) setUserLevel(5);
-      else setUserLevel(3);
-    }
-  }, [])
+  async function loadProfile() {
+    const supabase = createClient()
+
+    const {
+      data: { user },
+    } = await supabase.auth.getUser()
+
+    if (!user) return
+
+    const { data, error } = await supabase
+      .from("profiles")
+      .select(
+        "current_push_level, pain_areas, has_pain, fitness_goal, height_cm, weight_kg"
+      )
+      .eq("id", user.id)
+      .single()
+
+    if (!active || error || !data) return
+
+    const profile = data as ProfileInput
+
+    setAdjustment(getProgramAdjustment(profile))
+    setUserPains(
+      (profile.pain_areas || []).filter((pain) => pain !== "aucune")
+    )
+  }
+
+  loadProfile()
+
+  return () => {
+    active = false
+  }
+}, [])
+  const userLevel = adjustment?.level ?? null
 
   const isHighlight = (level: number) => {
     if (userLevel === null) return level === 6; // Default behavior if no onboarding done

@@ -20,6 +20,15 @@ export async function middleware(request: NextRequest) {
 
   const { data: { user } } = await supabase.auth.getUser()
   const pathname = request.nextUrl.pathname
+  
+  // Exclure les routes d'authentification du middleware
+  const authPaths = ['/auth/callback', '/onboarding']
+  const isAuthPath = authPaths.some(path => pathname === path || pathname.startsWith(`${path}/`))
+  
+  if (isAuthPath) {
+    return response
+  }
+
   const protectedPaths = ['/program', '/progress', '/result', '/premium']
   const isProtected = protectedPaths.some(path => pathname === path || pathname.startsWith(`${path}/`))
 

@@ -29,7 +29,7 @@ const inputStyle: React.CSSProperties = {
 
 const labelStyle: React.CSSProperties = {
   display: 'block',
-  marginBottom: '0.6rem',
+  marginBottom: '0.35rem',
   fontWeight: 600,
   color: 'var(--color-text)',
   letterSpacing: '-0.01em',
@@ -40,6 +40,15 @@ const helperStyle: React.CSSProperties = {
   marginTop: '0.35rem',
   fontSize: '0.9rem',
   color: 'var(--color-muted)',
+}
+
+const sectionLabelStyle: React.CSSProperties = {
+  fontSize: '0.9rem',
+  fontWeight: 600,
+  textTransform: 'uppercase',
+  letterSpacing: '0.12em',
+  color: 'var(--color-muted)',
+  marginBottom: '0.75rem',
 }
 
 const initialAnswers: Answers = { goal: '', pains: [], level: '', email: '', age: '', height: '', weight: '' }
@@ -150,7 +159,6 @@ export default function Onboarding() {
             <Link href="/" className="logo-minimal">Up40.</Link>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
               <Link href="/" className="nav-link">Annuler</Link>
-              {/* Theme toggle conservé mais moins mis en avant */}
               <div style={{ opacity: 0.75 }}>
                 <ThemeToggle />
               </div>
@@ -174,17 +182,23 @@ export default function Onboarding() {
           className="hero-description mb-4"
           style={{ fontSize: '1rem', maxWidth: '42ch', margin: '0 auto' }}
         >
-          Ce bilan nous permet de fixer un point de départ raisonnable. Quelques questions, aucune performance à « prouver », simplement une image honnête de votre situation actuelle.
+          Ce bilan nous permet de fixer un point de départ raisonnable. Quelques questions, aucune performance à « prouver », simplement une image honnête de votre situation actuelle.
         </p>
       </section>
 
-      <div className="onboarding-container" style={{ paddingTop: 0, maxWidth: 640, margin: '0 auto' }}>
+      <div
+        className="onboarding-container"
+        style={{ paddingTop: 0, maxWidth: 640, margin: '0 auto 5rem' }}
+      >
         <div className="progress-bar" style={{ marginBottom: '3rem' }}>
           <div className="progress-fill" style={{ width: `${(step / 4) * 100}%` }} />
         </div>
 
         {step === 1 && (
-          <div className="step-content">
+          <div className="step-content" style={{ marginBottom: '3rem' }}>
+            <div style={{ marginBottom: '1rem' }}>
+              <span style={sectionLabelStyle}>Votre priorité</span>
+            </div>
             <h1
               className="display-title"
               style={{ fontSize: 'var(--text-lg)', marginBottom: '0.75rem' }}
@@ -195,9 +209,9 @@ export default function Onboarding() {
               className="hero-description mb-8"
               style={{ fontSize: '1rem', maxWidth: '42ch' }}
             >
-              Up40 s’adapte à votre priorité du moment. Il ne s’agit pas de choisir « le bon » objectif, mais de préciser ce qui compte le plus pour vous maintenant.
+              Up40 s’adapte à votre priorité du moment. Il ne s’agit pas de choisir « le bon » objectif, mais de préciser ce qui compte le plus pour vous maintenant.
             </p>
-            <div className="options-grid">
+            <div className="options-grid" style={{ rowGap: '1rem' }}>
               {[
                 ['force', 'Gagner en force', 'Retrouver des pompes complètes et un haut du corps solide.'],
                 ['sante', 'Confort articulaire', 'Pratiquer sans ressentir de gêne régulière aux épaules ou aux poignets.'],
@@ -223,7 +237,10 @@ export default function Onboarding() {
         )}
 
         {step === 2 && (
-          <div className="step-content">
+          <div className="step-content" style={{ marginBottom: '3rem' }}>
+            <div style={{ marginBottom: '1rem' }}>
+              <span style={sectionLabelStyle}>Zones sensibles</span>
+            </div>
             <h1
               className="display-title"
               style={{ fontSize: 'var(--text-lg)', marginBottom: '0.75rem' }}
@@ -234,9 +251,9 @@ export default function Onboarding() {
               className="hero-description mb-8"
               style={{ fontSize: '1rem', maxWidth: '42ch' }}
             >
-              Indiquez les zones sensibles. Le programme ne les « évite » pas complètement, mais il les prend en compte pour ajuster la charge et le placement.
+              Indiquez les zones sensibles. Le programme ne les « évite » pas complètement, mais il les prend en compte pour ajuster la charge et le placement.
             </p>
-            <div className="options-grid mb-8">
+            <div className="options-grid mb-8" style={{ rowGap: '0.75rem' }}>
               {[
                 ['epaules', 'Épaules'],
                 ['poignets', 'Poignets'],
@@ -268,7 +285,10 @@ export default function Onboarding() {
         )}
 
         {step === 3 && (
-          <div className="step-content">
+          <div className="step-content" style={{ marginBottom: '3rem' }}>
+            <div style={{ marginBottom: '1rem' }}>
+              <span style={sectionLabelStyle}>Niveau actuel</span>
+            </div>
             <h1
               className="display-title"
               style={{ fontSize: 'var(--text-lg)', marginBottom: '0.75rem' }}
@@ -281,7 +301,7 @@ export default function Onboarding() {
             >
               On parle de pompes complètes, buste qui se rapproche du sol, corps bien aligné. Une estimation honnête vaut mieux qu’un chiffre parfait.
             </p>
-            <div className="options-grid">
+            <div className="options-grid" style={{ rowGap: '0.75rem' }}>
               {[
                 ['0', '0 vraie pompe'],
                 ['1-5', 'Entre 1 et 5 pompes'],
@@ -307,7 +327,10 @@ export default function Onboarding() {
         )}
 
         {step === 4 && (
-          <div className="step-content">
+          <div className="step-content" style={{ marginBottom: '3rem' }}>
+            <div style={{ marginBottom: '1rem' }}>
+              <span style={sectionLabelStyle}>Coordonnées</span>
+            </div>
             <h1
               className="display-title"
               style={{ fontSize: 'var(--text-lg)', marginBottom: '0.75rem' }}
@@ -323,7 +346,7 @@ export default function Onboarding() {
             <form
               onSubmit={handleSubmit}
               className="flex flex-col text-left"
-              style={{ gap: '1.5rem' }}
+              style={{ gap: '1.75rem' }}
             >
               <div>
                 <label style={labelStyle}>Votre e-mail</label>
@@ -341,7 +364,7 @@ export default function Onboarding() {
                 style={{
                   display: 'grid',
                   gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
-                  gap: '1rem',
+                  gap: '1.1rem',
                 }}
               >
                 {[

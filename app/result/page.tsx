@@ -96,7 +96,7 @@ export default function ResultPage() {
             <Link href="/" className="logo-minimal">Up40.</Link>
             <div className="nav-actions" style={{ display: 'flex', alignItems: 'center' }}>
               <div className="nav-links">
-                <Link href="/program" className="nav-link">La méthode</Link>
+                <Link href="/program" className="nav-link">Méthode</Link>
                 <Link href="/premium" className="nav-btn">Premium</Link>
               </div>
             </div>
@@ -177,9 +177,9 @@ export default function ResultPage() {
         </div>
       </section>
 
-      <div className="footer-spacing"></div>
+      <div className="footer-spacing" style={{ height: 'calc(120px + env(safe-area-inset-bottom))' }}></div>
 
-      <nav className="bottom-nav">
+      <nav className="bottom-nav" style={{ paddingBottom: 'calc(12px + env(safe-area-inset-bottom))' }}>
         <Link href="/" className="nav-item">Accueil</Link>
         <Link href="/onboarding" className="nav-item">Bilan</Link>
         <Link href="/program" className="nav-item">Méthode</Link>

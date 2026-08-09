@@ -8,7 +8,7 @@ export default function Page() {
         <div className="nav-container">
           <nav className="nav-bar">
             <Link href="/" className="logo-minimal">Up40.</Link>
-            <div className="nav-actions" style={{ display: "flex", alignItems: "center" }}>
+            <div className="nav-actions" style={{ display: 'flex', alignItems: 'center' }}>
             <div className="nav-links">
               <Link href="/program" className="nav-link">La méthode</Link>
               <Link href="/premium" className="nav-btn">Premium</Link>

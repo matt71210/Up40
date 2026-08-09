@@ -1,267 +1,72 @@
-"use client"
-import Link from "next/link"
-import { useEffect, useState, type ReactNode } from "react"
-import ThemeToggle from "../ThemeToggle"
-import { createClient } from "../../lib/supabase/client"
-import { getProgramAdjustment, type ProfileInput } from "../../lib/program"
+import Link from 'next/link'
 
-export default function Program() {
-  const [adjustment, setAdjustment] = useState<
-    ReturnType<typeof getProgramAdjustment> | null
-  >(null)
-  const [userPains, setUserPains] = useState<string[]>([])
-
-
-useEffect(() => {
-  let active = true
-
-  async function loadProfile() {
-    const supabase = createClient()
-
-    const {
-      data: { user },
-    } = await supabase.auth.getUser()
-
-    if (!user) return
-
-    const { data, error } = await supabase
-      .from("profiles")
-      .select(
-        "current_push_level, pain_areas, has_pain, fitness_goal, height_cm, weight_kg"
-      )
-      .eq("id", user.id)
-      .single()
-
-    if (!active || error || !data) return
-
-    const profile = data as ProfileInput
-
-    setAdjustment(getProgramAdjustment(profile))
-    setUserPains(
-      (profile.pain_areas || []).filter((pain) => pain !== "aucune")
-    )
-  }
-
-  loadProfile()
-
-  return () => {
-    active = false
-  }
-}, [])
-  const userLevel = adjustment?.level ?? null
-
-  const isHighlight = (level: number) => {
-    if (userLevel === null) return level === 6; // Default behavior if no onboarding done
-    return level === userLevel;
-  }
-
-  const getWeekLabel = (level: number) => {
-    const WEEKS_PER_LEVEL = 4; // 4 semaines (1 mois) par palier pour l'adaptation des tendons
-
-    if (!userLevel) {
-      const start = (level - 1) * WEEKS_PER_LEVEL + 1;
-      const end = start + WEEKS_PER_LEVEL - 1;
-      return level === 6 ? `Semaines ${start}+` : `Semaines ${start}-${end}`;
-    }
-    if (level < userLevel) return "✓ Acquis";
-
-    const offset = level - userLevel;
-    const startWeek = offset * WEEKS_PER_LEVEL + 1;
-    const endWeek = startWeek + WEEKS_PER_LEVEL - 1;
-    return level === 6 ? `Semaines ${startWeek}+` : `Semaines ${startWeek}-${endWeek}`;
-  }
-
+export default function ProgramPage() {
   return (
     <main className="min-h-screen bg-white">
       <header className="top-header transparent">
         <div className="nav-container">
           <nav className="nav-bar">
             <Link href="/" className="logo-minimal">Up40.</Link>
-            <div className="nav-actions" style={{ display: "flex", alignItems: "center" }}>
+            <div className="nav-actions" style={{ display: 'flex', alignItems: 'center' }}>
               <div className="nav-links">
-                <Link href="/program" className="nav-link" style={{ color: 'var(--brand)' }}>La méthode</Link>
+                <Link href="/program" className="nav-link active">Méthode</Link>
                 <Link href="/premium" className="nav-btn">Premium</Link>
               </div>
-              <ThemeToggle />
             </div>
           </nav>
         </div>
       </header>
 
-      <div className="program-container">
-        <section className="program-header text-center program-photo-hero">
-          <div className="badge-new mx-auto">
-            {userLevel ? "Votre programme personnalisé" : "La Méthode Up40"}
-          </div>
-          <h1 className="display-title" style={{ fontSize: 'clamp(2.5rem, 4vw, 3.5rem)' }}>
-            Biomécanique & Progression.
+      <section className="hero-section photo-hero" style={{ minHeight: 'auto', paddingBottom: '2rem' }}>
+        <div className="hero-content">
+          <div className="badge-new">Méthode Up40</div>
+          <h1 className="display-title" style={{ fontSize: 'var(--text-xl)', maxWidth: '20ch' }}>
+            Comment fonctionne ton plan
           </h1>
-          <p className="hero-description mx-auto">
-            Le but n'est pas d'enchaîner 100 répétitions cassées, mais de reconstruire une force solide et saine. Voici le chemin exact, l'inclinaison requise, et les accessoires idéaux.
+          <p className="hero-description" style={{ maxWidth: '46ch', fontSize: '1rem' }}>
+            La méthode Up40 repose sur des cycles courts, des séances lisibles et des paliers de progression réalistes. L’objectif n’est pas d’empiler les exercices, mais de créer une base solide que tu peux entretenir longtemps.
           </p>
+        </div>
+      </section>
 
-          {userPains.length > 0 && (
-            <div style={{ background: 'rgba(15,111,103,0.1)', color: 'var(--brand)', padding: '14px 20px', borderRadius: '12px', margin: '2rem auto 0', maxWidth: '500px', fontSize: '0.95rem', fontWeight: 600, border: '1px solid rgba(15,111,103,0.2)' }}>
-              ✓ Bilan appliqué : Protocole ajusté pour préserver vos {userPains.join(', ')}.
-            </div>
-          )}
-        </section>
-
-        <section className="timeline-section">
-          <div className="timeline">
-
-            {/* Niveau 1 */}
-            <div className="timeline-item">
-              <div className={`timeline-marker ${isHighlight(1) ? 'highlight-marker' : ''}`}>1</div>
-              <div className={`timeline-content ${isHighlight(1) ? 'border-highlight' : ''}`}>
-                <div className="flex" style={{display:'flex', alignItems:'center', gap:'10px'}}>
-                  <div className={`level-badge ${isHighlight(1) ? 'highlight-badge' : ''}`}>{getWeekLabel(1)}</div>
-                  {isHighlight(1) && <span style={{fontSize:'0.75rem', fontWeight:800, color:'var(--brand)', textTransform:'uppercase'}}>Votre point de départ</span>}
-                </div>
-                <h3>Fondations : Appui Mur</h3>
-                <p>Réveil du système nerveux. On réapprend à gainer la sangle abdominale et à placer les omoplates sans aucune charge sur les poignets.</p>
-                <div className="accessory-box">
-                  <strong>Installation :</strong> Face à un mur, pieds à 1 mètre du mur. 
-                </div>
-                <div className="level-details mt-4">
-                  <span className={`detail-tag ${isHighlight(1) ? 'highlight-tag' : ''}`}>Focus: Alignement</span>
-                  <span className={`detail-tag ${isHighlight(1) ? 'highlight-tag' : ''}`}>Charge: ~20% pdc</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Niveau 2 */}
-            <div className="timeline-item">
-              <div className={`timeline-marker ${isHighlight(2) ? 'highlight-marker' : ''}`}>2</div>
-              <div className={`timeline-content ${isHighlight(2) ? 'border-highlight' : ''}`}>
-                <div className="flex" style={{display:'flex', alignItems:'center', gap:'10px'}}>
-                  <div className={`level-badge ${isHighlight(2) ? 'highlight-badge' : ''}`}>{getWeekLabel(2)}</div>
-                  {isHighlight(2) && <span style={{fontSize:'0.75rem', fontWeight:800, color:'var(--brand)', textTransform:'uppercase'}}>Votre point de départ</span>}
-                </div>
-                <h3>Incliné Haut (~80cm)</h3>
-                <p>Introduction de la charge. Le buste descend vers les mains. C'est ici que l'on construit le volume propre et l'endurance des triceps sans imposer un stress inutile à la coiffe des rotateurs.</p>
-                <div className="accessory-box">
-                  <strong>Installation :</strong> Un plan de travail de cuisine, une table de salle à manger solide, ou des <em>sangles de suspension (TRX)</em> fixées en haut d'une porte.
-                </div>
-                <div className="level-details mt-4">
-                  <span className={`detail-tag ${isHighlight(2) ? 'highlight-tag' : ''}`}>Focus: Volume</span>
-                  <span className={`detail-tag ${isHighlight(2) ? 'highlight-tag' : ''}`}>Charge: ~40% pdc</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Niveau 3 */}
-            <div className="timeline-item">
-              <div className={`timeline-marker ${isHighlight(3) ? 'highlight-marker' : ''}`}>3</div>
-              <div className={`timeline-content ${isHighlight(3) ? 'border-highlight' : ''}`}>
-                <div className="flex" style={{display:'flex', alignItems:'center', gap:'10px'}}>
-                  <div className={`level-badge ${isHighlight(3) ? 'highlight-badge' : ''}`}>{getWeekLabel(3)}</div>
-                  {isHighlight(3) && <span style={{fontSize:'0.75rem', fontWeight:800, color:'var(--brand)', textTransform:'uppercase'}}>Votre point de départ</span>}
-                </div>
-                <h3>Incliné Bas (~40cm)</h3>
-                <p>La charge devient sérieuse. On réduit l'inclinaison de moitié. Le gainage doit être parfait pour ne pas creuser le dos. Les pectoraux prennent le relais.</p>
-                <div className="accessory-box">
-                  <strong>Installation :</strong> Un banc de musculation, un canapé ferme, la 2ème/3ème marche d'un escalier, ou une <em>box de plyométrie</em>.
-                </div>
-                <div className="level-details mt-4">
-                  <span className={`detail-tag ${isHighlight(3) ? 'highlight-tag' : ''}`}>Focus: Force de poussée</span>
-                  <span className={`detail-tag ${isHighlight(3) ? 'highlight-tag' : ''}`}>Charge: ~55% pdc</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Niveau 4 */}
-            <div className="timeline-item">
-              <div className={`timeline-marker ${isHighlight(4) ? 'highlight-marker' : ''}`}>4</div>
-              <div className={`timeline-content ${isHighlight(4) ? 'border-highlight' : ''}`}>
-                <div className="flex" style={{display:'flex', alignItems:'center', gap:'10px'}}>
-                  <div className={`level-badge ${isHighlight(4) ? 'highlight-badge' : ''}`}>{getWeekLabel(4)}</div>
-                  {isHighlight(4) && <span style={{fontSize:'0.75rem', fontWeight:800, color:'var(--brand)', textTransform:'uppercase'}}>Votre point de départ</span>}
-                </div>
-                <h3>Force Excentrique & Transfert au Sol</h3>
-                <p>Le programme se densifie. On passe au sol sur la phase de descente (hyper-lente de 5 secondes) pour blinder les tendons. Le protocole intègre désormais des routines avancées de mobilité scapulaire et de gainage dynamique pour préparer le corps à la charge totale.</p>
-                <div className="accessory-box">
-                  <strong>Installation :</strong> Au sol. Utilisation de <em>poignées de pompes (parallettes)</em> fortement recommandée si vous avez les poignets sensibles.
-                </div>
-                <div className="level-details mt-4">
-                  <span className={`detail-tag ${isHighlight(4) ? 'highlight-tag' : ''}`}>Focus: Densité tendineuse & Core</span>
-                  <span className={`detail-tag ${isHighlight(4) ? 'highlight-tag' : ''}`}>Charge: 100% pdc (descente)</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Niveau 5 */}
-            <div className="timeline-item">
-              <div className={`timeline-marker ${isHighlight(5) ? 'highlight-marker' : ''}`}>5</div>
-              <div className={`timeline-content ${isHighlight(5) ? 'border-highlight' : ''}`}>
-                <div className="flex" style={{display:'flex', alignItems:'center', gap:'10px'}}>
-                  <div className={`level-badge ${isHighlight(5) ? 'highlight-badge' : ''}`}>{getWeekLabel(5)}</div>
-                  {isHighlight(5) && <span style={{fontSize:'0.75rem', fontWeight:800, color:'var(--brand)', textTransform:'uppercase'}}>Votre point de départ</span>}
-                </div>
-                <h3>La Pompe Stricte (Sol)</h3>
-                <p>Le graal du poids de corps. Buste gainé, amplitude complète frôlant le sol, rythme contrôlé. On valide des séries longues (15-20 répétitions) sans aucune dégradation de la posture ni compensation par les épaules.</p>
-                <div className="accessory-box">
-                  <strong>Installation :</strong> Au sol. Poignées recommandées si les poignets fatiguent sur les séries longues.
-                </div>
-                <div className="level-details mt-4">
-                  <span className={`detail-tag ${isHighlight(5) ? 'highlight-tag' : ''}`}>Focus: Volume & Endurance musculaire</span>
-                  <span className={`detail-tag ${isHighlight(5) ? 'highlight-tag' : ''}`}>Charge: 100% pdc</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Niveau 6 */}
-            <div className="timeline-item">
-              <div className={`timeline-marker ${isHighlight(6) ? 'highlight-marker' : ''}`}>6</div>
-              <div className={`timeline-content ${isHighlight(6) ? 'border-highlight' : ''}`}>
-                <div className="flex" style={{display:'flex', alignItems:'center', gap:'10px'}}>
-                  <div className={`level-badge ${isHighlight(6) ? 'highlight-badge' : ''}`}>{getWeekLabel(6)}</div>
-                  {isHighlight(6) && <span style={{fontSize:'0.75rem', fontWeight:800, color:'var(--brand)', textTransform:'uppercase'}}>Votre point de départ</span>}
-                </div>
-                <h3>L'Athlète 40+</h3>
-                <p>La base est incassable, on passe au niveau supérieur. L'entraînement évolue vers des cycles d'hypertrophie et de puissance : pompes en déficit profond, instabilité totale sur anneaux de gymnastique, ou utilisation d'un gilet lesté. On ajoute un travail spécifique des deltoïdes postérieurs pour un équilibre parfait.</p>
-                <div className="accessory-box" style={{ borderColor: 'var(--brand)', backgroundColor: 'var(--brand-soft)' }}>
-                  <strong>Installation :</strong> Sangles de suspension (anneaux) ou Gilet Lesté de 10 à 20kg.
-                </div>
-                <div className="level-details mt-4">
-                  <span className={`detail-tag ${isHighlight(6) ? 'highlight-tag' : ''}`}>Focus: Hypertrophie & Puissance</span>
-                  <span className={`detail-tag ${isHighlight(6) ? 'highlight-tag' : ''}`}>Charge: 100% pdc + Lest</span>
-                </div>
-              </div>
-            </div>
-
+      <section className="value-section">
+        <div className="value-grid">
+          <div className="value-box">
+            <h3>1. Des cycles courts</h3>
+            <p>Chaque plan est structuré en cycles de quelques semaines. Cela te permet de voir clairement où tu en es, de mesurer tes progrès, et d’ajuster sans repartir de zéro à chaque fois.</p>
           </div>
-        </section>
-
-        <section className="accessories-section">
-          <h2 className="mb-8" style={{ fontSize: '1.6rem', fontWeight: 800 }}>Le matériel recommandé</h2>
-          <p className="hero-description" style={{ fontSize: '1rem' }}>
-            Bien que le programme soit réalisable à 100% avec le mobilier de la maison (table, canapé, sol), deux accessoires abordables peuvent transformer votre progression et préserver vos articulations.
-          </p>
-
-          <div className="acc-card">
-            <div className="acc-icon"><img src="/images/trx.jpg" alt="Sangles TRX" /></div>
-            <div className="acc-details">
-              <h4>Sangles de suspension (Type TRX ou Anneaux)</h4>
-              <p>Idéal pour régler l'inclinaison au millimètre près. Les poignées rotatives apportent du confort aux poignets et forcent le gainage profond.</p>
-            </div>
+          <div className="value-box">
+            <h3>2. Une séance du jour</h3>
+            <p>Tu ne choisis pas parmi des dizaines d’options. Une séance du jour, adaptée à ton niveau de départ, avec un volume que tu peux réellement tenir dans ton quotidien.</p>
           </div>
-
-          <div className="acc-card">
-            <div className="acc-icon"><img src="/images/parallettes.jpg" alt="Parallettes" /></div>
-            <div className="acc-details">
-              <h4>Poignées de pompes (Parallettes)</h4>
-              <p>Indispensable à partir du niveau 4 (sol) si vous ressentez des pincements aux poignets. Elles permettent de garder le poignet dans un axe neutre et droit.</p>
-            </div>
+          <div className="value-box">
+            <h3>3. Des paliers lisibles</h3>
+            <p>La méthode ne te demande pas d’« aller au-delà » à chaque séance. Les paliers sont définis à l’avance, avec des critères simples pour savoir quand passer au niveau suivant.</p>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {!userLevel && (
-          <div className="text-center mt-4">
-            <Link href="/onboarding" className="btn-dark">Commencer mon bilan</Link>
+      <section className="value-section" style={{ paddingTop: 0 }}>
+        <div className="value-grid">
+          <div className="value-box" style={{ gridColumn: 'span 2' }}>
+            <h3>Une place pour les articulations</h3>
+            <p>Les zones sensibles que tu as indiquées lors du bilan (épaules, poignets, coudes, bas du dos) sont prises en compte dans la façon dont les exercices sont proposés. On ne promet pas d’« effacer » les gênes, mais de construire une tolérance en respectant les contraintes du corps.</p>
           </div>
-        )}
-      </div>
+          <div className="value-box">
+            <h3>Une place pour le quotidien</h3>
+            <p>Le plan est pensé pour s’intégrer dans une vie active, pas pour devenir un nouveau centre de gravité. Trois séances courtes par semaine suffisent pour créer une progression, si elles sont faites avec constance.</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="value-section" style={{ paddingTop: 0 }}>
+        <div className="value-grid">
+          <div className="value-box" style={{ gridColumn: 'span 3' }}>
+            <h3>Comment utiliser la méthode</h3>
+            <p>La bonne façon d’utiliser Up40 n’est pas de « rattraper » les séances manquées ni de doubler les volumes. C’est de considérer chaque séance comme un rendez-vous raisonnable avec ton corps : tu y vas, tu fais ce qui est prévu, tu notes ce qui change, et tu laisses le plan ajuster les paliers.</p>
+          </div>
+        </div>
+      </section>
 
       <div className="footer-spacing"></div>
 

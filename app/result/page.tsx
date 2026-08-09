@@ -72,7 +72,7 @@ export default function ResultPage() {
           <div className="hero-content">
             <div className="badge-new">Résultat personnalisé</div>
             <h1 className="display-title" style={{ fontSize: 'var(--text-xl)' }}>Préparation de ton résultat…</h1>
-            <p className="hero-description muted">On crée ton plan sur mesure, à partir des données de ton bilan.</p>
+            <p className="hero-description muted">On crée ton plan de départ à partir des données de ton bilan.</p>
           </div>
         </section>
       </main>
@@ -107,10 +107,13 @@ export default function ResultPage() {
       <section className="hero-section photo-hero" style={{ minHeight: 'auto', paddingBottom: '2rem' }}>
         <div className="hero-content">
           <div className="badge-new">Résultat personnalisé</div>
-          <h1 className="display-title" style={{ fontSize: 'var(--text-xl)', maxWidth: '18ch' }}>
-            Ton niveau de départ : {adjustment.title}
+          <p className="hero-description" style={{ fontSize: 'var(--text-base)', marginBottom: '0.75rem' }}>
+            Ton plan de départ est prêt.
+          </p>
+          <h1 className="display-title" style={{ fontSize: 'var(--text-xl)', maxWidth: '22ch' }}>
+            Ton plan de départ : {adjustment.title}
           </h1>
-          <p className="hero-description" style={{ maxWidth: '40ch' }}>{painMessage}</p>
+          <p className="hero-description" style={{ maxWidth: '44ch' }}>{painMessage}</p>
 
           <div className="trust-metrics" style={{ marginTop: '1.5rem' }}>
             <div className="metric">
@@ -135,15 +138,15 @@ export default function ResultPage() {
         <div className="value-grid">
           <div className="value-box">
             <h3>Point de départ sécurisé</h3>
-            <p>Le volume est ajusté pour te permettre de reconstruire ta force sans brusquer tes articulations.</p>
+            <p>Le volume est ajusté pour te permettre de reconstruire ta force sans mettre tes épaules et poignets sous pression inutile.</p>
           </div>
           <div className="value-box">
             <h3>Progression réaliste</h3>
-            <p>Les paliers de difficulté suivent ton niveau actuel pour éviter les à-coups et les blessures.</p>
+            <p>Les paliers suivent ton niveau actuel pour éviter les à-coups et favoriser une montée en puissance régulière.</p>
           </div>
           <div className="value-box">
             <h3>Routine minimaliste</h3>
-            <p>Des séances courtes, concentrées, qui s’intègrent facilement dans un planning chargé.</p>
+            <p>Des séances courtes, concentrées, qui s’intègrent facilement dans un emploi du temps chargé.</p>
           </div>
         </div>
       </section>
@@ -151,12 +154,25 @@ export default function ResultPage() {
       <section className="value-section" style={{ paddingTop: 0 }}>
         <div className="value-grid">
           <div className="value-box" style={{ gridColumn: 'span 2' }}>
-            <h3>Les 7 prochains jours</h3>
-            <p>Commence par la séance du jour à ton niveau exact, et privilégie toujours la qualité du mouvement avant le nombre de répétitions.</p>
+            <h3>Cette semaine</h3>
+            <p>Commence par la séance du jour à ton niveau exact. Garde toujours la qualité du mouvement avant le nombre de répétitions.</p>
           </div>
           <div className="value-box">
-            <h3>Et après ?</h3>
-            <p>Reviens sur cette page après une semaine : ton plan s’adaptera automatiquement à tes progrès.</p>
+            <h3>Et après</h3>
+            <p>Reviens sur cette page après une semaine : ton plan s’adaptera automatiquement à tes progrès et te proposera le palier suivant.</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="value-section" style={{ paddingTop: 0 }}>
+        <div className="value-grid">
+          <div className="value-box" style={{ gridColumn: 'span 3' }}>
+            <h3>Découvrir la méthode complète</h3>
+            <p>La page Méthode te montre comment sont construits tes cycles, tes séances et tes paliers de progression. C’est ton guide pour comprendre la logique derrière ton plan.</p>
+            <div className="row" style={{ marginTop: 18 }}>
+              <Link href="/program" className="btn-dark">Voir la méthode</Link>
+              <Link href="/premium" className="btn-outline">Explorer le premium</Link>
+            </div>
           </div>
         </div>
       </section>
@@ -166,7 +182,7 @@ export default function ResultPage() {
       <nav className="bottom-nav">
         <Link href="/" className="nav-item">Accueil</Link>
         <Link href="/onboarding" className="nav-item">Bilan</Link>
-        <Link href="/program" className="nav-item active">Plan</Link>
+        <Link href="/program" className="nav-item">Méthode</Link>
         <Link href="/progress" className="nav-item">Progrès</Link>
         <Link href="/premium" className="nav-item">Premium</Link>
       </nav>

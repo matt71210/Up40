@@ -137,16 +137,16 @@ export default function ResultPage() {
       <section className="value-section">
         <div className="value-grid">
           <div className="value-box">
-            <h3>Point de départ sécurisé</h3>
-            <p>Le volume est ajusté pour te permettre de reconstruire ta force sans mettre tes épaules et poignets sous pression inutile.</p>
+            <h3>Ce que ce résultat signifie</h3>
+            <p>Ce niveau de départ n’est pas un jugement. C’est un point de repère. Il permet de choisir des séances qui respectent tes contraintes actuelles, tout en te donnant une marge de progression claire.</p>
           </div>
           <div className="value-box">
-            <h3>Progression réaliste</h3>
-            <p>Les paliers suivent ton niveau actuel pour éviter les à-coups et favoriser une montée en puissance régulière.</p>
+            <h3>Ce que le plan protège</h3>
+            <p>Les séances sont calibrées pour limiter les contraintes sur les zones sensibles que tu as indiquées (épaules, poignets, coudes, bas du dos). L’idée n’est pas de tout éviter, mais de construire une tolérance solide au fil des semaines.</p>
           </div>
           <div className="value-box">
-            <h3>Routine minimaliste</h3>
-            <p>Des séances courtes, concentrées, qui s’intègrent facilement dans un emploi du temps chargé.</p>
+            <h3>Ce que le plan demande</h3>
+            <p>Trois séances courtes par semaine, honnêtes avec toi-même. Pas de perfection, juste une régularité suffisante pour que le corps ait le temps de s’adapter.</p>
           </div>
         </div>
       </section>
@@ -155,11 +155,11 @@ export default function ResultPage() {
         <div className="value-grid">
           <div className="value-box" style={{ gridColumn: 'span 2' }}>
             <h3>Cette semaine</h3>
-            <p>Commence par la séance du jour à ton niveau exact. Garde toujours la qualité du mouvement avant le nombre de répétitions.</p>
+            <p>Commence par la séance du jour à ton niveau exact. Ne cherche pas à « prouver » quelque chose. Cherche la qualité : trajectoire, respiration, contrôle. C’est cette qualité qui rend les séances utiles à long terme.</p>
           </div>
           <div className="value-box">
-            <h3>Et après</h3>
-            <p>Reviens sur cette page après une semaine : ton plan s’adaptera automatiquement à tes progrès et te proposera le palier suivant.</p>
+            <h3>Et ensuite</h3>
+            <p>Reviens sur cette page après une semaine. Ton plan s’adaptera automatiquement à tes progrès et t’indiquera le palier suivant. Tu ne décides pas seul d’augmenter la difficulté : tu le fais avec des repères clairs.</p>
           </div>
         </div>
       </section>
@@ -167,8 +167,8 @@ export default function ResultPage() {
       <section className="value-section" style={{ paddingTop: 0 }}>
         <div className="value-grid">
           <div className="value-box" style={{ gridColumn: 'span 3' }}>
-            <h3>Découvrir la méthode complète</h3>
-            <p>La page Méthode te montre comment sont construits tes cycles, tes séances et tes paliers de progression. C’est ton guide pour comprendre la logique derrière ton plan.</p>
+            <h3>Comprendre la méthode</h3>
+            <p>La page Méthode te montre comment sont construits tes cycles, tes séances et tes paliers de progression. C’est la vue d’ensemble, pour que tu saches toujours où tu en es et pourquoi tu fais ce que tu fais.</p>
             <div className="row" style={{ marginTop: 18 }}>
               <Link href="/program" className="btn-dark">Voir la méthode</Link>
               <Link href="/premium" className="btn-outline">Explorer le premium</Link>

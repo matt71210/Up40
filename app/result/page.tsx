@@ -164,7 +164,7 @@ export default function ResultPage() {
         </div>
       </section>
 
-      <section className="value-section" style={{ paddingTop: 0 }}>
+      <section className="value-section" style={{ paddingTop: 0, borderTop: 'none' }}>
         <div className="value-grid">
           <div className="value-box" style={{ gridColumn: 'span 3' }}>
             <h3>Comprendre la méthode</h3>
@@ -177,9 +177,9 @@ export default function ResultPage() {
         </div>
       </section>
 
-      <div className="footer-spacing" style={{ height: 'calc(120px + env(safe-area-inset-bottom))' }}></div>
+      <div className="footer-spacing" style={{ height: 'calc(90px + env(safe-area-inset-bottom))' }}></div>
 
-      <nav className="bottom-nav" style={{ paddingBottom: 'calc(12px + env(safe-area-inset-bottom))' }}>
+      <nav className="bottom-nav" style={{ paddingBottom: 'calc(8px + env(safe-area-inset-bottom))', minHeight: '72px' }}>
         <Link href="/" className="nav-item">Accueil</Link>
         <Link href="/onboarding" className="nav-item">Bilan</Link>
         <Link href="/program" className="nav-item">Méthode</Link>

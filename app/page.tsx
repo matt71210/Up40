@@ -9,12 +9,12 @@ export default function Page() {
           <nav className="nav-bar">
             <Link href="/" className="logo-minimal">Up40.</Link>
             <div className="nav-actions" style={{ display: 'flex', alignItems: 'center' }}>
-            <div className="nav-links">
-              <Link href="/program" className="nav-link">La méthode</Link>
-              <Link href="/premium" className="nav-btn">Premium</Link>
+              <div className="nav-links">
+                <Link href="/program" className="nav-link">La méthode</Link>
+                <Link href="/premium" className="nav-btn">Premium</Link>
+              </div>
+              <ThemeToggle />
             </div>
-            <ThemeToggle />
-          </div>
           </nav>
         </div>
       </header>
@@ -26,8 +26,8 @@ export default function Page() {
             Reconstruisez votre force.<br />
             <span className="text-gray">Préservez votre corps.</span>
           </h1>
-          <p className="hero-description">
-            Up40 est le programme d'entraînement conçu pour la biomécanique de l'adulte actif. Fini le fitness brutal et l'usure prématurée : retrouvez de vraies pompes complètes avec 12 minutes de pratique intelligente par jour.
+          <p className="hero-description" style={{ maxWidth: '44ch' }}>
+            Up40 aide l'adulte actif à retrouver une base solide avec une progression courte, précise et pensée pour durer. Pas de promesses bruyantes : une méthode claire, des repères simples, et un corps qui progresse sans s'user.
           </p>
           <div className="cta-group">
             <Link href="/onboarding" className="btn-dark">Démarrer mon bilan</Link>
@@ -109,15 +109,28 @@ export default function Page() {
         <div className="value-grid">
           <div className="value-box">
             <h3>Confort des épaules</h3>
-            <p>Une progression axée sur le placement et le respect articulaire, pas sur le volume pur.</p>
+            <p>Chaque étape privilégie le placement, la stabilité et le respect articulaire avant le volume.</p>
           </div>
           <div className="value-box">
             <h3>Des paliers réalistes</h3>
-            <p>On ne commence pas au sol. L'algorithme ajuste l'inclinaison à votre force actuelle.</p>
+            <p>On ne part pas du sol si ce n’est pas le bon point de départ. La progression s’ajuste à votre niveau réel.</p>
           </div>
           <div className="value-box">
-            <h3>Routine minimaliste</h3>
-            <p>Pas de matériel complexe, pas de séances de 45 minutes. Juste de la régularité pure.</p>
+            <h3>Une routine claire</h3>
+            <p>Pas de protocole complexe, pas de charge mentale inutile. Juste un cadre simple, lisible et efficace.</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="value-section" style={{ paddingTop: 0 }}>
+        <div className="value-grid">
+          <div className="value-box" style={{ gridColumn: 'span 2' }}>
+            <h3>Pourquoi Up40</h3>
+            <p>Parce qu’à partir d’un certain âge, la vraie progression n’est pas d’en faire plus. C’est de mieux calibrer l’effort, d’enchaîner les bonnes séances, et de rester régulier sans se cramer.</p>
+          </div>
+          <div className="value-box">
+            <h3>Pour qui</h3>
+            <p>Pour celles et ceux qui veulent reprendre sérieusement, sans jargon inutile ni surenchère marketing.</p>
           </div>
         </div>
       </section>

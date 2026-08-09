@@ -167,19 +167,18 @@ export default function ResultPage() {
       <section className="value-section" style={{ paddingTop: 0, borderTop: 'none' }}>
         <div className="value-grid">
           <div className="value-box" style={{ gridColumn: 'span 3' }}>
-            <h3>Comprendre la méthode</h3>
-            <p>La page Méthode te montre comment sont construits tes cycles, tes séances et tes paliers de progression. C’est la vue d’ensemble, pour que tu saches toujours où tu en es et pourquoi tu fais ce que tu fais.</p>
+            <h3>Passer à la suite</h3>
+            <p>La page Méthode te montre comment sont construits tes cycles, tes séances et tes paliers de progression. Tu peux aussi découvrir l’option Premium si tu veux un accompagnement plus structuré.</p>
             <div className="row" style={{ marginTop: 18 }}>
               <Link href="/program" className="btn-dark">Voir la méthode</Link>
-              <Link href="/premium" className="btn-outline">Explorer le premium</Link>
             </div>
           </div>
         </div>
       </section>
 
-      <div className="footer-spacing" style={{ height: 'calc(90px + env(safe-area-inset-bottom))' }}></div>
+      <div className="footer-spacing" style={{ height: 'calc(70px + env(safe-area-inset-bottom))' }}></div>
 
-      <nav className="bottom-nav" style={{ paddingBottom: 'calc(8px + env(safe-area-inset-bottom))', minHeight: '72px' }}>
+      <nav className="bottom-nav" style={{ paddingBottom: 'calc(6px + env(safe-area-inset-bottom))', minHeight: '60px' }}>
         <Link href="/" className="nav-item">Accueil</Link>
         <Link href="/onboarding" className="nav-item">Bilan</Link>
         <Link href="/program" className="nav-item">Méthode</Link>

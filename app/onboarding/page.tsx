@@ -16,12 +16,30 @@ type Answers = {
 }
 
 const inputStyle: React.CSSProperties = {
-  width: '100%', padding: '1rem', border: '1px solid var(--color-border)', borderRadius: '0.9rem',
-  backgroundColor: 'var(--color-surface)', color: 'var(--color-text)', fontFamily: 'inherit', fontSize: '1rem', outline: 'none'
+  width: '100%',
+  padding: '1.1rem',
+  border: '1px solid var(--color-border)',
+  borderRadius: '0.9rem',
+  backgroundColor: 'var(--color-surface)',
+  color: 'var(--color-text)',
+  fontFamily: 'inherit',
+  fontSize: '1.02rem',
+  outline: 'none',
 }
 
 const labelStyle: React.CSSProperties = {
-  display: 'block', marginBottom: '0.6rem', fontWeight: 600, color: 'var(--color-text)', letterSpacing: '-0.01em'
+  display: 'block',
+  marginBottom: '0.6rem',
+  fontWeight: 600,
+  color: 'var(--color-text)',
+  letterSpacing: '-0.01em',
+  fontSize: '0.98rem',
+}
+
+const helperStyle: React.CSSProperties = {
+  marginTop: '0.35rem',
+  fontSize: '0.9rem',
+  color: 'var(--color-muted)',
 }
 
 const initialAnswers: Answers = { goal: '', pains: [], level: '', email: '', age: '', height: '', weight: '' }
@@ -57,7 +75,9 @@ export default function Onboarding() {
     setAnswers(prev => {
       if (painId === 'aucune') return { ...prev, pains: ['aucune'] }
       const withoutNone = prev.pains.filter(pain => pain !== 'aucune')
-      const pains = withoutNone.includes(painId) ? withoutNone.filter(pain => pain !== painId) : [...withoutNone, painId]
+      const pains = withoutNone.includes(painId)
+        ? withoutNone.filter(pain => pain !== painId)
+        : [...withoutNone, painId]
       return { ...prev, pains }
     })
   }
@@ -111,9 +131,13 @@ export default function Onboarding() {
   if (isMagicLinkSent) return (
     <main className="min-h-screen bg-white flex flex-col items-center justify-center p-6 text-center">
       <div className="badge-new mb-6">Bilan enregistré</div>
-      <h1 className="display-title mb-6">Vérifiez votre boîte email</h1>
-      <p className="hero-description max-w-md mx-auto mb-6">Un lien de connexion a été envoyé à <strong>{answers.email}</strong>.</p>
-      <p className="hero-description max-w-md mx-auto mb-10">Cliquez sur ce lien pour accéder à votre résultat et à votre plan de départ Up40.</p>
+      <h1 className="display-title mb-6" style={{ fontSize: 'var(--text-xl)' }}>Vérifiez votre boîte email</h1>
+      <p className="hero-description max-w-md mx-auto mb-6" style={{ fontSize: '1rem' }}>
+        Un lien de connexion a été envoyé à <strong>{answers.email}</strong>.
+      </p>
+      <p className="hero-description max-w-md mx-auto mb-10" style={{ fontSize: '1rem' }}>
+        Cliquez sur ce lien pour accéder à votre résultat et à votre plan de départ Up40.
+      </p>
       <Link href="/" className="btn-dark">Retour à l’accueil</Link>
     </main>
   )
@@ -124,32 +148,54 @@ export default function Onboarding() {
         <div className="nav-container">
           <nav className="nav-bar">
             <Link href="/" className="logo-minimal">Up40.</Link>
-            <div style={{ display: 'flex', alignItems: 'center' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
               <Link href="/" className="nav-link">Annuler</Link>
-              <ThemeToggle />
+              {/* Theme toggle conservé mais moins mis en avant */}
+              <div style={{ opacity: 0.75 }}>
+                <ThemeToggle />
+              </div>
             </div>
           </nav>
         </div>
       </header>
 
-      <section className="hero-section photo-hero text-center" style={{ minHeight: 'auto', paddingBottom: '2rem' }}>
+      <section
+        className="hero-section photo-hero text-center"
+        style={{ minHeight: 'auto', paddingBottom: '2rem' }}
+      >
         <div className="badge-new mx-auto">Bilan personnalisé</div>
-        <h1 className="display-title mt-2" style={{ fontSize: 'var(--text-xl)' }}>Votre profil</h1>
-        <p className="hero-description mb-4" style={{ fontSize: 'var(--text-base)', maxWidth: '40ch', margin: '0 auto' }}>
-          Ce bilan nous permet de fixer un point de départ raisonnable. Quelques questions, aucune performance à « prouver », juste une image honnête de votre situation actuelle.
+        <h1
+          className="display-title mt-2"
+          style={{ fontSize: 'var(--text-xl)' }}
+        >
+          Votre profil
+        </h1>
+        <p
+          className="hero-description mb-4"
+          style={{ fontSize: '1rem', maxWidth: '42ch', margin: '0 auto' }}
+        >
+          Ce bilan nous permet de fixer un point de départ raisonnable. Quelques questions, aucune performance à « prouver », simplement une image honnête de votre situation actuelle.
         </p>
       </section>
 
-      <div className="onboarding-container" style={{ paddingTop: 0 }}>
+      <div className="onboarding-container" style={{ paddingTop: 0, maxWidth: 640, margin: '0 auto' }}>
         <div className="progress-bar" style={{ marginBottom: '3rem' }}>
           <div className="progress-fill" style={{ width: `${(step / 4) * 100}%` }} />
         </div>
 
         {step === 1 && (
           <div className="step-content">
-            <h1 className="display-title" style={{ fontSize: 'var(--text-lg)', marginBottom: '0.75rem' }}>Quel est votre objectif principal ?</h1>
-            <p className="hero-description mb-8" style={{ fontSize: 'var(--text-base)', maxWidth: '42ch' }}>
-              Up40 s’adapte à votre priorité du moment. Pas besoin d’avoir « le bon objectif », il s’agit surtout de savoir ce qui compte le plus pour vous maintenant.
+            <h1
+              className="display-title"
+              style={{ fontSize: 'var(--text-lg)', marginBottom: '0.75rem' }}
+            >
+              Quel est votre objectif principal ?
+            </h1>
+            <p
+              className="hero-description mb-8"
+              style={{ fontSize: '1rem', maxWidth: '42ch' }}
+            >
+              Up40 s’adapte à votre priorité du moment. Il ne s’agit pas de choisir « le bon » objectif, mais de préciser ce qui compte le plus pour vous maintenant.
             </p>
             <div className="options-grid">
               {[
@@ -167,8 +213,8 @@ export default function Onboarding() {
                   }}
                 >
                   <div className="task-details">
-                    <h4 style={{ margin: 0, fontSize: '1.1rem' }}>{title}</h4>
-                    <p style={{ margin: 0, marginTop: '4px' }}>{description}</p>
+                    <h4 style={{ margin: 0, fontSize: '1.05rem' }}>{title}</h4>
+                    <p style={{ margin: 0, marginTop: '4px', fontSize: '0.95rem' }}>{description}</p>
                   </div>
                 </button>
               ))}
@@ -178,16 +224,24 @@ export default function Onboarding() {
 
         {step === 2 && (
           <div className="step-content">
-            <h1 className="display-title" style={{ fontSize: 'var(--text-lg)', marginBottom: '0.75rem' }}>Ressentez-vous des gênes fréquentes ?</h1>
-            <p className="hero-description mb-8" style={{ fontSize: 'var(--text-base)', maxWidth: '42ch' }}>
-              Indiquez les zones sensibles. Le programme ne les « évite » pas totalement, mais il les prend en compte pour adapter la charge et le placement.
+            <h1
+              className="display-title"
+              style={{ fontSize: 'var(--text-lg)', marginBottom: '0.75rem' }}
+            >
+              Ressentez-vous des gênes fréquentes ?
+            </h1>
+            <p
+              className="hero-description mb-8"
+              style={{ fontSize: '1rem', maxWidth: '42ch' }}
+            >
+              Indiquez les zones sensibles. Le programme ne les « évite » pas complètement, mais il les prend en compte pour ajuster la charge et le placement.
             </p>
             <div className="options-grid mb-8">
               {[
-                ['epaules', 'Oui, aux épaules'],
-                ['poignets', 'Oui, aux poignets'],
-                ['coudes', 'Oui, aux coudes'],
-                ['dos', 'Oui, au bas du dos'],
+                ['epaules', 'Épaules'],
+                ['poignets', 'Poignets'],
+                ['coudes', 'Coudes'],
+                ['dos', 'Bas du dos'],
                 ['aucune', 'Aucune gêne particulière'],
               ].map(([id, label]) => (
                 <button
@@ -197,14 +251,14 @@ export default function Onboarding() {
                   onClick={() => togglePain(id)}
                 >
                   <div className="task-details">
-                    <h4 style={{ margin: 0, fontSize: '1.1rem' }}>{label}</h4>
+                    <h4 style={{ margin: 0, fontSize: '1.05rem' }}>{label}</h4>
                   </div>
                 </button>
               ))}
             </div>
             <button
               className="btn-dark"
-              style={{ width: '100%', padding: '1.25rem' }}
+              style={{ width: '100%', padding: '1.25rem', fontSize: '1.02rem' }}
               onClick={nextStep}
               disabled={answers.pains.length === 0}
             >
@@ -215,10 +269,16 @@ export default function Onboarding() {
 
         {step === 3 && (
           <div className="step-content">
-            <h1 className="display-title" style={{ fontSize: 'var(--text-lg)', marginBottom: '0.75rem' }}>
+            <h1
+              className="display-title"
+              style={{ fontSize: 'var(--text-lg)', marginBottom: '0.75rem' }}
+            >
               Combien de pompes propres faites-vous aujourd’hui ?
             </h1>
-            <p className="hero-description mb-8" style={{ fontSize: 'var(--text-base)', maxWidth: '42ch' }}>
+            <p
+              className="hero-description mb-8"
+              style={{ fontSize: '1rem', maxWidth: '42ch' }}
+            >
               On parle de pompes complètes, buste qui se rapproche du sol, corps bien aligné. Une estimation honnête vaut mieux qu’un chiffre parfait.
             </p>
             <div className="options-grid">
@@ -238,7 +298,7 @@ export default function Onboarding() {
                   }}
                 >
                   <div className="task-details">
-                    <h4 style={{ margin: 0, fontSize: '1.1rem' }}>{label}</h4>
+                    <h4 style={{ margin: 0, fontSize: '1.05rem' }}>{label}</h4>
                   </div>
                 </button>
               ))}
@@ -248,15 +308,25 @@ export default function Onboarding() {
 
         {step === 4 && (
           <div className="step-content">
-            <h1 className="display-title" style={{ fontSize: 'var(--text-lg)', marginBottom: '0.75rem' }}>
+            <h1
+              className="display-title"
+              style={{ fontSize: 'var(--text-lg)', marginBottom: '0.75rem' }}
+            >
               Dernière étape pour voir votre résultat
             </h1>
-            <p className="hero-description mb-8" style={{ fontSize: 'var(--text-base)', maxWidth: '42ch' }}>
+            <p
+              className="hero-description mb-8"
+              style={{ fontSize: '1rem', maxWidth: '42ch' }}
+            >
               Nous créons votre profil Up40. L’email sert uniquement à vous envoyer le lien de connexion sécurisé vers votre résultat et votre plan de départ.
             </p>
-            <form onSubmit={handleSubmit} className="flex flex-col text-left" style={{ gap: '1.5rem' }}>
+            <form
+              onSubmit={handleSubmit}
+              className="flex flex-col text-left"
+              style={{ gap: '1.5rem' }}
+            >
               <div>
-                <label style={labelStyle}>Votre E-mail</label>
+                <label style={labelStyle}>Votre e-mail</label>
                 <input
                   type="email"
                   required
@@ -265,8 +335,15 @@ export default function Onboarding() {
                   value={answers.email}
                   onChange={event => handleSelect('email', event.target.value)}
                 />
+                <p style={helperStyle}>Nous n’utilisons pas cette adresse pour vous envoyer des contenus promotionnels.</p>
               </div>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem' }}>
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
+                  gap: '1rem',
+                }}
+              >
                 {[
                   ['age', 'Âge', 'Ans'],
                   ['height', 'Taille', 'cm'],
@@ -277,8 +354,8 @@ export default function Onboarding() {
                     <input
                       type="number"
                       required
-                      min={key === 'age' ? 18 : key === 'height' ? 140 : 40}
-                      max={key === 'age' ? 100 : key === 'height' ? 220 : 200}
+                      min={key === 'age' ? 35 : key === 'height' ? 140 : 40}
+                      max={key === 'age' ? 75 : key === 'height' ? 220 : 200}
                       step={key === 'weight' ? '0.1' : '1'}
                       style={inputStyle}
                       placeholder={placeholder}
@@ -295,7 +372,7 @@ export default function Onboarding() {
                     backgroundColor: '#fef2f2',
                     color: '#dc2626',
                     borderRadius: '0.75rem',
-                    fontSize: '0.9rem',
+                    fontSize: '0.95rem',
                   }}
                 >
                   {error}
@@ -316,7 +393,7 @@ export default function Onboarding() {
                   justifyContent: 'center',
                   alignItems: 'center',
                   padding: '1.25rem',
-                  fontSize: '1.1rem',
+                  fontSize: '1.05rem',
                 }}
                 disabled={
                   isSubmitting ||

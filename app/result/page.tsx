@@ -159,7 +159,7 @@ export default function ResultPage() {
           </div>
           <div className="value-box">
             <h3>Et ensuite</h3>
-            <p>Reviens sur cette page après une semaine. Ton plan s’adaptera automatiquement à tes progrès et t’indiquera le palier suivant. Tu ne décides pas seul d’augmenter la difficulté : tu le fais avec des repères clairs.</p>
+            <p>Reviens sur cette page après une semaine : ton plan s’adaptera automatiquement à tes progrès et t’indiquera le palier suivant.</p>
           </div>
         </div>
       </section>

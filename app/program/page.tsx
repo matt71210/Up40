@@ -1,9 +1,33 @@
 import Link from 'next/link'
+import { getProgramAdjustment, buildProgramPlan, getSessionOfDay, ProfileInput } from '../../lib/program'
+import { createClient } from '../../lib/supabase/client'
 
-export default function ProgramPage() {
+export default async function ProgramPage() {
+  const supabase = createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+
+  let adjustment = null
+  let session = null
+
+  if (user) {
+    const { data } = await supabase
+      .from('profiles')
+      .select('current_push_level, pain_areas, has_pain, fitness_goal, height_cm, weight_kg')
+      .eq('id', user.id)
+      .single()
+
+    if (data) {
+      const profile = data as ProfileInput
+      adjustment = getProgramAdjustment(profile)
+
+      const plan = buildProgramPlan(adjustment)
+      session = getSessionOfDay(adjustment, plan)
+    }
+  }
+
   return (
     <main className="min-h-screen bg-white">
-      <header className="top-header transparent">
+      <header className="top-header program-photo-hero">
         <div className="nav-container">
           <nav className="nav-bar">
             <Link href="/" className="logo-minimal">Up40.</Link>
@@ -17,55 +41,94 @@ export default function ProgramPage() {
         </div>
       </header>
 
-      <section className="hero-section photo-hero" style={{ minHeight: 'auto', paddingBottom: '2rem' }}>
+      <section className="hero-section" style={{ minHeight: 'auto', paddingBottom: '2rem' }}>
         <div className="hero-content">
-          <div className="badge-new">Méthode Up40</div>
+          <div className="badge-new">Plan Up40</div>
           <h1 className="display-title" style={{ fontSize: 'var(--text-xl)', maxWidth: '20ch' }}>
-            Comment fonctionne ton plan
+            Ta séance du jour
           </h1>
-          <p className="hero-description" style={{ maxWidth: '46ch', fontSize: '1rem' }}>
-            La méthode Up40 repose sur des cycles courts, des séances lisibles et des paliers de progression réalistes. L’objectif n’est pas d’empiler les exercices, mais de créer une base solide que tu peux entretenir longtemps.
-          </p>
+          {adjustment ? (
+            <p className="hero-description" style={{ maxWidth: '46ch', fontSize: '1rem' }}>
+              Niveau de départ&nbsp;: <strong>{adjustment.title}</strong>. Trois séances par semaine, sur un cycle de {adjustment.cycleWeeks} semaines.
+            </p>
+          ) : (
+            <p className="hero-description" style={{ maxWidth: '46ch', fontSize: '1rem' }}>
+              Connecte-toi et réalise ton bilan pour voir ta séance du jour.
+            </p>
+          )}
         </div>
       </section>
 
-      <section className="value-section">
-        <div className="value-grid">
-          <div className="value-box">
-            <h3>1. Des cycles courts</h3>
-            <p>Chaque plan est structuré en cycles de quelques semaines. Cela te permet de voir clairement où tu en es, de mesurer tes progrès, et d’ajuster sans repartir de zéro à chaque fois.</p>
-          </div>
-          <div className="value-box">
-            <h3>2. Une séance du jour</h3>
-            <p>Tu ne choisis pas parmi des dizaines d’options. Une séance du jour, adaptée à ton niveau de départ, avec un volume que tu peux réellement tenir dans ton quotidien.</p>
-          </div>
-          <div className="value-box">
-            <h3>3. Des paliers lisibles</h3>
-            <p>La méthode ne te demande pas d’« aller au-delà » à chaque séance. Les paliers sont définis à l’avance, avec des critères simples pour savoir quand passer au niveau suivant.</p>
-          </div>
-        </div>
-      </section>
+      <section className="program-container">
+        {session ? (
+          <>
+            <div className="program-header">
+              <h2 className="display-title" style={{ fontSize: '1.4rem', marginBottom: '0.5rem' }}>
+                {session.title}
+              </h2>
+              <p className="hero-description" style={{ fontSize: '0.95rem', maxWidth: '48ch' }}>
+                Séance centrée sur <strong>{session.focus === 'technique' ? 'la technique' : session.focus === 'volume' ? 'un volume tolérable' : 'le contrôle excentrique'}</strong>.
+              </p>
+            </div>
 
-      <section className="value-section" style={{ paddingTop: 0 }}>
-        <div className="value-grid">
-          <div className="value-box" style={{ gridColumn: 'span 2' }}>
-            <h3>Une place pour les articulations</h3>
-            <p>Les zones sensibles que tu as indiquées lors du bilan (épaules, poignets, coudes, bas du dos) sont prises en compte dans la façon dont les exercices sont proposés. On ne promet pas d’« effacer » les gênes, mais de construire une tolérance en respectant les contraintes du corps.</p>
-          </div>
-          <div className="value-box">
-            <h3>Une place pour le quotidien</h3>
-            <p>Le plan est pensé pour s’intégrer dans une vie active, pas pour devenir un nouveau centre de gravité. Trois séances courtes par semaine suffisent pour créer une progression, si elles sont faites avec constance.</p>
-          </div>
-        </div>
-      </section>
+            <div className="timeline">
+              {session.blocks.map((block, index) => (
+                <div key={index} className="timeline-item">
+                  <div className={index === 0 ? 'timeline-marker highlight-marker' : 'timeline-marker'}>
+                    {index + 1}
+                  </div>
+                  <div className={index === 0 ? 'timeline-content border-highlight' : 'timeline-content'}>
+                    <div className={index === 0 ? 'level-badge highlight-badge' : 'level-badge'}>
+                      Bloc {index + 1}
+                    </div>
+                    <h3>{block.name}</h3>
+                    <p>{block.description}</p>
+                    <div className="level-details">
+                      {block.sets && block.reps && (
+                        <span className={index === 0 ? 'detail-tag highlight-tag' : 'detail-tag'}>
+                          {block.sets} séries de {block.reps} répétitions
+                        </span>
+                      )}
+                      {block.tempo && (
+                        <span className="detail-tag">Tempo&nbsp;: {block.tempo}</span>
+                      )}
+                      {block.restSeconds && (
+                        <span className="detail-tag">Repos&nbsp;: {block.restSeconds} secondes</span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
 
-      <section className="value-section" style={{ paddingTop: 0 }}>
-        <div className="value-grid">
-          <div className="value-box" style={{ gridColumn: 'span 3' }}>
-            <h3>Comment utiliser la méthode</h3>
-            <p>La bonne façon d’utiliser Up40 n’est pas de « rattraper » les séances manquées ni de doubler les volumes. C’est de considérer chaque séance comme un rendez-vous raisonnable avec ton corps : tu y vas, tu fais ce qui est prévu, tu notes ce qui change, et tu laisses le plan ajuster les paliers.</p>
+            <div className="weekly-routine">
+              <h3>Rythme de la semaine</h3>
+              <div className="routine-grid">
+                <div className="routine-card">
+                  <div className="routine-icon">1</div>
+                  <h4>Séance technique</h4>
+                  <p>Travail sur la trajectoire, la stabilité et la mise en route.</p>
+                </div>
+                <div className="routine-card">
+                  <div className="routine-icon">2</div>
+                  <h4>Séance contrôle</h4>
+                  <p>Descente plus lente, contrôle de la charge et du placement.</p>
+                </div>
+                <div className="routine-card">
+                  <div className="routine-icon">3</div>
+                  <h4>Séance volume</h4>
+                  <p>Volume tolérable à un niveau confortable, pour construire l’habitude.</p>
+                </div>
+              </div>
+            </div>
+          </>
+        ) : (
+          <div className="program-header">
+            <p className="hero-description" style={{ fontSize: '1rem' }}>
+              Aucune séance du jour disponible. Assure-toi d’avoir réalisé ton bilan et d’être connecté.
+            </p>
           </div>
-        </div>
+        )}
       </section>
 
       <div className="footer-spacing"></div>

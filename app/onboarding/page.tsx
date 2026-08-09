@@ -86,7 +86,7 @@ export default function Onboarding() {
 
       const data = await res.json()
       if (!res.ok) {
-        throw new Error(data.error || 'Erreur lors de la creation du profil')
+        throw new Error(data.error || 'Erreur lors de la création du profil')
       }
 
       setCooldownRemaining(60)
@@ -97,9 +97,9 @@ export default function Onboarding() {
       const normalized = message.toLowerCase()
       if (normalized.includes('rate limit') || normalized.includes('email rate')) {
         setCooldownRemaining(60)
-        setError('Trop de demandes en peu de temps. Attendez 60 secondes avant de reessayer.')
+        setError('Trop de demandes en peu de temps. Attendez 60 secondes avant de réessayer.')
       } else if (normalized.includes('smtp') || normalized.includes('email provider') || normalized.includes('sender')) {
-        setError('L\'envoi de l\'email a echoue. Verifiez la configuration SMTP et l\'adresse expediteur dans Supabase.')
+        setError('L\'envoi de l\'email a échoué. Vérifiez la configuration SMTP et l\'adresse expéditeur dans Supabase.')
       } else {
         setError(message)
       }
@@ -110,24 +110,232 @@ export default function Onboarding() {
 
   if (isMagicLinkSent) return (
     <main className="min-h-screen bg-white flex flex-col items-center justify-center p-6 text-center">
-      <div className="badge-new mb-6">Email envoye</div>
-      <h1 className="display-title mb-6">Verifiez votre boite email</h1>
-      <p className="hero-description max-w-md mx-auto mb-6">Un lien de connexion a ete envoye a <strong>{answers.email}</strong>.</p>
-      <p className="hero-description max-w-md mx-auto mb-10">Cliquez sur ce lien pour terminer votre inscription et decouvrir votre programme personnalise.</p>
-      <Link href="/" className="btn-dark">Retour a l\'accueil</Link>
+      <div className="badge-new mb-6">Bilan enregistré</div>
+      <h1 className="display-title mb-6">Vérifiez votre boîte email</h1>
+      <p className="hero-description max-w-md mx-auto mb-6">Un lien de connexion a été envoyé à <strong>{answers.email}</strong>.</p>
+      <p className="hero-description max-w-md mx-auto mb-10">Cliquez sur ce lien pour accéder à votre résultat et à votre plan de départ Up40.</p>
+      <Link href="/" className="btn-dark">Retour à l’accueil</Link>
     </main>
   )
 
   return (
     <main className="min-h-screen bg-white">
-      <header className="top-header transparent"><div className="nav-container"><nav className="nav-bar"><Link href="/" className="logo-minimal">Up40.</Link><div style={{ display: 'flex', alignItems: 'center' }}><Link href="/" className="nav-link">Annuler</Link><ThemeToggle /></div></nav></div></header>
-      <section className="hero-section photo-hero text-center" style={{ minHeight: 'auto', paddingBottom: '2rem' }}><div className="badge-new mx-auto">Bilan Personnalise</div><h1 className="display-title mt-2" style={{ fontSize: 'var(--text-xl)' }}>Votre Profil</h1></section>
+      <header className="top-header transparent">
+        <div className="nav-container">
+          <nav className="nav-bar">
+            <Link href="/" className="logo-minimal">Up40.</Link>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <Link href="/" className="nav-link">Annuler</Link>
+              <ThemeToggle />
+            </div>
+          </nav>
+        </div>
+      </header>
+
+      <section className="hero-section photo-hero text-center" style={{ minHeight: 'auto', paddingBottom: '2rem' }}>
+        <div className="badge-new mx-auto">Bilan personnalisé</div>
+        <h1 className="display-title mt-2" style={{ fontSize: 'var(--text-xl)' }}>Votre profil</h1>
+        <p className="hero-description mb-4" style={{ fontSize: 'var(--text-base)', maxWidth: '40ch', margin: '0 auto' }}>
+          Ce bilan nous permet de fixer un point de départ raisonnable. Quelques questions, aucune performance à « prouver », juste une image honnête de votre situation actuelle.
+        </p>
+      </section>
+
       <div className="onboarding-container" style={{ paddingTop: 0 }}>
-        <div className="progress-bar" style={{ marginBottom: '3rem' }}><div className="progress-fill" style={{ width: `${(step / 4) * 100}%` }} /></div>
-        {step === 1 && <div className="step-content"><h1 className="display-title" style={{ fontSize: 'var(--text-lg)', marginBottom: '0.75rem' }}>Quel est votre objectif principal ?</h1><p className="hero-description mb-8" style={{ fontSize: 'var(--text-base)' }}>Up40 s\'adapte a votre priorite du moment.</p><div className="options-grid">{[['force','💪','Gagner en force','Retrouver de vraies pompes completes.'],['sante','🛡️','Confort articulaire','Pratiquer sans subir de genes aux articulations.'],['posture','🧍','Ameliorer ma posture','Ouvrir le torse et renforcer le haut du corps.']].map(([id, icon, title, description]) => <button key={id} type="button" className={`task-card ${answers.goal === id ? 'active' : ''}`} onClick={() => { handleSelect('goal', id); setTimeout(nextStep, 300) }}><div className="task-icon">{icon}</div><div className="task-details"><h4 style={{ margin: 0, fontSize: '1.1rem' }}>{title}</h4><p style={{ margin: 0, marginTop: '4px' }}>{description}</p></div></button>)}</div></div>}
-        {step === 2 && <div className="step-content"><h1 className="display-title" style={{ fontSize: 'var(--text-lg)', marginBottom: '0.75rem' }}>Ressentez-vous des genes frequentes ?</h1><p className="hero-description mb-8" style={{ fontSize: 'var(--text-base)' }}>Selectionnez toutes les zones sensibles. Le programme s\'adaptera.</p><div className="options-grid mb-8">{[['epaules','Oui, aux epaules'],['poignets','Oui, aux poignets'],['coudes','Oui, aux coudes'],['dos','Oui, au bas du dos'],['aucune','Aucune gene']].map(([id, label]) => <button key={id} type="button" className={`task-card ${answers.pains.includes(id) ? 'active' : ''}`} onClick={() => togglePain(id)}><div className="task-details"><h4 style={{ margin: 0, fontSize: '1.1rem' }}>{label}</h4></div></button>)}</div><button className="btn-dark" style={{ width: '100%', padding: '1.25rem' }} onClick={nextStep} disabled={answers.pains.length === 0}>Continuer</button></div>}
-        {step === 3 && <div className="step-content"><h1 className="display-title" style={{ fontSize: 'var(--text-lg)', marginBottom: '0.75rem' }}>Combien de pompes propres faites-vous aujourd\'hui ?</h1><p className="hero-description mb-8" style={{ fontSize: 'var(--text-base)' }}>Buste qui touche presque le sol, corps bien droit.</p><div className="options-grid">{[['0','0 vraie pompe'],['1-5','Entre 1 et 5 pompes'],['5-15','Entre 5 et 15 pompes'],['15+','Plus de 15 pompes']].map(([id, label]) => <button key={id} type="button" className={`task-card ${answers.level === id ? 'active' : ''}`} onClick={() => { handleSelect('level', id); setTimeout(nextStep, 300) }}><div className="task-details"><h4 style={{ margin: 0, fontSize: '1.1rem' }}>{label}</h4></div></button>)}</div></div>}
-        {step === 4 && <div className="step-content"><h1 className="display-title" style={{ fontSize: 'var(--text-lg)', marginBottom: '0.75rem' }}>Derniere etape pour voir votre resultat</h1><p className="hero-description mb-8" style={{ fontSize: 'var(--text-base)' }}>Nous creons votre profil personnalise.</p><form onSubmit={handleSubmit} className="flex flex-col text-left" style={{ gap: '1.5rem' }}><div><label style={labelStyle}>Votre E-mail</label><input type="email" required style={inputStyle} placeholder="email@exemple.com" value={answers.email} onChange={event => handleSelect('email', event.target.value)} /></div><div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem' }}>{[['age','Age','Ans'],['height','Taille','cm'],['weight','Poids','kg']].map(([key, label, placeholder]) => <div key={key}><label style={labelStyle}>{label}</label><input type="number" required min={key === 'age' ? 18 : key === 'height' ? 140 : 40} max={key === 'age' ? 100 : key === 'height' ? 220 : 200} step={key === 'weight' ? '0.1' : '1'} style={inputStyle} placeholder={placeholder} value={answers[key as keyof Answers] as string} onChange={event => handleSelect(key as keyof Answers, event.target.value)} /></div>)}</div>{error && <div style={{ padding: '1rem', backgroundColor: '#fef2f2', color: '#dc2626', borderRadius: '0.75rem', fontSize: '0.9rem' }}>{error}{cooldownRemaining > 0 && <div style={{ marginTop: '0.5rem' }}>Nouvel essai possible dans {cooldownRemaining} s.</div>}</div>}<button type="submit" className="btn-dark" style={{ width: '100%', marginTop: '1rem', display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '1.25rem', fontSize: '1.1rem' }} disabled={isSubmitting || cooldownRemaining > 0 || !answers.email || !answers.age || !answers.weight || !answers.height}>{isSubmitting ? 'Envoi en cours...' : cooldownRemaining > 0 ? `Reessayez dans ${cooldownRemaining} s` : 'Recevoir mon lien de connexion'}</button></form></div>}
+        <div className="progress-bar" style={{ marginBottom: '3rem' }}>
+          <div className="progress-fill" style={{ width: `${(step / 4) * 100}%` }} />
+        </div>
+
+        {step === 1 && (
+          <div className="step-content">
+            <h1 className="display-title" style={{ fontSize: 'var(--text-lg)', marginBottom: '0.75rem' }}>Quel est votre objectif principal ?</h1>
+            <p className="hero-description mb-8" style={{ fontSize: 'var(--text-base)', maxWidth: '42ch' }}>
+              Up40 s’adapte à votre priorité du moment. Pas besoin d’avoir « le bon objectif », il s’agit surtout de savoir ce qui compte le plus pour vous maintenant.
+            </p>
+            <div className="options-grid">
+              {[
+                ['force', 'Gagner en force', 'Retrouver des pompes complètes et un haut du corps solide.'],
+                ['sante', 'Confort articulaire', 'Pratiquer sans ressentir de gêne régulière aux épaules ou aux poignets.'],
+                ['posture', 'Améliorer ma posture', 'Ouvrir le torse, tenir mieux, et sentir le haut du corps plus présent.'],
+              ].map(([id, title, description]) => (
+                <button
+                  key={id}
+                  type="button"
+                  className={`task-card ${answers.goal === id ? 'active' : ''}`}
+                  onClick={() => {
+                    handleSelect('goal', id)
+                    setTimeout(nextStep, 300)
+                  }}
+                >
+                  <div className="task-details">
+                    <h4 style={{ margin: 0, fontSize: '1.1rem' }}>{title}</h4>
+                    <p style={{ margin: 0, marginTop: '4px' }}>{description}</p>
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {step === 2 && (
+          <div className="step-content">
+            <h1 className="display-title" style={{ fontSize: 'var(--text-lg)', marginBottom: '0.75rem' }}>Ressentez-vous des gênes fréquentes ?</h1>
+            <p className="hero-description mb-8" style={{ fontSize: 'var(--text-base)', maxWidth: '42ch' }}>
+              Indiquez les zones sensibles. Le programme ne les « évite » pas totalement, mais il les prend en compte pour adapter la charge et le placement.
+            </p>
+            <div className="options-grid mb-8">
+              {[
+                ['epaules', 'Oui, aux épaules'],
+                ['poignets', 'Oui, aux poignets'],
+                ['coudes', 'Oui, aux coudes'],
+                ['dos', 'Oui, au bas du dos'],
+                ['aucune', 'Aucune gêne particulière'],
+              ].map(([id, label]) => (
+                <button
+                  key={id}
+                  type="button"
+                  className={`task-card ${answers.pains.includes(id) ? 'active' : ''}`}
+                  onClick={() => togglePain(id)}
+                >
+                  <div className="task-details">
+                    <h4 style={{ margin: 0, fontSize: '1.1rem' }}>{label}</h4>
+                  </div>
+                </button>
+              ))}
+            </div>
+            <button
+              className="btn-dark"
+              style={{ width: '100%', padding: '1.25rem' }}
+              onClick={nextStep}
+              disabled={answers.pains.length === 0}
+            >
+              Continuer
+            </button>
+          </div>
+        )}
+
+        {step === 3 && (
+          <div className="step-content">
+            <h1 className="display-title" style={{ fontSize: 'var(--text-lg)', marginBottom: '0.75rem' }}>
+              Combien de pompes propres faites-vous aujourd’hui ?
+            </h1>
+            <p className="hero-description mb-8" style={{ fontSize: 'var(--text-base)', maxWidth: '42ch' }}>
+              On parle de pompes complètes, buste qui se rapproche du sol, corps bien aligné. Une estimation honnête vaut mieux qu’un chiffre parfait.
+            </p>
+            <div className="options-grid">
+              {[
+                ['0', '0 vraie pompe'],
+                ['1-5', 'Entre 1 et 5 pompes'],
+                ['5-15', 'Entre 5 et 15 pompes'],
+                ['15+', 'Plus de 15 pompes'],
+              ].map(([id, label]) => (
+                <button
+                  key={id}
+                  type="button"
+                  className={`task-card ${answers.level === id ? 'active' : ''}`}
+                  onClick={() => {
+                    handleSelect('level', id)
+                    setTimeout(nextStep, 300)
+                  }}
+                >
+                  <div className="task-details">
+                    <h4 style={{ margin: 0, fontSize: '1.1rem' }}>{label}</h4>
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {step === 4 && (
+          <div className="step-content">
+            <h1 className="display-title" style={{ fontSize: 'var(--text-lg)', marginBottom: '0.75rem' }}>
+              Dernière étape pour voir votre résultat
+            </h1>
+            <p className="hero-description mb-8" style={{ fontSize: 'var(--text-base)', maxWidth: '42ch' }}>
+              Nous créons votre profil Up40. L’email sert uniquement à vous envoyer le lien de connexion sécurisé vers votre résultat et votre plan de départ.
+            </p>
+            <form onSubmit={handleSubmit} className="flex flex-col text-left" style={{ gap: '1.5rem' }}>
+              <div>
+                <label style={labelStyle}>Votre E-mail</label>
+                <input
+                  type="email"
+                  required
+                  style={inputStyle}
+                  placeholder="email@exemple.com"
+                  value={answers.email}
+                  onChange={event => handleSelect('email', event.target.value)}
+                />
+              </div>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem' }}>
+                {[
+                  ['age', 'Âge', 'Ans'],
+                  ['height', 'Taille', 'cm'],
+                  ['weight', 'Poids', 'kg'],
+                ].map(([key, label, placeholder]) => (
+                  <div key={key}>
+                    <label style={labelStyle}>{label}</label>
+                    <input
+                      type="number"
+                      required
+                      min={key === 'age' ? 18 : key === 'height' ? 140 : 40}
+                      max={key === 'age' ? 100 : key === 'height' ? 220 : 200}
+                      step={key === 'weight' ? '0.1' : '1'}
+                      style={inputStyle}
+                      placeholder={placeholder}
+                      value={answers[key as keyof Answers] as string}
+                      onChange={event => handleSelect(key as keyof Answers, event.target.value)}
+                    />
+                  </div>
+                ))}
+              </div>
+              {error && (
+                <div
+                  style={{
+                    padding: '1rem',
+                    backgroundColor: '#fef2f2',
+                    color: '#dc2626',
+                    borderRadius: '0.75rem',
+                    fontSize: '0.9rem',
+                  }}
+                >
+                  {error}
+                  {cooldownRemaining > 0 && (
+                    <div style={{ marginTop: '0.5rem' }}>
+                      Nouvel essai possible dans {cooldownRemaining} s.
+                    </div>
+                  )}
+                </div>
+              )}
+              <button
+                type="submit"
+                className="btn-dark"
+                style={{
+                  width: '100%',
+                  marginTop: '1rem',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  padding: '1.25rem',
+                  fontSize: '1.1rem',
+                }}
+                disabled={
+                  isSubmitting ||
+                  cooldownRemaining > 0 ||
+                  !answers.email ||
+                  !answers.age ||
+                  !answers.weight ||
+                  !answers.height
+                }
+              >
+                {isSubmitting
+                  ? 'Envoi en cours…'
+                  : cooldownRemaining > 0
+                  ? `Réessayez dans ${cooldownRemaining} s`
+                  : 'Recevoir mon lien de connexion'}
+              </button>
+            </form>
+          </div>
+        )}
       </div>
     </main>
   )
